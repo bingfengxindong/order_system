@@ -1,0 +1,286 @@
+/*头部*/
+.header-in{
+    width: 1000px;
+    min-height: 50px;
+    margin: 0 auto;
+}
+.header-in-in{
+    width: 100%;
+    min-height: 30px;
+}
+.header-in-in-li{
+    margin: 0;
+    float: left;
+    display: inline-block;
+    width: 10%;
+    height: 30px;
+}
+
+/*中间*/
+.center-in{
+    width: 1000px;
+    min-height: 60px;
+    margin: 0 auto;
+}
+/*订单信息*/
+.center-order{
+    width: 100%;
+    min-height: 100px;
+    border-bottom: 1px solid black;
+}
+
+.center-order-li{
+    width: 100%;
+    min-height: 60px;
+}
+/*前三行*/
+/*前三行每行三个*/
+.center-order-li-li,.center-order-li-li-space{
+    margin: 0;
+    float: left;
+    display: inline-block;
+    height: 60px;
+}
+.center-order-li-li{
+    width: 30%;
+}
+.center-order-li-li-space{
+    width: 5%;
+}
+
+/*前三行每行之一的左右*/
+.center-order-li-li-left,.center-order-li-li-right{
+    margin: 0;
+    float: left;
+    display: inline-block;
+    height: 60px;
+}
+.center-order-li-li-left{
+    width: 33%;
+}
+.center-order-li-li-left-title{
+    width: 90%;
+    height: 50px;
+    border: 1px solid black;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 48px;
+    border-radius: 5px;
+}
+
+.center-order-li-li-right{
+    width: 67%;
+}
+.center-order-li-li-right-content{
+    width: 95%;
+    height: 50px;
+    border: 1px solid black;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 48px;
+    border-radius: 5px;
+}
+
+/*第四行的图片、产品信息、大货*/
+.center-order-li-igp,.center-order-li-igp1{
+    margin: 0;
+    float: left;
+    display: inline-block;
+    width: 33%;
+    height: 220px;
+}
+.center-order-li-igp1{
+    width: 34%;
+    position: relative;
+}
+.center-order-li-igp1 .center-order-li-igp-title{
+    width: 80px;
+    height: 40px;
+    text-align: center;
+    line-height: 38px;
+    border: 1px solid black;
+    background: white;
+    position: absolute;
+    top: -20px;
+    left: 20px;
+}
+
+.center-order-li-igp{
+    width: 33%;
+    position: relative;
+}
+.center-order-li-igp .center-order-li-igp-title{
+    width: 80px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background: yellow;
+    border-radius: 5px;
+    position: absolute;
+    top: -20px;
+    left: 120px;
+}
+
+.center-order-li-igp-in{
+    width: 87%;
+    height: 200px;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.order-image{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 190px;
+    font-size: 20px;
+}
+
+.order-image img{
+    height: 198px;
+}
+
+.center-order-li-igp-in-in{
+    width: 100%;
+    height: 50px;
+}
+.center-order-li-igp-in-in-left,.center-order-li-igp-in-in-right{
+    margin: 0;
+    float: left;
+    display: inline-block;
+    height: 50px;
+}
+.center-order-li-igp-in-in-left{
+    width: 33%;
+}
+.center-order-li-igp-in-in-left-title{
+    width: 85%;
+    height: 42px;
+    margin: 0 auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+}
+
+.center-order-li-igp-in-in-right{
+    width: 67%;
+}
+.center-order-li-igp-in-in-right-content{
+    width: 90%;
+    height: 42px;
+    margin: 0 auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+}
+
+
+/*打样进度*/
+.center-proofing{
+    width: 100%;
+    min-height: 100px;
+    border-bottom: 1px solid black;
+}
+
+.center-proofing-in{
+    width: 100%;
+    min-height: 60px;
+}
+.center-proofing-in-in,.center-proofing-in-in-space{
+    margin: 0;
+    float: left;
+    display: inline-block;
+    width: 45%;
+    height: 120px;
+}
+.center-proofing-in-in{
+    width: 48%;
+}
+
+.center-proofing-in-in-left,.center-proofing-in-in-right{
+    margin: 0;
+    float: left;
+    display: inline-block;
+    height: 120px;
+}
+.center-proofing-in-in-left{
+    width: 22%;
+}
+.center-proofing-in-in-left-title{
+    width: 90%;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 40px;
+}
+.center-proofing-in-in-right{
+    width: 78%;
+}
+.center-proofing-in-in-right-content{
+    width: 95%;
+    height: 110px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+.center-proofing-in-in-right-content-in{
+    width: 90%;
+    height: 90px;
+    margin: 0 auto;
+}
+.center-proofing-in-in-right-content-in textarea{
+    width: 98%;
+    height: 84px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    resize: none;
+}
+
+.center-proofing-in-in-space{
+    width: 4%;
+}
+
+/*大货进度*/
+.center-production{
+    width: 100%;
+    min-height: 100px;
+    border-bottom: 1px solid black;
+}
+
+.center-production-in{
+    width: 100%;
+    min-height: 70px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.center-production-in-in{
+    width: 98%;
+    min-height: 70px;
+    margin: 0 auto;
+}
+
+/*第二个第三个的标题*/
+.center-title{
+    width: 100px;
+    height: 60px;
+}
+.center-title-in{
+    width: 100%;
+    height: 40px;
+    background: yellow;
+    line-height: 40px;
+    text-align: center;
+}
+
+.font-blue{
+    color: blue;
+}
+.font-red{
+    color: red;
+}

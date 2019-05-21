@@ -1,0 +1,39 @@
+body{
+    margin: 0;
+    padding: 0;
+    width: 100vm;
+    overflow: scroll;
+}
+
+.header{
+    width: 100%;
+    min-height: 50px;
+    margin: 0 auto;
+}
+
+.center{
+    width: 100%;
+    min-height: 100px;
+    margin: 0 auto;
+}
+
+.buttom{
+    width: 100%;
+    height: 50px;
+    margin: 0 auto;
+}
+
+.ten_space{
+    width: 100%;
+    height: 10px;
+    clear: both;
+}
+.one_space{
+    width: 100%;
+    height: 1px;
+    clear: both;
+}
+
+a{
+    cursor: pointer;
+}

@@ -1,0 +1,639 @@
+{% extends "base.html"%}
+{% block head %}
+    <link rel="stylesheet" href="/static/css/order_information/orderdetail.css">
+    <link rel="stylesheet" href="/static/css/order_information/orderadd.css">
+{% endblock %}
+{% block header %}
+    <div class="header-in">
+        <div class="ten_space"></div>
+        <div class="header-in-in">
+            <div class="header-in-in-li">
+                <a href="{% url 'order:orderlist' %}" type="button" class="btn btn-default">返回列表</a>
+            </div>
+        </div>
+        <div class="ten_space"></div>
+    </div>
+{% endblock %}
+{% block center %}
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="center-in">
+            <div class="center-order">
+                <div class="ten_space"></div>
+                <div class="center-order-li">
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title font-blue">
+                                <b>客人名</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content font-blue">
+                                <select name="customer_pk" id="customer_name">
+                                    <option disabled selected>请选择客户名</option>
+                                    {% for customer in customers %}
+                                        <option value="{{ customer.pk }}">
+                                            {{ customer.c_name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-order-li-li-space"></div>
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title font-blue">
+                                <b>联系人</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content font-blue">
+                                <input type="text" name="customer_contack" id="customer_contack" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-order-li-li-space"></div>
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title font-blue">
+                                <b>联系人邮件</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content font-blue">
+                                <input type="text" name="customer_email" id="customer_email" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="center-order-li">
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>单号</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <input type="text" value="{{ order_number }}" name="order_number" id="order_number" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-order-li-li-space"></div>
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>下单日期</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <input type="text" value="{{ today }}" name="order_date" id="order_date" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-order-li-li-space"></div>
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>帽型</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <select name="captype" id="captype">
+                                    <option disabled selected>请选择帽型</option>
+                                    {% for captype in captypes %}
+                                        <option value="{{ captype.pk }}">{{ captype.ct_type }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="center-order-li">
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>业务员</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <select name="user" id="user">
+                                    <option disabled selected>请选择业务员</option>
+                                    {% for user in users %}
+                                        <option value="{{ user.pk }}">{{ user.u_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-order-li-li-space"></div>
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>颜色</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <select name="capcolor" id="capcolor">
+                                    <option disabled selected>请选择颜色</option>
+                                    {% for capcolor in capcolors %}
+                                        <option value="{{ capcolor.pk }}">{{ capcolor.cc_color }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-order-li-li-space"></div>
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>绣印花</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <select name="embroiderorprint" id="embroiderorprint">
+                                    <option disabled selected>请选择绣印花</option>
+                                    <option value="0">无</option>
+                                    <option value="1">绣花</option>
+                                    <option value="2">印花</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ten_space"></div>
+                <div class="ten_space"></div>
+                <div class="ten_space"></div>
+                <div class="center-order-li">
+                    <div class="center-order-li-igp1">
+                        <div class="center-order-li-igp-title">
+                            <b>图片</b>
+                        </div>
+                        <div class="center-order-li-igp-in">
+                            <input type="file" id="add_image" name="add_iamge" class="hide"/>
+                            <div class="order-image">
+                                <a onclick="add_image()">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-order-li-igp">
+                        <div class="center-order-li-igp-title">
+                            <b>产品信息</b>
+                        </div>
+                        <div class="center-order-li-igp-in">
+                            <div class="ten_space"></div>
+                            <div class="ten_space"></div>
+                            <div class="ten_space"></div>
+                            <div class="center-order-li-igp-in-in">
+                                <div class="center-order-li-igp-in-in-left">
+                                    <div class="center-order-li-igp-in-in-left-title">
+                                        <b>帽眉</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-igp-in-in-right">
+                                    <div class="center-order-li-igp-in-in-right-content">
+                                        <select name="capeyebrow" id="capeyebrow">
+                                            <option disabled selected>请选择帽眉</option>
+                                            {% for capeyebrow in capeyebrows %}
+                                                <option value="{{ capeyebrow.pk }}">{{ capeyebrow.ce_type }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center-order-li-igp-in-in">
+                                <div class="center-order-li-igp-in-in-left">
+                                    <div class="center-order-li-igp-in-in-left-title">
+                                        <b>版号</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-igp-in-in-right">
+                                    <div class="center-order-li-igp-in-in-right-content">
+                                        <select name="versionnumber" id="versionnumber">
+                                            <option  disabled selected>请选择版号</option>
+                                            {% for versionnumber in versionnumbers %}
+                                                <option value="{{ versionnumber.pk }}">{{ versionnumber.vn_version }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center-order-li-igp-in-in">
+                                <div class="center-order-li-igp-in-in-left">
+                                    <div class="center-order-li-igp-in-in-left-title">
+                                        <b>后扣</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-igp-in-in-right">
+                                    <div class="center-order-li-igp-in-in-right-content">
+                                        <select name="afterdeduction" id="afterdeduction">
+                                            <option disabled selected>请选择后扣</option>
+                                            {% for afterdeduction in afterdeductions %}
+                                                <option value="{{ afterdeduction.pk }}">{{ afterdeduction.ad_type }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-order-li-igp">
+                        <div class="center-order-li-igp-title">
+                            <b>大货信息</b>
+                        </div>
+                        <div class="center-order-li-igp-in">
+                            <div class="ten_space"></div>
+                            <div class="ten_space"></div>
+                            <div class="ten_space"></div>
+                            <div class="center-order-li-igp-in-in">
+                                <div class="center-order-li-igp-in-in-left">
+                                    <div class="center-order-li-igp-in-in-left-title">
+                                        <b>下单数量</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-igp-in-in-right">
+                                    <div class="center-order-li-igp-in-in-right-content">
+                                        <input type="text" name="pi_amount" id="pi_amount" autocomplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center-order-li-igp-in-in">
+                                <div class="center-order-li-igp-in-in-left">
+                                    <div class="center-order-li-igp-in-in-left-title">
+                                        <b>下单单价</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-igp-in-in-right">
+                                    <div class="center-order-li-igp-in-in-right-content">
+                                        <input type="text" name="pi_unit_price" id="pi_unit_price" value="$" autocomplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center-order-li-igp-in-in">
+                                <div class="center-order-li-igp-in-in-left">
+                                    <div class="center-order-li-igp-in-in-left-title">
+                                        <b>交货期</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-igp-in-in-right">
+                                    <div class="center-order-li-igp-in-in-right-content">
+                                        <input type="text" name="pi_date" id="pi_date" class="form_datetime" autocomplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="one_space"></div>
+                </div>
+                <div class="one_space"></div>
+            </div>
+        {#    打样进度表#}
+            <div class="center-proofing">
+                <div class="center-title">
+                    <div class="ten_space"></div>
+                    <div class="center-title-in">
+                        <b>打样进度表</b>
+                    </div>
+                </div>
+
+                <div class="center-order-li">
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>下单时间</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <input type="text" name="pp_sample_order_date" id="pp_sample_order_date" value="{{ today }}" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-order-li-li-space"></div>
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>到料时间</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <input type="text" name="pp_sample_arrival_date" id="pp_sample_arrival_date" class="form_datetime" autocomplete="off"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-order-li-li-space"></div>
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>快递时间</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <input type="text" name="pp_sample_express_date" id="pp_sample_express_date" class="form_datetime" autocomplete="off"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="center-proofing-in">
+                    <div class="center-proofing-in-in">
+                        <div class="center-proofing-in-in-left">
+                            <div class="center-proofing-in-in-left-title">
+                                <b>反馈信息</b>
+                            </div>
+                        </div>
+                        <div class="center-proofing-in-in-right">
+                            <div class="center-proofing-in-in-right-content">
+                                <div class="ten_space"></div>
+                                <div class="center-proofing-in-in-right-content-in">
+                                    <textarea name="pp_customer_feedback" id="pp_customer_feedback"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-proofing-in-in-space"></div>
+                    <div class="center-proofing-in-in">
+                        <div class="center-proofing-in-in-left">
+                            <div class="center-proofing-in-in-left-title">
+                                <b>整改信息</b>
+                            </div>
+                        </div>
+                        <div class="center-proofing-in-in-right">
+                            <div class="center-proofing-in-in-right-content">
+                                <div class="ten_space"></div>
+                                <div class="center-proofing-in-in-right-content-in">
+                                    <textarea name="pp_corrective_information" id="pp_corrective_information"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="one_space"></div>
+                </div>
+
+                <div class="center-order-li">
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>修改样时间</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <input type="text" name="pp_Modify_sample_order_date" id="pp_Modify_sample_order_date" class="form_datetime" autocomplete="off"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-order-li-li-space"></div>
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>到料时间</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <input type="text" name="pp_Modify_sample_arrival_date" id="pp_Modify_sample_arrival_date" class="form_datetime" autocomplete="off"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-order-li-li-space"></div>
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>快递时间</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <input type="text" name="pp_Modify_sample_express_date" id="pp_Modify_sample_express_date" class="form_datetime" autocomplete="off"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="one_space"></div>
+            </div>
+        {#    大货进度表#}
+            <div class="center-production">
+                <div class="center-title">
+                    <div class="ten_space"></div>
+                    <div class="center-title-in">
+                        <b>大货进度表</b>
+                    </div>
+                </div>
+
+                <div class="center-order-li">
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>生产车间</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <select name="pw_workshop" id="pw_workshop">
+                                    <option disabled selected>请选择车间</option>
+                                    {% for productionworkshop in productionworkshops %}
+                                        <option value="{{ productionworkshop.pk }}">{{ productionworkshop.pw_workshop }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="center-production-in">
+                    <div class="center-production-in-in">
+                        <div class="ten_space"></div>
+                        <div class="center-order-li">
+                            <div class="center-order-li-li">
+                                <div class="center-order-li-li-left">
+                                    <div class="center-order-li-li-left-title">
+                                        <b>下单时间</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-right">
+                                    <div class="center-order-li-li-right-content">
+                                        <input type="text" name="ps_order_date" id="ps_order_date" class="form_datetime" autocomplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center-order-li-li-space"></div>
+                            <div class="center-order-li-li">
+                                <div class="center-order-li-li-left">
+                                    <div class="center-order-li-li-left-title">
+                                        <b>到料时间</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-right">
+                                    <div class="center-order-li-li-right-content">
+                                        <input type="text" name="ps_arrival_date" id="ps_arrival_date" class="form_datetime" autocomplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center-order-li-li-space"></div>
+                            <div class="center-order-li-li">
+                                <div class="center-order-li-li-left">
+                                    <div class="center-order-li-li-left-title">
+                                        <b>裁剪时间</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-right">
+                                    <div class="center-order-li-li-right-content">
+                                        <input type="text" name="ps_tailor_date" id="ps_tailor_date" class="form_datetime" autocomplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="center-order-li">
+                            <div class="center-order-li-li">
+                                <div class="center-order-li-li-left">
+                                    <div class="center-order-li-li-left-title">
+                                        <b>绣花时间</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-right">
+                                    <div class="center-order-li-li-right-content">
+                                        <input type="text" name="ps_embroider_date" id="ps_embroider_date" class="form_datetime_top" autocomplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center-order-li-li-space"></div>
+                            <div class="center-order-li-li">
+                                <div class="center-order-li-li-left">
+                                    <div class="center-order-li-li-left-title">
+                                        <b>印花时间</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-right">
+                                    <div class="center-order-li-li-right-content">
+                                        <input type="text" name="ps_print_date" id="ps_print_date" class="form_datetime_top" autocomplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center-order-li-li-space"></div>
+                            <div class="center-order-li-li">
+                                <div class="center-order-li-li-left">
+                                    <div class="center-order-li-li-left-title">
+                                        <b>水洗时间</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-right">
+                                    <div class="center-order-li-li-right-content">
+                                        <input type="text" name="ps_Water_washing_date" id="ps_Water_washing_date" class="form_datetime_top" autocomplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="center-order-li">
+                            <div class="center-order-li-li">
+                                <div class="center-order-li-li-left">
+                                    <div class="center-order-li-li-left-title">
+                                        <b>车缝时间</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-right">
+                                    <div class="center-order-li-li-right-content">
+                                        <input type="text" name="ps_sewing_date" id="ps_sewing_date" class="form_datetime_top" autocomplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center-order-li-li-space"></div>
+                            <div class="center-order-li-li">
+                                <div class="center-order-li-li-left">
+                                    <div class="center-order-li-li-left-title">
+                                        <b>QC时间</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-right">
+                                    <div class="center-order-li-li-right-content">
+                                        <input type="text" name="ps_qc_date" id="ps_qc_date" class="form_datetime_top" autocomplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center-order-li-li-space"></div>
+                            <div class="center-order-li-li">
+                                <div class="center-order-li-li-left">
+                                    <div class="center-order-li-li-left-title">
+                                        <b>外运时间</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-right">
+                                    <div class="center-order-li-li-right-content">
+                                        <input type="text" name="ps_outward_transport_date" id="ps_outward_transport_date" class="form_datetime_top" autocomplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ten_space"></div>
+                <div class="center-order-li">
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title font-red">
+                                <b>收款时间</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <input type="text" name="ps_gathering_date" id="ps_gathering_date" class="form_datetime_top" autocomplete="off"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-order-li-li-space"></div>
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title font-red">
+                                <b>收款金额</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <input type="text" name="ps_gathering_price" id="ps_gathering_price" value="$" autocomplete="off"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-order-li-li-space"></div>
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title font-red">
+                                <b>合同余额</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <input type="text" name="ps_contract_balance" id="ps_contract_balance" value="$" autocomplete="off"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="one_space"></div>
+            </div>
+            <div class="center-submit">
+                <div class="center-submit-in">
+                    <input type="submit" class="btn btn-success" value="保存" />
+                </div>
+            </div>
+            <div class="one_space"></div>
+        </div>
+        <div class="one_space"></div>
+    </form>
+{% endblock %}
+{% block js%}
+    <script src="/static/js/orderlist.js"></script>
+{% endblock %}

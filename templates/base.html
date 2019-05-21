@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/static/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css">
+    <script src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/static/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <link rel="stylesheet" href="/static/css/base.css">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div class="header">
+        {% block header %}{% endblock %}
+    </div>
+    <div class="center">
+        {% block center %}{% endblock %}
+    </div>
+    <div class="buttom">
+        {% block bottom %}{% endblock %}
+    </div>
+    {% block js %}{% endblock %}
+</body>
+</html>

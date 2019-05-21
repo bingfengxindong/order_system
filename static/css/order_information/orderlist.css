@@ -1,0 +1,73 @@
+/*筛选*/
+.center-screen{
+    width: 1200px;
+    min-height: 60px;
+    background: lightgoldenrodyellow;
+    border: 1px solid rgb(221,221,221);
+    margin: 0 auto;
+}
+.center-screen-in{
+    width: 98%;
+    height: 50px;
+    margin: 0 auto;
+}
+
+.center-screen-in-li{
+    margin: 0;
+    float: left;
+    display: inline-block;
+    width: 8%;
+    height: 50px;
+}
+.center-screen-in-li-in{
+    width: 90%;
+    height: 40px;
+    border: 1px solid rgb(221,221,221);
+    border-radius: 5px;
+    background: white;
+    text-align: center;
+    line-height: 36px;
+}
+.center-screen-in-li-in input{
+    width: 99%;
+    height: 38px;
+    border: none;
+    outline: none;
+}
+
+/*添加*/
+.order-add{
+    width: 1200px;
+    min-height: 40px;
+    margin: 0 auto;
+}
+.order-add-li{
+    margin: 0;
+    float: left;
+    display: inline-block;
+    width: 10%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
+/*列表*/
+.center-order-list{
+    width: 1200px;
+    min-height: 60px;
+    border: 1px solid rgb(221,221,221);
+    margin: 0 auto;
+}
+.center-order-list-in{
+    width: 98%;
+    min-height: 40px;
+    margin: 0 auto;
+}
+
+/*分页*/
+.center-page{
+    width: 1200px;
+    min-height: 40px;
+    margin: 0 auto;
+    text-align: center;
+}
