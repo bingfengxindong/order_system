@@ -16,23 +16,36 @@
     margin: 0;
     float: left;
     display: inline-block;
-    width: 8%;
+    width: 12%;
     height: 50px;
 }
-.center-screen-in-li-in{
+.center-screen-in-li-in,.center-screen-in-li-li-nb{
     width: 90%;
     height: 40px;
-    border: 1px solid rgb(221,221,221);
     border-radius: 5px;
-    background: white;
     text-align: center;
     line-height: 36px;
 }
+.center-screen-in-li-in{
+    border: 1px solid rgb(221,221,221);
+    background: white;
+}
 .center-screen-in-li-in input{
-    width: 99%;
+    width: 90%;
     height: 38px;
     border: none;
     outline: none;
+}
+
+.center-screen-in-li-in select{
+    width: 96%;
+    height: 98%;
+    border: none;
+    outline: none;
+}
+
+#order_date,#order_end_date{
+    cursor: pointer;
 }
 
 /*添加*/

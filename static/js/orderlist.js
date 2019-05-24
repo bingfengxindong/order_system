@@ -1,32 +1,38 @@
 $(function () {
     order_date_timepicker();
     customer_name_change();
-    var order_date = $("#order_date");
-    var order_end_date = $("#order_end_date");
-    order_end_date.on("change",function () {
-        var order_date_val = $("#order_date").val();
-        var order_end_date_val = $("#order_end_date").val();
-        if(order_date_val == ""){
-            $("#time-prompt").text("请选择开始时间！");
-        }else{
-            if(Date.parse(order_date_val) > Date.parse(order_end_date_val)){
-                $("#time-prompt").text("开始时间不应该大于结束时间！");
-            }else{
-                $("#time-prompt").text("");
-            }
-        }
-    });
+    order_start_end_date();
 });
+
+function order_start_end_date() {
+    $("#order_date").datetimepicker({
+        format: 'yyyy-mm-dd',
+        minView: "month",
+        language:"zh-CN",
+    });
+
+    $("#order_date").change(function () {
+        var sd =  $(this).val();
+        $("#order_end_date").datetimepicker({
+            format: 'yyyy-mm-dd',
+            minView: "month",
+            language:"zh-CN",
+            startDate:sd,
+        });
+    })
+}
 
 function order_date_timepicker() {
     $(".form_datetime").datetimepicker({
         format: 'yyyy-mm-dd',
         minView: "month",
+        language:"zh-CN",
     });
     $(".form_datetime_top").datetimepicker({
         format: 'yyyy-mm-dd',
         minView: "month",
-        pickerPosition: "top-left"
+        pickerPosition: "top-left",
+        language:"zh-CN",
     });
 }
 

@@ -5,103 +5,147 @@
 {% block center %}
     <div class="center-screen">
         <div class="ten_space"></div>
-        <div class="center-screen-in">
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <b>下单日期</b>
+        <form method="get" action="">
+            <input type="hidden" name="st" id="search_type" value="sc"/>
+            <div class="center-screen-in">
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <b>下单日期</b>
+                    </div>
+                </div>
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <input type="text" value="{{ order_date }}" name="od" id="order_date" placeholder="开始" readonly/>
+                    </div>
+                </div>
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <input type="text" value="{{ order_end_date }}" name="oed" id="order_end_date" placeholder="结束" readonly/>
+                    </div>
+                </div>
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <b>订单号</b>
+                    </div>
+                </div>
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <input type="text" value="{{ number }}" name="on" id="number"/>
+                    </div>
+                </div>
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <b>客人名</b>
+                    </div>
+                </div>
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <input type="text" value="{{ customername }}" name="cn" id="customername"/>
+                    </div>
                 </div>
             </div>
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <input type="text" class="form_datetime" name="order_date" id="order_date" readonly/>
+            <div class="center-screen-in">
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <a href="{% url 'order:orderlist' %}?pn={{ pagenow }}&st=pp">打样中</a>
+                    </div>
+                </div>
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <a href="{% url 'order:orderlist' %}?pn={{ pagenow }}&st=ps">大货中</a>
+                    </div>
+                </div>
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <a href="{% url 'order:orderlist' %}?pn={{ pagenow }}&st=cp">收款中</a>
+                    </div>
+                </div>
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <a href="{% url 'order:orderlist' %}?pn=1">全部</a>
+                    </div>
                 </div>
             </div>
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <input type="text" class="form_datetime" name="order_end_date" id="order_end_date" readonly/>
+            <div class="center-screen-in">
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <b>帽型</b>
+                    </div>
+                </div>
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <select name="cp" id="captype">
+                            {% ifequal search_type "sc" %}
+                                {% ifequal captype_pk 0 %}
+                                    <option disabled selected>请选择帽型</option>
+                                {% else %}
+                                    <option value="{{ captype.pk }}" selected>{{ captype.ct_type }}</option>
+                                {% endifequal %}
+                            {% else %}
+                                <option disabled selected>请选择帽型</option>
+                            {% endifequal %}
+                            {% for captype in captypes %}
+                                <option value="{{ captype.pk }}">{{ captype.ct_type }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <b>业务员</b>
+                    </div>
+                </div>
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <select name="up" id="user">
+                            {% ifequal search_type "sc" %}
+                                {% ifequal user_pk 0 %}
+                                    <option disabled selected>请选择业务员</option>
+                                {% else %}
+                                    <option value="{{ user.pk }}" selected>{{ user.u_name }}</option>
+                                {% endifequal %}
+                            {% else %}
+                                <option disabled selected>请选择业务员</option>
+                            {% endifequal %}
+
+                            {% for user in users %}
+                                <option value="{{ user.pk }}">{{ user.u_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <b>生产车间</b>
+                    </div>
+                </div>
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
+                        <select name="pwp" id="pw_workshop">
+                            {% ifequal search_type "sc" %}
+                                {% ifequal pw_workshop_pk 0 %}
+                                    <option disabled selected>请选择车间</option>
+                                {% else %}
+                                    <option value="{{ pw_workshop.pk }}" selected>{{ pw_workshop.pw_workshop }}</option>
+                                {% endifequal %}
+                            {% else %}
+                                <option disabled selected>请选择车间</option>
+                            {% endifequal %}
+
+                            {% for productionworkshop in productionworkshops %}
+                                <option value="{{ productionworkshop.pk }}">{{ productionworkshop.pw_workshop }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-li-nb">
+                        <input type="submit" class="btn btn-info" value="提交过滤">
+                    </div>
                 </div>
             </div>
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <a href="{% url 'order:orderlist' %}?pn={{ pagenow }}&st=pp">打样中</a>
-                </div>
-            </div>
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <a href="{% url 'order:orderlist' %}?pn={{ pagenow }}&st=ps">大货中</a>
-                </div>
-            </div>
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <a href="{% url 'order:orderlist' %}?pn={{ pagenow }}&st=cp">收款中</a>
-                </div>
-            </div>
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <a href="{% url 'order:orderlist' %}?pn=1">全部</a>
-                </div>
-            </div>
-            <span id="time-prompt"></span>
         </div>
-        <div class="center-screen-in">
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <b>订单号</b>
-                </div>
-            </div>
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <input type="text"/>
-                </div>
-            </div>
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <b>客人名</b>
-                </div>
-            </div>
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <input type="text"/>
-                </div>
-            </div>
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <b>帽型</b>
-                </div>
-            </div>
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <input type="text"/>
-                </div>
-            </div>
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <b>业务员</b>
-                </div>
-            </div>
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <input type="text"/>
-                </div>
-            </div>
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <b>生产车间</b>
-                </div>
-            </div>
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <input type="text"/>
-                </div>
-            </div>
-            <div class="center-screen-in-li">
-                <div class="center-screen-in-li-in">
-                    <input type="submit" class="btn btn-info" value="提交过滤">
-                </div>
-            </div>
-        </div>
-        <div class="ten_space"></div>
-    </div>
+    </form>
     <div class="ten_space"></div>
     <div class="order-add">
 {#        <div class="order-add-li">#}
@@ -252,32 +296,61 @@
             </table>
         </div>
     </div>
-    <div class="center-page">
-        {% ifequal orders 0 %}
-        {% else %}
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    {% if page.has_previous %}
-                        <li>
-                            <a href="{% url 'order:orderlist' %}?pn={{ page.previous_page_number }}&st={{ search_type }}" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                    {% endif %}
-                    {% for page_l in page_list %}
-                        <li {% ifequal pagenow page_l %}class="active"{% endifequal %}><a href="{% url 'order:orderlist' %}?pn={{ page_l }}&st={{ search_type }}">{{ page_l }}</a></li>
-                    {% endfor %}
-                    {% if page.has_next %}
-                        <li>
-                            <a href="{% url 'order:orderlist' %}?pn={{ page.next_page_number }}&st={{ search_type }}" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </nav>
-        {% endifequal %}
-    </div>
+    {% ifequal search_type "sc" %}
+        <div class="center-page">
+            {% ifequal orders 0 %}
+            {% else %}
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        {% if page.has_previous %}
+                            <li>
+                                <a href="{% url 'order:orderlist' %}?pn={{ page.previous_page_number }}&st={{ search_type }}&od={{ order_date }}&oed={{ order_end_date }}&on={{ number }}&cn={{ customername }}&cp={{ captype_pk }}&up={{ user_pk }}&pwp={{ pw_workshop_pk }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% for page_l in page_list %}
+                            <li {% ifequal pagenow page_l %}class="active"{% endifequal %}><a href="{% url 'order:orderlist' %}?pn={{ page_l }}&st={{ search_type }}&od={{ order_date }}&oed={{ order_end_date }}&on={{ number }}&cn={{ customername }}&cp={{ captype_pk }}&up={{ user_pk }}&pwp={{ pw_workshop_pk }}">{{ page_l }}</a></li>
+                        {% endfor %}
+                        {% if page.has_next %}
+                            <li>
+                                <a href="{% url 'order:orderlist' %}?pn={{ page.next_page_number }}&st={{ search_type }}&od={{ order_date }}&oed={{ order_end_date }}&on={{ number }}&cn={{ customername }}&cp={{ captype_pk }}&up={{ user_pk }}&pwp={{ pw_workshop_pk }}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endifequal %}
+        </div>
+    {% else %}
+        <div class="center-page">
+            {% ifequal orders 0 %}
+            {% else %}
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        {% if page.has_previous %}
+                            <li>
+                                <a href="{% url 'order:orderlist' %}?pn={{ page.previous_page_number }}&st={{ search_type }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% for page_l in page_list %}
+                            <li {% ifequal pagenow page_l %}class="active"{% endifequal %}><a href="{% url 'order:orderlist' %}?pn={{ page_l }}&st={{ search_type }}">{{ page_l }}</a></li>
+                        {% endfor %}
+                        {% if page.has_next %}
+                            <li>
+                                <a href="{% url 'order:orderlist' %}?pn={{ page.next_page_number }}&st={{ search_type }}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endifequal %}
+        </div>
+    {% endifequal %}
     <div class="one_space"></div>
 {% endblock %}
 {% block js%}

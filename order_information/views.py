@@ -13,12 +13,34 @@ class Orderlist(View):
     def get(self,request):
         pagenow = int(request.GET.get("pn",1))
         search_type = request.GET.get("st","a")
+
         if search_type == "pp":
             orders = [i for i in Order.objects.all() if i.o_proofingprogress.pp_sample_order_date and not i.o_proofingprogress.pp_sample_express_date]
         elif search_type == "ps":
             orders = [i for i in Order.objects.all() if i.o_productionschedule.ps_order_date and not i.o_productionschedule.ps_outward_transport_date]
         elif search_type == "cp":
             orders = [i for i in Order.objects.all() if i.o_productionschedule.ps_outward_transport_date and not i.o_productionschedule.ps_gathering_date]
+        elif search_type == "sc":
+            order_date = request.GET.get("od")
+            order_end_date = request.GET.get("oed")
+            number = request.GET.get("on")
+            customername = request.GET.get("cn")
+            captype_pk = int(request.GET.get("cp",0))
+            user_pk = int(request.GET.get("up",0))
+            pw_workshop_pk = int(request.GET.get("pwp",0))
+            orders = Order.objects.filter()
+            if order_date != "" and order_end_date != "":
+                orders = Order.objects.filter(o_date__range=(order_date,order_end_date))
+            if number != "":
+                orders = [i for i in orders if number in i.o_number]
+            if customername != "":
+                orders = [i for i in orders if customername in i.o_customer.c_name]
+            if captype_pk != 0:
+                orders = [i for i in orders if i.o_captype.pk == captype_pk]
+            if user_pk != 0:
+                orders = [i for i in orders if i.o_user.pk == user_pk]
+            if pw_workshop_pk != 0:
+                orders = [i for i in orders if i.o_productionschedule.ps_workshop and i.o_productionschedule.ps_workshop.pk == pw_workshop_pk]
         else:
             orders = Order.objects.all().order_by("-pk")
 
@@ -48,6 +70,10 @@ class Orderlist(View):
                 page_end = page_num
 
             page_range = [page for page in range(page_start, page_end + 1)]
+
+        captypes = CapType.objects.all()
+        users = User.objects.all()
+        productionworkshops = ProductionWorkshop.objects.all()
         context = {
             "title": "订单列表",
             "orders": pagintor_list,
@@ -56,7 +82,24 @@ class Orderlist(View):
             "order_len":len(orders),
             "page_list": page_range,
             "search_type": search_type,
+            "captypes": captypes,
+            "users": users,
+            "productionworkshops": productionworkshops,
         }
+        if search_type == "sc":
+            context["order_date"] = order_date
+            context["order_end_date"] = order_end_date
+            context["number"] = number
+            context["customername"] = customername
+            context["captype_pk"] = captype_pk
+            context["user_pk"] = user_pk
+            context["pw_workshop_pk"] = pw_workshop_pk
+            if captype_pk != 0:
+                context["captype"] = CapType.objects.get(pk=captype_pk)
+            if user_pk != 0:
+                context["user"] = User.objects.get(pk=user_pk)
+            if pw_workshop_pk != 0:
+                context["pw_workshop"] = ProductionWorkshop.objects.get(pk=pw_workshop_pk)
         return render(request=request, template_name="orderlist.html", context=context)
 
 class OrderDetail(View):
