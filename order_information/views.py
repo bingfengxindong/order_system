@@ -123,6 +123,7 @@ class OrderEdit(View):
         captypes = CapType.objects.all()
         users = User.objects.all()
         capcolors = CapColor.objects.all()
+        embroiderorprints = EmbroiderOrPrint.objects.all()
         capeyebrows = CapEyebrow.objects.all()
         versionnumbers = VersionNumber.objects.all()
         afterdeductions = AfterDeduction.objects.all()
@@ -134,6 +135,7 @@ class OrderEdit(View):
             "captypes": captypes,
             "users": users,
             "capcolors": capcolors,
+            "embroiderorprints": embroiderorprints,
             "capeyebrows": capeyebrows,
             "versionnumbers": versionnumbers,
             "afterdeductions": afterdeductions,
@@ -172,8 +174,9 @@ class OrderEdit(View):
             capcolor = createorder.query_capcolor(capcolor_pk=capcolor_pk)
             order.o_capcolor = capcolor
 
-        embroiderorprint = request.POST.get("embroiderorprint")
-        if embroiderorprint:
+        embroiderorprint_pk = request.POST.get("embroiderorprint")
+        if embroiderorprint_pk:
+            embroiderorprint = EmbroiderOrPrint.objects.get(pk=embroiderorprint_pk)
             order.o_embroiderorprint = embroiderorprint
 
         capeyebrow_pk = request.POST.get("capeyebrow")
@@ -286,7 +289,10 @@ class OrderEdit(View):
 
 class OrderAdd(View):
     def ordernumber(self):
-        last_order_number = str(int(Order.objects.filter().order_by("-pk")[0].o_number.split("-")[-1]) + 1)
+        try:
+            last_order_number = str(int(Order.objects.filter().order_by("-pk")[0].o_number.split("-")[-1]) + 1)
+        except:
+            last_order_number = "100"
         last_order_number_len = len(last_order_number)
         return "{}{}".format("0"*(4 - last_order_number_len),last_order_number)
 
@@ -298,17 +304,19 @@ class OrderAdd(View):
         captypes = CapType.objects.all()
         users = User.objects.all()
         capcolors = CapColor.objects.all()
+        embroiderorprints = EmbroiderOrPrint.objects.all()
         capeyebrows = CapEyebrow.objects.all()
         versionnumbers = VersionNumber.objects.all()
         afterdeductions = AfterDeduction.objects.all()
         productionworkshops = ProductionWorkshop.objects.all()
-        order_number = "KS19-{}".format(self.ordernumber())
+        order_number = "FW19-{}".format(self.ordernumber())
         context = {
             "title":"添加订单",
             "customers":customers,
             "captypes":captypes,
             "users":users,
             "capcolors":capcolors,
+            "embroiderorprints":embroiderorprints,
             "capeyebrows":capeyebrows,
             "versionnumbers":versionnumbers,
             "afterdeductions":afterdeductions,
@@ -350,8 +358,9 @@ class OrderAdd(View):
             capcolor = createorder.query_capcolor(capcolor_pk=capcolor_pk)
             order.o_capcolor = capcolor
 
-        embroiderorprint = request.POST.get("embroiderorprint")
-        if embroiderorprint:
+        embroiderorprint_pk = request.POST.get("embroiderorprint")
+        if embroiderorprint_pk:
+            embroiderorprint = EmbroiderOrPrint.objects.get(pk=embroiderorprint_pk)
             order.o_embroiderorprint = embroiderorprint
 
         capeyebrow_pk = request.POST.get("capeyebrow")

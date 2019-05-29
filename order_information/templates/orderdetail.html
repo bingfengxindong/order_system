@@ -137,17 +137,7 @@
                     </div>
                     <div class="center-order-li-li-right">
                         <div class="center-order-li-li-right-content">
-                            {% ifequal order.o_embroiderorprint 0 %}
-                                <span>无</span>
-                            {% else %}
-                                {% ifequal order.o_embroiderorprint 1 %}
-                                    <span>绣花</span>
-                                {% else %}
-                                    {% ifequal order.o_embroiderorprint 2 %}
-                                        <span>印花</span>
-                                    {% endifequal %}
-                                {% endifequal %}
-                            {% endifequal %}
+                            <span>{{ order.o_embroiderorprint.eop_type }}</span>
                         </div>
                     </div>
                 </div>

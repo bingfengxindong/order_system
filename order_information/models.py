@@ -13,11 +13,11 @@ class Order(models.Model):
     o_number = models.CharField(max_length=200,verbose_name="订单号")
     o_date = models.DateTimeField(blank=True,null=True,verbose_name="订单日期")
     o_image = models.ImageField(blank=True,null=True,upload_to="%Y/%m/%d/",verbose_name="图片")
-    o_embroiderorprint = models.IntegerField(blank=True,null=True,choices=choice,verbose_name="绣印花")
 
     o_customer = models.ForeignKey("Customer",blank=True,null=True,on_delete=models.CASCADE,verbose_name="客户")
     o_captype = models.ForeignKey("CapType",blank=True,null=True,on_delete=models.CASCADE,verbose_name="帽型")
     o_capcolor = models.ForeignKey("CapColor",blank=True,null=True,on_delete=models.CASCADE,verbose_name="颜色")
+    o_embroiderorprint = models.ForeignKey("EmbroiderOrPrint",blank=True,null=True,on_delete=models.CASCADE,verbose_name="绣印花")
     o_capeyebrow = models.ForeignKey("CapEyebrow",blank=True,null=True,on_delete=models.CASCADE,verbose_name="帽眉")
     o_versionnumber = models.ForeignKey("VersionNumber",blank=True,null=True,on_delete=models.CASCADE,verbose_name="版号")
     o_afterdeduction = models.ForeignKey("AfterDeduction",blank=True,null=True,on_delete=models.CASCADE,verbose_name="后扣")
@@ -83,6 +83,21 @@ class CapColor(models.Model):
         ordering = ["pk"]
         verbose_name = "颜色"
         verbose_name_plural = "颜色"
+
+class EmbroiderOrPrint(models.Model):
+    eop_id = models.UUIDField(verbose_name="编号")
+    eop_type = models.CharField(max_length=200, verbose_name="绣印花")
+    create_date = models.DateTimeField(auto_now_add=True)
+    create_end_date = models.DateTimeField(auto_now=True)
+    isdelete = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "{}".format(self.eop_type)
+
+    class Meta:
+        ordering = ["pk"]
+        verbose_name = "绣印花"
+        verbose_name_plural = "绣印花"
 
 class CapEyebrow(models.Model):
     ce_id = models.UUIDField(verbose_name="编号")

@@ -4,24 +4,6 @@ $(function () {
     order_start_end_date();
 });
 
-function order_start_end_date() {
-    $("#order_date").datetimepicker({
-        format: 'yyyy-mm-dd',
-        minView: "month",
-        language:"zh-CN",
-    });
-
-    $("#order_date").change(function () {
-        var sd =  $(this).val();
-        $("#order_end_date").datetimepicker({
-            format: 'yyyy-mm-dd',
-            minView: "month",
-            language:"zh-CN",
-            startDate:sd,
-        });
-    })
-}
-
 function order_date_timepicker() {
     $(".form_datetime").datetimepicker({
         format: 'yyyy-mm-dd',

@@ -177,25 +177,13 @@
                             <div class="center-order-li-li-right-content">
                                 <select name="embroiderorprint" id="embroiderorprint">
                                     {% if order.o_embroiderorprint %}
-                                        <option value="{{ order.o_embroiderorprint }}" disabled selected>
-                                            {% ifequal order.o_embroiderorprint 0 %}
-                                                <span>无</span>
-                                            {% else %}
-                                                {% ifequal order.o_embroiderorprint 1 %}
-                                                    <span>绣花</span>
-                                                {% else %}
-                                                    {% ifequal order.o_embroiderorprint 2 %}
-                                                        <span>印花</span>
-                                                    {% endifequal %}
-                                                {% endifequal %}
-                                            {% endifequal %}
-                                        </option>
+                                        <option value="{{ order.o_embroiderorprint.pk }}" disabled selected>{{ order.o_embroiderorprint.eop_type }}</option>
                                     {% else %}
                                         <option disabled selected>请选择绣印花</option>
                                     {% endif %}
-                                    <option value="0">无</option>
-                                    <option value="1">绣花</option>
-                                    <option value="2">印花</option>
+                                    {% for embroiderorprint in embroiderorprints %}
+                                        <option value="{{ embroiderorprint.pk }}">{{ embroiderorprint.eop_type }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>
