@@ -76,7 +76,7 @@
                         </div>
                         <div class="center-order-li-li-right">
                             <div class="center-order-li-li-right-content">
-                                <input type="text" value="{{ order_number }}" name="order_number" id="order_number" readonly/>
+                                <input type="text" name="order_number" id="order_number"/>
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                         </div>
                         <div class="center-order-li-li-right">
                             <div class="center-order-li-li-right-content">
-                                <input type="text" value="{{ today }}" name="order_date" id="order_date" readonly/>
+                                <input type="text" value="{{ today }}" name="order_date" id="order_date" class="form_datetime" autocomplete="off"/>
                             </div>
                         </div>
                     </div>
@@ -315,7 +315,7 @@
                         </div>
                         <div class="center-order-li-li-right">
                             <div class="center-order-li-li-right-content">
-                                <input type="text" name="pp_sample_order_date" id="pp_sample_order_date" value="{{ today }}" readonly/>
+                                <input type="text" value="{{ today }}" name="pp_sample_order_date" id="pp_sample_order_date" class="form_datetime" autocomplete="off"/>
                             </div>
                         </div>
                     </div>
@@ -448,6 +448,19 @@
                                         <option value="{{ productionworkshop.pk }}">{{ productionworkshop.pw_workshop }}</option>
                                     {% endfor %}
                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-order-li-li-space"></div>
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>大货单号</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <input type="text" name="ps_number" id="ps_number"/>
                             </div>
                         </div>
                     </div>

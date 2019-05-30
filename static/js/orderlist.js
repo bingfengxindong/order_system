@@ -1,7 +1,6 @@
 $(function () {
     order_date_timepicker();
     customer_name_change();
-    order_start_end_date();
 });
 
 function order_date_timepicker() {
@@ -46,8 +45,8 @@ function add_image() {
         if(url){
             $(".order-image").html(
                 `
-                    <a onclick="cancel_image()">取消</a>
                     <img src="`+ url +`">
+                    <a onclick="cancel_image()">取消</a>
                 `
             );
         }

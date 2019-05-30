@@ -239,6 +239,7 @@ class OrderEdit(View):
         order.o_proofingprogress = proofingprogress
 
         workshop_pk = request.POST.get("pw_workshop")
+        ps_number = self.edit_date(request.POST.get("ps_number"))
         ps_order_date = self.edit_date(request.POST.get("ps_order_date"))
         ps_arrival_date = self.edit_date(request.POST.get("ps_arrival_date"))
         ps_tailor_date = self.edit_date(request.POST.get("ps_tailor_date"))
@@ -255,6 +256,8 @@ class OrderEdit(View):
         productionschedule.ps_id = uuid.uuid1()
         if ps_order_date:
             productionschedule.ps_order_date = ps_order_date
+        if ps_number:
+            productionschedule.ps_number = ps_number
         if ps_arrival_date:
             productionschedule.ps_arrival_date = ps_arrival_date
         if ps_tailor_date:
@@ -309,7 +312,7 @@ class OrderAdd(View):
         versionnumbers = VersionNumber.objects.all()
         afterdeductions = AfterDeduction.objects.all()
         productionworkshops = ProductionWorkshop.objects.all()
-        order_number = "FW19-{}".format(self.ordernumber())
+        # order_number = "FW19-{}".format(self.ordernumber())
         context = {
             "title":"添加订单",
             "customers":customers,
@@ -321,8 +324,8 @@ class OrderAdd(View):
             "versionnumbers":versionnumbers,
             "afterdeductions":afterdeductions,
             "productionworkshops":productionworkshops,
-            "order_number":order_number,
-            "today":datetime.date.today(),
+            # "order_number":order_number,
+            "today":datetime.date.today().strftime("%Y-%m-%d"),
         }
         return render(request=request,template_name="orderadd.html",context=context)
 
@@ -423,6 +426,7 @@ class OrderAdd(View):
         order.o_proofingprogress = proofingprogress
 
         workshop_pk = request.POST.get("pw_workshop")
+        ps_number = request.POST.get("ps_number")
         ps_order_date = request.POST.get("ps_order_date")
         ps_arrival_date = request.POST.get("ps_arrival_date")
         ps_tailor_date = request.POST.get("ps_tailor_date")
@@ -437,6 +441,8 @@ class OrderAdd(View):
         ps_contract_balance = request.POST.get("ps_contract_balance")
         productionschedule = ProductionSchedule()
         productionschedule.ps_id = uuid.uuid1()
+        if ps_number:
+            productionschedule.ps_number = ps_number
         if ps_order_date:
             productionschedule.ps_order_date = ps_order_date
         if ps_arrival_date:

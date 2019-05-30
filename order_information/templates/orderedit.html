@@ -10,6 +10,9 @@
             <div class="header-in-in-li">
                 <a href="{% url 'order:orderlist' %}" type="button" class="btn btn-default">返回列表</a>
             </div>
+            <div class="header-in-in-li">
+                <a href="{% url 'order:orderdetail' %}?pk={{ order.pk }}" type="button" class="btn btn-default">取消</a>
+            </div>
         </div>
         <div class="ten_space"></div>
     </div>
@@ -202,8 +205,8 @@
                             <input type="file" id="add_image" name="add_iamge" class="hide"/>
                             <div class="order-image">
                                 {% if order.o_image %}
-                                    <a onclick="cancel_image()">取消</a>
                                     <img src="/media/{{ order.o_image }}">
+                                    <a onclick="cancel_image()">取消</a>
                                 {% else %}
                                     <a onclick="add_image()">
                                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -490,6 +493,19 @@
                                         <option value="{{ productionworkshop.pk }}">{{ productionworkshop.pw_workshop }}</option>
                                     {% endfor %}
                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-order-li-li-space"></div>
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>大货单号</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <input type="text" {% if order.o_productionschedule.ps_number %}value="{{ order.o_productionschedule.ps_number }}"{% endif %} name="ps_number" id="ps_number"/>
                             </div>
                         </div>
                     </div>

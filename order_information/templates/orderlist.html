@@ -47,6 +47,11 @@
             <div class="center-screen-in">
                 <div class="center-screen-in-li">
                     <div class="center-screen-in-li-in">
+                        <a href="{% url 'order:orderlist' %}?pn=1">全部</a>
+                    </div>
+                </div>
+                <div class="center-screen-in-li">
+                    <div class="center-screen-in-li-in">
                         <a href="{% url 'order:orderlist' %}?pn={{ pagenow }}&st=pp">打样中</a>
                     </div>
                 </div>
@@ -58,11 +63,6 @@
                 <div class="center-screen-in-li">
                     <div class="center-screen-in-li-in">
                         <a href="{% url 'order:orderlist' %}?pn={{ pagenow }}&st=cp">收款中</a>
-                    </div>
-                </div>
-                <div class="center-screen-in-li">
-                    <div class="center-screen-in-li-in">
-                        <a href="{% url 'order:orderlist' %}?pn=1">全部</a>
                     </div>
                 </div>
             </div>
@@ -208,148 +208,159 @@
         <div class="ten_space"></div>
         <div class="ten_space"></div>
         <div class="center-order-list-in">
-            <table class="table table-bordered">
-                <tr>
-                    <td>ID</td>
-                    <td>单号</td>
-                    <td>业务员</td>
-                    <td>大货交期</td>
-                    <td>大货数量</td>
-                    <td>大货金额</td>
-                    <td>客人名</td>
-                    <td>颜色</td>
-                    <td>打样时间</td>
-                    <td>快递时间</td>
-                    <td>大货下单时间</td>
-                    <td>大货车间</td>
-                    <td>到料时间</td>
-                    <td>车缝时间</td>
-                    <td>外运时间</td>
-                    <td>收款时间</td>
-                    <td>编辑</td>
-                </tr>
-                {% for order in orders %}
+            {% ifequal order_len 0 %}
+                <div class="center-order-list-in-none">
+                    <b>当前暂无订单！<a href="{% url 'order:orderadd' %}">请添加</a></b>
+                </div>
+            {% else %}
+                <table class="table table-striped">
                     <tr>
-                        <td>{{ order.pk }}</td>
-                        <td>
-                            <a href="{% url 'order:orderdetail' %}?pk={{ order.pk }}">{{ order.o_number }}</a>
-                        </td>
-                        <td>{{ order.o_user.u_name }}</td>
-                        <td>
-                            {% if order.o_productinfo.pi_date%}
-                                {{ order.o_productinfo.pi_date }}
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if order.o_productinfo.pi_amount %}
-                                {{ order.o_productinfo.pi_amount }}
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if order.o_productinfo.pi_unit_price %}
-                                {{ order.o_productinfo.pi_price_type }}{{ order.o_productinfo.pi_unit_price }}
-                            {% endif %}
-                        </td>
-                        <td>{{ order.o_customer.c_name }}</td>
-                        <td>{{ order.o_capcolor.cc_color }}</td>
-                        <td>
-                            {% if order.o_proofingprogress.pp_sample_arrival_date %}
-                                {{ order.o_proofingprogress.pp_sample_arrival_date }}
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if order.o_proofingprogress.pp_sample_express_date %}
-                                {{ order.o_proofingprogress.pp_sample_express_date }}
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if order.o_productionschedule.ps_order_date %}
-                                {{ order.o_productionschedule.ps_order_date }}
-                            {% endif %}
-                        </td>
-                        <td>{{ order.o_productionschedule.ps_workshop.pw_workshop }}</td>
-                        <td>
-                            {% if order.o_productionschedule.ps_arrival_date %}
-                                {{ order.o_productionschedule.ps_arrival_date }}
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if order.o_productionschedule.ps_sewing_date %}
-                                {{ order.o_productionschedule.ps_sewing_date }}
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if order.o_productionschedule.ps_outward_transport_date %}
-                                {{ order.o_productionschedule.ps_outward_transport_date }}
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if order.o_productionschedule.ps_gathering_date %}
-                                {{ order.o_productionschedule.ps_gathering_date }}
-                            {% endif %}
-                        </td>
-                        <td>
-                            <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}" type="button" class="btn btn-default">编辑</a>
-                        </td>
+                        <th>图片</th>
+                        <th>单号</th>
+                        <th>业务员</th>
+                        <th>大货交期</th>
+                        <th>大货数量</th>
+                        <th>大货单价</th>
+                        <th>客人名</th>
+                        <th>颜色</th>
+                        <th>打样时间</th>
+                        <th>快递时间</th>
+                        <th>大货下单时间</th>
+                        <th>大货车间</th>
+                        <th>到料时间</th>
+                        <th>车缝时间</th>
+                        <th>外运时间</th>
+                        <th>收款时间</th>
+                        <th>编辑</th>
                     </tr>
-                {% endfor %}
-            </table>
+                    {% for order in orders %}
+                        <tr>
+                            <td>
+                                <img src="/media/{{ order.o_image }}">
+                            </td>
+                            <td>
+                                <a href="{% url 'order:orderdetail' %}?pk={{ order.pk }}">{{ order.o_number }}</a>
+                            </td>
+                            <td>{{ order.o_user.u_name }}</td>
+                            <td>
+                                {% if order.o_productinfo.pi_date%}
+                                    {{ order.o_productinfo.pi_date }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if order.o_productinfo.pi_amount %}
+                                    {{ order.o_productinfo.pi_amount }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if order.o_productinfo.pi_unit_price %}
+                                    {{ order.o_productinfo.pi_price_type }}{{ order.o_productinfo.pi_unit_price }}
+                                {% endif %}
+                            </td>
+                            <td>{{ order.o_customer.c_name }}</td>
+                            <td>{{ order.o_capcolor.cc_color }}</td>
+                            <td>
+                                {% if order.o_proofingprogress.pp_sample_order_date %}
+                                    {{ order.o_proofingprogress.pp_sample_order_date }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if order.o_proofingprogress.pp_sample_express_date %}
+                                    {{ order.o_proofingprogress.pp_sample_express_date }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if order.o_productionschedule.ps_order_date %}
+                                    {{ order.o_productionschedule.ps_order_date }}
+                                {% endif %}
+                            </td>
+                            <td>{{ order.o_productionschedule.ps_workshop.pw_workshop }}</td>
+                            <td>
+                                {% if order.o_productionschedule.ps_arrival_date %}
+                                    {{ order.o_productionschedule.ps_arrival_date }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if order.o_productionschedule.ps_sewing_date %}
+                                    {{ order.o_productionschedule.ps_sewing_date }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if order.o_productionschedule.ps_outward_transport_date %}
+                                    {{ order.o_productionschedule.ps_outward_transport_date }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if order.o_productionschedule.ps_gathering_date %}
+                                    {{ order.o_productionschedule.ps_gathering_date }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}" type="button" class="btn btn-default">编辑</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endifequal %}
         </div>
     </div>
-    {% ifequal search_type "sc" %}
-        <div class="center-page">
-            {% ifequal orders 0 %}
-            {% else %}
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        {% if page.has_previous %}
-                            <li>
-                                <a href="{% url 'order:orderlist' %}?pn={{ page.previous_page_number }}&st={{ search_type }}&od={{ order_date }}&oed={{ order_end_date }}&on={{ number }}&cn={{ customername }}&cp={{ captype_pk }}&up={{ user_pk }}&pwp={{ pw_workshop_pk }}" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% for page_l in page_list %}
-                            <li {% ifequal pagenow page_l %}class="active"{% endifequal %}><a href="{% url 'order:orderlist' %}?pn={{ page_l }}&st={{ search_type }}&od={{ order_date }}&oed={{ order_end_date }}&on={{ number }}&cn={{ customername }}&cp={{ captype_pk }}&up={{ user_pk }}&pwp={{ pw_workshop_pk }}">{{ page_l }}</a></li>
-                        {% endfor %}
-                        {% if page.has_next %}
-                            <li>
-                                <a href="{% url 'order:orderlist' %}?pn={{ page.next_page_number }}&st={{ search_type }}&od={{ order_date }}&oed={{ order_end_date }}&on={{ number }}&cn={{ customername }}&cp={{ captype_pk }}&up={{ user_pk }}&pwp={{ pw_workshop_pk }}" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-            {% endifequal %}
-        </div>
+    {% ifequal order_len 0 %}
     {% else %}
-        <div class="center-page">
-            {% ifequal orders 0 %}
-            {% else %}
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        {% if page.has_previous %}
-                            <li>
-                                <a href="{% url 'order:orderlist' %}?pn={{ page.previous_page_number }}&st={{ search_type }}" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% for page_l in page_list %}
-                            <li {% ifequal pagenow page_l %}class="active"{% endifequal %}><a href="{% url 'order:orderlist' %}?pn={{ page_l }}&st={{ search_type }}">{{ page_l }}</a></li>
-                        {% endfor %}
-                        {% if page.has_next %}
-                            <li>
-                                <a href="{% url 'order:orderlist' %}?pn={{ page.next_page_number }}&st={{ search_type }}" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-            {% endifequal %}
-        </div>
+        {% ifequal search_type "sc" %}
+            <div class="center-page">
+                {% ifequal orders 0 %}
+                {% else %}
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            {% if page.has_previous %}
+                                <li>
+                                    <a href="{% url 'order:orderlist' %}?pn={{ page.previous_page_number }}&st={{ search_type }}&od={{ order_date }}&oed={{ order_end_date }}&on={{ number }}&cn={{ customername }}&cp={{ captype_pk }}&up={{ user_pk }}&pwp={{ pw_workshop_pk }}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% for page_l in page_list %}
+                                <li {% ifequal pagenow page_l %}class="active"{% endifequal %}><a href="{% url 'order:orderlist' %}?pn={{ page_l }}&st={{ search_type }}&od={{ order_date }}&oed={{ order_end_date }}&on={{ number }}&cn={{ customername }}&cp={{ captype_pk }}&up={{ user_pk }}&pwp={{ pw_workshop_pk }}">{{ page_l }}</a></li>
+                            {% endfor %}
+                            {% if page.has_next %}
+                                <li>
+                                    <a href="{% url 'order:orderlist' %}?pn={{ page.next_page_number }}&st={{ search_type }}&od={{ order_date }}&oed={{ order_end_date }}&on={{ number }}&cn={{ customername }}&cp={{ captype_pk }}&up={{ user_pk }}&pwp={{ pw_workshop_pk }}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endifequal %}
+            </div>
+        {% else %}
+            <div class="center-page">
+                {% ifequal orders 0 %}
+                {% else %}
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            {% if page.has_previous %}
+                                <li>
+                                    <a href="{% url 'order:orderlist' %}?pn={{ page.previous_page_number }}&st={{ search_type }}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% for page_l in page_list %}
+                                <li {% ifequal pagenow page_l %}class="active"{% endifequal %}><a href="{% url 'order:orderlist' %}?pn={{ page_l }}&st={{ search_type }}">{{ page_l }}</a></li>
+                            {% endfor %}
+                            {% if page.has_next %}
+                                <li>
+                                    <a href="{% url 'order:orderlist' %}?pn={{ page.next_page_number }}&st={{ search_type }}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endifequal %}
+            </div>
+        {% endifequal %}
     {% endifequal %}
     <div class="one_space"></div>
 {% endblock %}

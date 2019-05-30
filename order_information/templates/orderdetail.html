@@ -422,6 +422,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="center-order-li-li-space"></div>
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>大货单号</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                {% if order.o_productionschedule.ps_number %}
+                                    <span>{{ order.o_productionschedule.ps_number }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
             </div>
 
             <div class="center-production-in">

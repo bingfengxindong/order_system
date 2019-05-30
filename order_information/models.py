@@ -11,7 +11,7 @@ class Order(models.Model):
     )
     o_id = models.UUIDField(verbose_name="编号")
     o_number = models.CharField(max_length=200,verbose_name="订单号")
-    o_date = models.DateTimeField(blank=True,null=True,verbose_name="订单日期")
+    o_date = models.DateField(blank=True,null=True,verbose_name="订单日期")
     o_image = models.ImageField(blank=True,null=True,upload_to="%Y/%m/%d/",verbose_name="图片")
 
     o_customer = models.ForeignKey("Customer",blank=True,null=True,on_delete=models.CASCADE,verbose_name="客户")
