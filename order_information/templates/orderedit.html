@@ -97,7 +97,7 @@
                         </div>
                         <div class="center-order-li-li-right">
                             <div class="center-order-li-li-right-content">
-                                <input type="text" value="{{ order.o_date }}" name="order_date" id="order_date" readonly/>
+                                <input type="text" value="{{ order.o_date|date:'Y-m-j' }}" name="order_date" id="order_date" autocomplete="off" readonly/>
                             </div>
                         </div>
                     </div>
@@ -328,7 +328,7 @@
                                 </div>
                                 <div class="center-order-li-igp-in-in-right">
                                     <div class="center-order-li-igp-in-in-right-content">
-                                        <input type="text" {% if order.o_productinfo.pi_date %}value="{{ order.o_productinfo.pi_date }}"{% endif %} name="pi_date" id="pi_date" class="form_datetime"/>
+                                        <input type="text" {% if order.o_productinfo.pi_date %}value="{{ order.o_productinfo.pi_date|date:'Y-m-j' }}"{% endif %} name="pi_date" id="pi_date" class="form_datetime" autocomplete="off"/>
                                     </div>
                                 </div>
                             </div>
@@ -356,7 +356,7 @@
                         </div>
                         <div class="center-order-li-li-right">
                             <div class="center-order-li-li-right-content">
-                                <input type="text" name="pp_sample_order_date" id="pp_sample_order_date" value="{{ order.o_proofingprogress.pp_sample_order_date }}" readonly/>
+                                <input type="text" name="pp_sample_order_date" id="pp_sample_order_date" value="{{ order.o_proofingprogress.pp_sample_order_date|date:'Y-m-j' }}" autocomplete="off" readonly/>
                             </div>
                         </div>
                     </div>
@@ -369,7 +369,7 @@
                         </div>
                         <div class="center-order-li-li-right">
                             <div class="center-order-li-li-right-content">
-                                <input type="text" {% if order.o_proofingprogress.pp_sample_arrival_date %}value="{{ order.o_proofingprogress.pp_sample_arrival_date }}"{% endif %} name="pp_sample_arrival_date" id="pp_sample_arrival_date" class="form_datetime"/>
+                                <input type="text" {% if order.o_proofingprogress.pp_sample_arrival_date %}value="{{ order.o_proofingprogress.pp_sample_arrival_date|date:'Y-m-j' }}"{% endif %} name="pp_sample_arrival_date" id="pp_sample_arrival_date" class="form_datetime" autocomplete="off"/>
                             </div>
                         </div>
                     </div>
@@ -382,7 +382,7 @@
                         </div>
                         <div class="center-order-li-li-right">
                             <div class="center-order-li-li-right-content">
-                                <input type="text" {% if order.o_proofingprogress.pp_sample_express_date %}value="{{ order.o_proofingprogress.pp_sample_express_date }}"{% endif %} name="pp_sample_express_date" id="pp_sample_express_date" class="form_datetime"/>
+                                <input type="text" {% if order.o_proofingprogress.pp_sample_express_date %}value="{{ order.o_proofingprogress.pp_sample_express_date|date:'Y-m-j' }}"{% endif %} name="pp_sample_express_date" id="pp_sample_express_date" class="form_datetime" autocomplete="off"/>
                             </div>
                         </div>
                     </div>
@@ -432,7 +432,7 @@
                         </div>
                         <div class="center-order-li-li-right">
                             <div class="center-order-li-li-right-content">
-                                <input type="text" {% if order.o_proofingprogress.pp_Modify_sample_order_date %}value="{{ order.o_proofingprogress.pp_Modify_sample_order_date }}"{% endif %} name="pp_Modify_sample_order_date" id="pp_Modify_sample_order_date" class="form_datetime"/>
+                                <input type="text" {% if order.o_proofingprogress.pp_Modify_sample_order_date %}value="{{ order.o_proofingprogress.pp_Modify_sample_order_date|date:'Y-m-j' }}"{% endif %} name="pp_Modify_sample_order_date" id="pp_Modify_sample_order_date" class="form_datetime" autocomplete="off"/>
                             </div>
                         </div>
                     </div>
@@ -445,7 +445,7 @@
                         </div>
                         <div class="center-order-li-li-right">
                             <div class="center-order-li-li-right-content">
-                                <input type="text" {% if order.o_proofingprogress.pp_Modify_sample_arrival_date %}value="{{ order.o_proofingprogress.pp_Modify_sample_arrival_date }}"{% endif %} name="pp_Modify_sample_arrival_date" id="pp_Modify_sample_arrival_date" class="form_datetime"/>
+                                <input type="text" {% if order.o_proofingprogress.pp_Modify_sample_arrival_date %}value="{{ order.o_proofingprogress.pp_Modify_sample_arrival_date|date:'Y-m-j' }}"{% endif %} name="pp_Modify_sample_arrival_date" id="pp_Modify_sample_arrival_date" class="form_datetime" autocomplete="off"/>
                             </div>
                         </div>
                     </div>
@@ -458,7 +458,7 @@
                         </div>
                         <div class="center-order-li-li-right">
                             <div class="center-order-li-li-right-content">
-                                <input type="text" {% if order.o_proofingprogress.pp_Modify_sample_express_date %}value="{{ order.o_proofingprogress.pp_Modify_sample_express_date }}"{% endif %} name="pp_Modify_sample_express_date" id="pp_Modify_sample_express_date" class="form_datetime"/>
+                                <input type="text" {% if order.o_proofingprogress.pp_Modify_sample_express_date %}value="{{ order.o_proofingprogress.pp_Modify_sample_express_date|date:'Y-m-j' }}"{% endif %} name="pp_Modify_sample_express_date" id="pp_Modify_sample_express_date" class="form_datetime" autocomplete="off"/>
                             </div>
                         </div>
                     </div>
@@ -523,7 +523,7 @@
                                 </div>
                                 <div class="center-order-li-li-right">
                                     <div class="center-order-li-li-right-content">
-                                        <input type="text" {% if order.o_productionschedule.ps_order_date %}value="{{ order.o_productionschedule.ps_order_date }}"{% endif %} name="ps_order_date" id="ps_order_date" class="form_datetime"/>
+                                        <input type="text" {% if order.o_productionschedule.ps_order_date %}value="{{ order.o_productionschedule.ps_order_date|date:'Y-m-j' }}"{% endif %} name="ps_order_date" id="ps_order_date" class="form_datetime" autocomplete="off"/>
                                     </div>
                                 </div>
                             </div>
@@ -536,7 +536,7 @@
                                 </div>
                                 <div class="center-order-li-li-right">
                                     <div class="center-order-li-li-right-content">
-                                        <input type="text" {% if order.o_productionschedule.ps_arrival_date %}value="{{ order.o_productionschedule.ps_arrival_date }}"{% endif %} name="ps_arrival_date" id="ps_arrival_date" class="form_datetime"/>
+                                        <input type="text" {% if order.o_productionschedule.ps_arrival_date %}value="{{ order.o_productionschedule.ps_arrival_date|date:'Y-m-j' }}"{% endif %} name="ps_arrival_date" id="ps_arrival_date" class="form_datetime" autocomplete="off"/>
                                     </div>
                                 </div>
                             </div>
@@ -549,7 +549,7 @@
                                 </div>
                                 <div class="center-order-li-li-right">
                                     <div class="center-order-li-li-right-content">
-                                        <input type="text" {% if order.o_productionschedule.ps_tailor_date %}value="{{ order.o_productionschedule.ps_tailor_date }}"{% endif %} name="ps_tailor_date" id="ps_tailor_date" class="form_datetime"/>
+                                        <input type="text" {% if order.o_productionschedule.ps_tailor_date %}value="{{ order.o_productionschedule.ps_tailor_date|date:'Y-m-j' }}"{% endif %} name="ps_tailor_date" id="ps_tailor_date" class="form_datetime" autocomplete="off"/>
                                     </div>
                                 </div>
                             </div>
@@ -564,7 +564,7 @@
                                 </div>
                                 <div class="center-order-li-li-right">
                                     <div class="center-order-li-li-right-content">
-                                        <input type="text" {% if order.o_productionschedule.ps_embroider_date %}value="{{ order.o_productionschedule.ps_embroider_date }}"{% endif %} name="ps_embroider_date" id="ps_embroider_date" class="form_datetime"/>
+                                        <input type="text" {% if order.o_productionschedule.ps_embroider_date %}value="{{ order.o_productionschedule.ps_embroider_date|date:'Y-m-j' }}"{% endif %} name="ps_embroider_date" id="ps_embroider_date" class="form_datetime_top" autocomplete="off"/>
                                     </div>
                                 </div>
                             </div>
@@ -577,7 +577,7 @@
                                 </div>
                                 <div class="center-order-li-li-right">
                                     <div class="center-order-li-li-right-content">
-                                        <input type="text" {% if order.o_productionschedule.ps_print_date %}value="{{ order.o_productionschedule.ps_print_date }}"{% endif %} name="ps_print_date" id="ps_print_date" class="form_datetime"/>
+                                        <input type="text" {% if order.o_productionschedule.ps_print_date %}value="{{ order.o_productionschedule.ps_print_date|date:'Y-m-j' }}"{% endif %} name="ps_print_date" id="ps_print_date" class="form_datetime_top" autocomplete="off"/>
                                     </div>
                                 </div>
                             </div>
@@ -590,7 +590,7 @@
                                 </div>
                                 <div class="center-order-li-li-right">
                                     <div class="center-order-li-li-right-content">
-                                        <input type="text" {% if order.o_productionschedule.ps_Water_washing_date %}value="{{ order.o_productionschedule.ps_Water_washing_date }}"{% endif %} name="ps_Water_washing_date" id="ps_Water_washing_date" class="form_datetime"/>
+                                        <input type="text" {% if order.o_productionschedule.ps_Water_washing_date %}value="{{ order.o_productionschedule.ps_Water_washing_date|date:'Y-m-j' }}"{% endif %} name="ps_Water_washing_date" id="ps_Water_washing_date" class="form_datetime_top" autocomplete="off"/>
                                     </div>
                                 </div>
                             </div>
@@ -605,7 +605,7 @@
                                 </div>
                                 <div class="center-order-li-li-right">
                                     <div class="center-order-li-li-right-content">
-                                        <input type="text" {% if order.o_productionschedule.ps_sewing_date %}value="{{ order.o_productionschedule.ps_sewing_date }}"{% endif %} name="ps_sewing_date" id="ps_sewing_date" class="form_datetime"/>
+                                        <input type="text" {% if order.o_productionschedule.ps_sewing_date %}value="{{ order.o_productionschedule.ps_sewing_date|date:'Y-m-j' }}"{% endif %} name="ps_sewing_date" id="ps_sewing_date" class="form_datetime_top" autocomplete="off"/>
                                     </div>
                                 </div>
                             </div>
@@ -618,7 +618,7 @@
                                 </div>
                                 <div class="center-order-li-li-right">
                                     <div class="center-order-li-li-right-content">
-                                        <input type="text" {% if order.o_productionschedule.ps_qc_date %}value="{{ order.o_productionschedule.ps_qc_date }}"{% endif %} name="ps_qc_date" id="ps_qc_date" class="form_datetime"/>
+                                        <input type="text" {% if order.o_productionschedule.ps_qc_date %}value="{{ order.o_productionschedule.ps_qc_date|date:'Y-m-j' }}"{% endif %} name="ps_qc_date" id="ps_qc_date" class="form_datetime_top" autocomplete="off"/>
                                     </div>
                                 </div>
                             </div>
@@ -631,7 +631,7 @@
                                 </div>
                                 <div class="center-order-li-li-right">
                                     <div class="center-order-li-li-right-content">
-                                        <input type="text" {% if order.o_productionschedule.ps_outward_transport_date %}value="{{ order.o_productionschedule.ps_outward_transport_date }}"{% endif %} name="ps_outward_transport_date" id="ps_outward_transport_date" class="form_datetime"/>
+                                        <input type="text" {% if order.o_productionschedule.ps_outward_transport_date %}value="{{ order.o_productionschedule.ps_outward_transport_date|date:'Y-m-j' }}"{% endif %} name="ps_outward_transport_date" id="ps_outward_transport_date" class="form_datetime_top" autocomplete="off"/>
                                     </div>
                                 </div>
                             </div>
@@ -649,7 +649,7 @@
                         </div>
                         <div class="center-order-li-li-right">
                             <div class="center-order-li-li-right-content">
-                                <input type="text" {% if order.o_productionschedule.ps_gathering_date %}value="{{ order.o_productionschedule.ps_gathering_date }}"{% endif %} name="ps_gathering_date" id="ps_gathering_date" class="form_datetime"/>
+                                <input type="text" {% if order.o_productionschedule.ps_gathering_date %}value="{{ order.o_productionschedule.ps_gathering_date|date:'Y-m-j' }}"{% endif %} name="ps_gathering_date" id="ps_gathering_date" class="form_datetime_top" autocomplete="off"/>
                             </div>
                         </div>
                     </div>

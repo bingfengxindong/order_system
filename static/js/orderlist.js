@@ -1,5 +1,6 @@
 $(function () {
     order_date_timepicker();
+    order_start_end_date();
     customer_name_change();
 });
 
@@ -15,6 +16,24 @@ function order_date_timepicker() {
         pickerPosition: "top-left",
         language:"zh-CN",
     });
+}
+
+function order_start_end_date() {
+    $("#order_date").datetimepicker({
+        format: 'yyyy-mm-dd',
+        minView: "month",
+        language:"zh-CN",
+    });
+
+    $("#order_date").change(function () {
+        var sd =  $(this).val();
+        $("#order_end_date").datetimepicker({
+            format: 'yyyy-mm-dd',
+            minView: "month",
+            language:"zh-CN",
+            startDate:sd,
+        });
+    })
 }
 
 function customer_name_change() {
