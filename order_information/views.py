@@ -215,9 +215,6 @@ class OrderEdit(View):
         pp_sample_express_date = self.edit_date(request.POST.get("pp_sample_express_date"))
         pp_customer_feedback = request.POST.get("pp_customer_feedback")
         pp_corrective_information = request.POST.get("pp_corrective_information")
-        pp_Modify_sample_order_date = self.edit_date(request.POST.get("pp_Modify_sample_order_date"))
-        pp_Modify_sample_arrival_date = self.edit_date(request.POST.get("pp_Modify_sample_arrival_date"))
-        pp_Modify_sample_express_date = self.edit_date(request.POST.get("pp_Modify_sample_express_date"))
         proofingprogress = ProofingProgress()
         proofingprogress.pp_id = uuid.uuid1()
         proofingprogress.pp_sample_order_date = self.edit_date(pp_sample_order_date)
@@ -229,12 +226,6 @@ class OrderEdit(View):
             proofingprogress.pp_customer_feedback = pp_customer_feedback
         if pp_corrective_information:
             proofingprogress.pp_corrective_information = pp_corrective_information
-        if pp_Modify_sample_order_date:
-            proofingprogress.pp_Modify_sample_order_date = pp_Modify_sample_order_date
-        if pp_Modify_sample_arrival_date:
-            proofingprogress.pp_Modify_sample_arrival_date = pp_Modify_sample_arrival_date
-        if pp_Modify_sample_express_date:
-            proofingprogress.pp_Modify_sample_express_date = pp_Modify_sample_express_date
         proofingprogress.save()
         order.o_proofingprogress = proofingprogress
 
@@ -402,9 +393,6 @@ class OrderAdd(View):
         pp_sample_express_date = request.POST.get("pp_sample_express_date")
         pp_customer_feedback = request.POST.get("pp_customer_feedback")
         pp_corrective_information = request.POST.get("pp_corrective_information")
-        pp_Modify_sample_order_date = request.POST.get("pp_Modify_sample_order_date")
-        pp_Modify_sample_arrival_date = request.POST.get("pp_Modify_sample_arrival_date")
-        pp_Modify_sample_express_date = request.POST.get("pp_Modify_sample_express_date")
         proofingprogress = ProofingProgress()
         proofingprogress.pp_id = uuid.uuid1()
         proofingprogress.pp_sample_order_date = self.edit_date(pp_sample_order_date)
@@ -416,12 +404,6 @@ class OrderAdd(View):
             proofingprogress.pp_customer_feedback = pp_customer_feedback
         if pp_corrective_information:
             proofingprogress.pp_corrective_information = pp_corrective_information
-        if pp_Modify_sample_order_date:
-            proofingprogress.pp_Modify_sample_order_date = pp_Modify_sample_order_date
-        if pp_Modify_sample_arrival_date:
-            proofingprogress.pp_Modify_sample_arrival_date = pp_Modify_sample_arrival_date
-        if pp_Modify_sample_express_date:
-            proofingprogress.pp_Modify_sample_express_date = pp_Modify_sample_express_date
         proofingprogress.save()
         order.o_proofingprogress = proofingprogress
 

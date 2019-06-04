@@ -8,7 +8,7 @@ class ProductionWorkshopAdmin(admin.ModelAdmin):
 admin.site.register(ProductionWorkshop,ProductionWorkshopAdmin)
 
 class ProductionScheduleAdmin(admin.ModelAdmin):
-    list_display = ("ps_workshop""ps_order_date", "ps_outward_transport_date", "ps_gathering_date")
+    list_display = ("ps_workshop","ps_order_date", "ps_outward_transport_date", "ps_gathering_date")
     list_per_page = 100  # 设置每页记录
     date_hierarchy = "create_date"  # 详细时间分层筛选
-admin.site.register(ProductionSchedule)
+admin.site.register(ProductionSchedule,ProductionScheduleAdmin)
