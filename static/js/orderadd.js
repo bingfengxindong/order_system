@@ -1,7 +1,14 @@
 $(function () {
-    $(".form_datetime").datetimepicker({
-        format: 'yyyy-mm-dd',
-        minView: "month",
-        language:"zh-CN",
+    $("#proofing-progress-click").click(function () {
+        $(this).attr("class","center-title-in-now");
+        $("#production-schedule-click").attr("class","center-title-in");
+        $("#proofing-progress").show();
+        $("#production-schedule").hide();
+    });
+    $("#production-schedule-click").click(function () {
+        $(this).attr("class","center-title-in-now");
+        $("#proofing-progress-click").attr("class","center-title-in");
+        $("#production-schedule").show();
+        $("#proofing-progress").hide();
     });
 });

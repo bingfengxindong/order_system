@@ -175,6 +175,7 @@
                         <th>大货单价</th>
                         <th>客人名</th>
                         <th>颜色</th>
+                        <th>打样数量</th>
                         <th>打样时间</th>
                         <th>快递时间</th>
                         <th>大货下单时间</th>
@@ -210,16 +211,13 @@
                                 {% endif %}
                             </td>
                             <td>{{ order.o_customer.c_name }}</td>
-                            <td>{{ order.o_capcolor.cc_color }}</td>
+                            <td>{% for capcolor in order.o_capcolor %}{{ capcolor.cc_color }}、{% endfor %}</td>
+                            <td>{% if order.o_proofingprogress_number %}{{ order.o_proofingprogress_number }}{% endif %}</td>
                             <td>
-                                {% if order.o_proofingprogress.pp_sample_order_date %}
-                                    {{ order.o_proofingprogress.pp_sample_order_date }}
-                                {% endif %}
+                                {% if order.o_proofingprogress.pp_sample_order_date %}{{ order.o_proofingprogress.pp_sample_order_date }}{% endif %}
                             </td>
                             <td>
-                                {% if order.o_proofingprogress.pp_sample_express_date %}
-                                    {{ order.o_proofingprogress.pp_sample_express_date }}
-                                {% endif %}
+                                {% if order.o_proofingprogress.pp_sample_express_date %}{{ order.o_proofingprogress.pp_sample_express_date }}{% endif %}
                             </td>
                             <td>
                                 {% if order.o_productionschedule.ps_order_date %}

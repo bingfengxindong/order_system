@@ -119,12 +119,14 @@
                 <div class="center-order-li-li">
                     <div class="center-order-li-li-left">
                         <div class="center-order-li-li-left-title">
-                            <b>颜色</b>
+                            <b>打样数量</b>
                         </div>
                     </div>
                     <div class="center-order-li-li-right">
                         <div class="center-order-li-li-right-content">
-                            <span>{{ order.o_capcolor.cc_color }}</span>
+                            {% if order.o_proofingprogress_number %}
+                                <span>{{ order.o_proofingprogress_number }}</span>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -140,6 +142,21 @@
                             <span>{{ order.o_embroiderorprint.eop_type }}</span>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="center-order-li">
+                <div class="center-order-li-left">
+                    <b>颜色</b>
+                </div>
+                <div class="center-order-li-right">
+                    {% for capcolor in order.o_capcolor.all %}
+                        <div class="center-order-li-right-li">
+                            <div class="ten_space"></div>
+                                <div class="ten_space"></div>
+                            <label>{{ capcolor.cc_color }}</label>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
 
@@ -263,150 +280,306 @@
             </div>
             <div class="one_space"></div>
         </div>
-    {#    打样进度表#}
-        <div class="center-proofing">
-            <div class="center-title">
-                <div class="ten_space"></div>
-                <div class="center-title-in">
-                    <b>打样进度表</b>
+    {#    打样进度表、大货进度表#}
+            <div class="center-proofing">
+                <div class="center-t">
+                    <div class="center-title">
+                        <div class="ten_space"></div>
+                        <div class="center-title-in-now" id="proofing-progress-click">
+                            <b>打样进度表</b>
+                        </div>
+                    </div>
+                    <div class="center-title">
+                        <div class="ten_space"></div>
+                        <div class="center-title-in" id="production-schedule-click">
+                            <b>大货进度表</b>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="center-order-li">
-                <div class="center-order-li-li">
-                    <div class="center-order-li-li-left">
-                        <div class="center-order-li-li-left-title">
-                            <b>下单时间</b>
-                        </div>
-                    </div>
-                    <div class="center-order-li-li-right">
-                        <div class="center-order-li-li-right-content">
-                            <span>{{ order.o_proofingprogress.pp_sample_order_date }}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="center-order-li-li-space"></div>
-                <div class="center-order-li-li">
-                    <div class="center-order-li-li-left">
-                        <div class="center-order-li-li-left-title">
-                            <b>到料时间</b>
-                        </div>
-                    </div>
-                    <div class="center-order-li-li-right">
-                        <div class="center-order-li-li-right-content">
-                            {% if order.o_proofingprogress.pp_sample_arrival_date %}
-                                <span>{{ order.o_proofingprogress.pp_sample_arrival_date }}</span>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                <div class="center-order-li-li-space"></div>
-                <div class="center-order-li-li">
-                    <div class="center-order-li-li-left">
-                        <div class="center-order-li-li-left-title">
-                            <b>快递时间</b>
-                        </div>
-                    </div>
-                    <div class="center-order-li-li-right">
-                        <div class="center-order-li-li-right-content">
-                            {% if order.o_proofingprogress.pp_sample_express_date %}
-                                <span>{{ order.o_proofingprogress.pp_sample_express_date }}</span>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
+{#                 打样进度表#}
+                <div class="center-proofing-production" id="proofing-progress">
 
-            <div class="center-proofing-in">
-                <div class="center-proofing-in-in">
-                    <div class="center-proofing-in-in-left">
-                        <div class="center-proofing-in-in-left-title">
-                            <b>反馈信息</b>
+                    {% for proofingprogress in order.o_proofingprogress.all %}
+
+                        <div class="center-order-title">
+                            <b>第{{ forloop.counter }}次打样</b>
                         </div>
+
+                        <div class="center-order-li">
+                            <div class="center-order-li-li">
+                                <div class="center-order-li-li-left">
+                                    <div class="center-order-li-li-left-title">
+                                        <b>下单时间</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-right">
+                                    <div class="center-order-li-li-right-content">
+                                        <span>{{ proofingprogress.pp_sample_order_date }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center-order-li-li-space"></div>
+                            <div class="center-order-li-li">
+                                <div class="center-order-li-li-left">
+                                    <div class="center-order-li-li-left-title">
+                                        <b>到料时间</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-right">
+                                    <div class="center-order-li-li-right-content">
+                                        {% if proofingprogress.pp_sample_arrival_date %}
+                                            <span>{{ proofingprogress.pp_sample_arrival_date }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center-order-li-li-space"></div>
+                            <div class="center-order-li-li">
+                                <div class="center-order-li-li-left">
+                                    <div class="center-order-li-li-left-title">
+                                        <b>快递时间</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-right">
+                                    <div class="center-order-li-li-right-content">
+                                        {% if proofingprogress.pp_sample_express_date %}
+                                            <span>{{ proofingprogress.pp_sample_express_date }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="center-proofing-in">
+                            <div class="center-proofing-in-in">
+                                <div class="center-proofing-in-in-left">
+                                    <div class="center-proofing-in-in-left-title">
+                                        <b>反馈信息</b>
+                                    </div>
+                                </div>
+                                <div class="center-proofing-in-in-right">
+                                    <div class="center-proofing-in-in-right-content">
+                                        <div class="ten_space"></div>
+                                        <div class="center-proofing-in-in-right-content-in">
+                                            <textarea name="customer_info" readonly>{% if proofingprogress.pp_customer_feedback %}{{ proofingprogress.pp_customer_feedback }}{% endif %}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center-proofing-in-in-space"></div>
+                            <div class="center-proofing-in-in">
+                                <div class="center-proofing-in-in-left">
+                                    <div class="center-proofing-in-in-left-title">
+                                        <b>整改信息</b>
+                                    </div>
+                                </div>
+                                <div class="center-proofing-in-in-right">
+                                    <div class="center-proofing-in-in-right-content">
+                                        <div class="ten_space"></div>
+                                        <div class="center-proofing-in-in-right-content-in">
+                                            <textarea name="customer_info" readonly>{% if proofingprogress.pp_corrective_information %}{{ proofingprogress.pp_corrective_information }}{% endif %}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="one_space"></div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="one_space"></div>
+                </div>
+
+{#                大货进度表#}
+                <div class="center-proofing-production" id="production-schedule">
+                    <div class="center-order-li">
+                        <div class="center-order-li-li">
+                            <div class="center-order-li-li-left">
+                                <div class="center-order-li-li-left-title">
+                                    <b>生产车间</b>
+                                </div>
+                            </div>
+                            <div class="center-order-li-li-right">
+                                <div class="center-order-li-li-right-content">
+                                    <span>{{ order.o_productionschedule.ps_workshop.pw_workshop }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-space"></div>
+                            <div class="center-order-li-li">
+                                <div class="center-order-li-li-left">
+                                    <div class="center-order-li-li-left-title">
+                                        <b>大货单号</b>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-right">
+                                    <div class="center-order-li-li-right-content">
+                                        {% if order.o_productionschedule.ps_number %}
+                                            <span>{{ order.o_productionschedule.ps_number }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
                     </div>
-                    <div class="center-proofing-in-in-right">
-                        <div class="center-proofing-in-in-right-content">
+
+                    <div class="center-production-in">
+                        <div class="center-production-in-in">
                             <div class="ten_space"></div>
-                            <div class="center-proofing-in-in-right-content-in">
-                                <textarea name="customer_info" readonly>{% if order.o_proofingprogress.pp_customer_feedback %}{{ order.o_proofingprogress.pp_customer_feedback }}{% endif %}</textarea>
+                            <div class="center-order-li">
+                                <div class="center-order-li-li">
+                                    <div class="center-order-li-li-left">
+                                        <div class="center-order-li-li-left-title">
+                                            <b>下单时间</b>
+                                        </div>
+                                    </div>
+                                    <div class="center-order-li-li-right">
+                                        <div class="center-order-li-li-right-content">
+                                            {% if order.o_productionschedule.ps_order_date %}
+                                                <span>{{ order.o_productionschedule.ps_order_date }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-space"></div>
+                                <div class="center-order-li-li">
+                                    <div class="center-order-li-li-left">
+                                        <div class="center-order-li-li-left-title">
+                                            <b>到料时间</b>
+                                        </div>
+                                    </div>
+                                    <div class="center-order-li-li-right">
+                                        <div class="center-order-li-li-right-content">
+                                            {% if order.o_productionschedule.ps_arrival_date %}
+                                                <span>{{ order.o_productionschedule.ps_arrival_date }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-space"></div>
+                                <div class="center-order-li-li">
+                                    <div class="center-order-li-li-left">
+                                        <div class="center-order-li-li-left-title">
+                                            <b>裁剪时间</b>
+                                        </div>
+                                    </div>
+                                    <div class="center-order-li-li-right">
+                                        <div class="center-order-li-li-right-content">
+                                            {% if order.o_productionschedule.ps_tailor_date %}
+                                                <span>{{ order.o_productionschedule.ps_tailor_date }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="center-proofing-in-in-space"></div>
-                <div class="center-proofing-in-in">
-                    <div class="center-proofing-in-in-left">
-                        <div class="center-proofing-in-in-left-title">
-                            <b>整改信息</b>
-                        </div>
-                    </div>
-                    <div class="center-proofing-in-in-right">
-                        <div class="center-proofing-in-in-right-content">
-                            <div class="ten_space"></div>
-                            <div class="center-proofing-in-in-right-content-in">
-                                <textarea name="customer_info" readonly>{% if order.o_proofingprogress.pp_corrective_information %}{{ order.o_proofingprogress.pp_corrective_information }}{% endif %}</textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="one_space"></div>
-            </div>
 
-            <div class="one_space"></div>
-        </div>
-    {#    大货进度表#}
-        <div class="center-production">
-            <div class="center-title">
-                <div class="ten_space"></div>
-                <div class="center-title-in">
-                    <b>大货进度表</b>
-                </div>
-            </div>
+                            <div class="center-order-li">
+                                <div class="center-order-li-li">
+                                    <div class="center-order-li-li-left">
+                                        <div class="center-order-li-li-left-title">
+                                            <b>绣花时间</b>
+                                        </div>
+                                    </div>
+                                    <div class="center-order-li-li-right">
+                                        <div class="center-order-li-li-right-content">
+                                            {% if order.o_productionschedule.ps_embroider_date %}
+                                                <span>{{ order.o_productionschedule.ps_embroider_date }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-space"></div>
+                                <div class="center-order-li-li">
+                                    <div class="center-order-li-li-left">
+                                        <div class="center-order-li-li-left-title">
+                                            <b>印花时间</b>
+                                        </div>
+                                    </div>
+                                    <div class="center-order-li-li-right">
+                                        <div class="center-order-li-li-right-content">
+                                            {% if order.o_productionschedule.ps_print_date %}
+                                                <span>{{ order.o_productionschedule.ps_print_date }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-space"></div>
+                                <div class="center-order-li-li">
+                                    <div class="center-order-li-li-left">
+                                        <div class="center-order-li-li-left-title">
+                                            <b>水洗时间</b>
+                                        </div>
+                                    </div>
+                                    <div class="center-order-li-li-right">
+                                        <div class="center-order-li-li-right-content">
+                                            {% if order.o_productionschedule.ps_Water_washing_date %}
+                                                <span>{{ order.o_productionschedule.ps_Water_washing_date }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-            <div class="center-order-li">
-                <div class="center-order-li-li">
-                    <div class="center-order-li-li-left">
-                        <div class="center-order-li-li-left-title">
-                            <b>生产车间</b>
-                        </div>
-                    </div>
-                    <div class="center-order-li-li-right">
-                        <div class="center-order-li-li-right-content">
-                            <span>{{ order.o_productionschedule.ps_workshop.pw_workshop }}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="center-order-li-li-space"></div>
-                    <div class="center-order-li-li">
-                        <div class="center-order-li-li-left">
-                            <div class="center-order-li-li-left-title">
-                                <b>大货单号</b>
+                            <div class="center-order-li">
+                                <div class="center-order-li-li">
+                                    <div class="center-order-li-li-left">
+                                        <div class="center-order-li-li-left-title">
+                                            <b>车缝时间</b>
+                                        </div>
+                                    </div>
+                                    <div class="center-order-li-li-right">
+                                        <div class="center-order-li-li-right-content">
+                                            {% if order.o_productionschedule.ps_sewing_date %}
+                                                <span>{{ order.o_productionschedule.ps_sewing_date }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-space"></div>
+                                <div class="center-order-li-li">
+                                    <div class="center-order-li-li-left">
+                                        <div class="center-order-li-li-left-title">
+                                            <b>QC时间</b>
+                                        </div>
+                                    </div>
+                                    <div class="center-order-li-li-right">
+                                        <div class="center-order-li-li-right-content">
+                                            {% if order.o_productionschedule.ps_qc_date %}
+                                                <span>{{ order.o_productionschedule.ps_qc_date }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-space"></div>
+                                <div class="center-order-li-li">
+                                    <div class="center-order-li-li-left">
+                                        <div class="center-order-li-li-left-title">
+                                            <b>外运时间</b>
+                                        </div>
+                                    </div>
+                                    <div class="center-order-li-li-right">
+                                        <div class="center-order-li-li-right-content">
+                                            {% if order.o_productionschedule.ps_outward_transport_date %}
+                                                <span>{{ order.o_productionschedule.ps_outward_transport_date }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="center-order-li-li-right">
-                            <div class="center-order-li-li-right-content">
-                                {% if order.o_productionschedule.ps_number %}
-                                    <span>{{ order.o_productionschedule.ps_number }}</span>
-                                {% endif %}
-                            </div>
-                        </div>
                     </div>
-            </div>
 
-            <div class="center-production-in">
-                <div class="center-production-in-in">
                     <div class="ten_space"></div>
                     <div class="center-order-li">
                         <div class="center-order-li-li">
                             <div class="center-order-li-li-left">
-                                <div class="center-order-li-li-left-title">
-                                    <b>下单时间</b>
+                                <div class="center-order-li-li-left-title font-red">
+                                    <b>收款时间</b>
                                 </div>
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    {% if order.o_productionschedule.ps_order_date %}
-                                        <span>{{ order.o_productionschedule.ps_order_date }}</span>
+                                    {% if order.o_productionschedule.ps_gathering_date %}
+                                        <span>{{ order.o_productionschedule.ps_gathering_date }}</span>
                                     {% endif %}
                                 </div>
                             </div>
@@ -414,14 +587,14 @@
                         <div class="center-order-li-li-space"></div>
                         <div class="center-order-li-li">
                             <div class="center-order-li-li-left">
-                                <div class="center-order-li-li-left-title">
-                                    <b>到料时间</b>
+                                <div class="center-order-li-li-left-title font-red">
+                                    <b>收款金额</b>
                                 </div>
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    {% if order.o_productionschedule.ps_arrival_date %}
-                                        <span>{{ order.o_productionschedule.ps_arrival_date }}</span>
+                                    {% if order.o_productionschedule.ps_gathering_price %}
+                                        <span>{{ order.o_productionschedule.ps_price_type }}{{ order.o_productionschedule.ps_gathering_price }}</span>
                                     {% endif %}
                                 </div>
                             </div>
@@ -429,168 +602,30 @@
                         <div class="center-order-li-li-space"></div>
                         <div class="center-order-li-li">
                             <div class="center-order-li-li-left">
-                                <div class="center-order-li-li-left-title">
-                                    <b>裁剪时间</b>
+                                <div class="center-order-li-li-left-title font-red">
+                                    <b>合同余额</b>
                                 </div>
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    {% if order.o_productionschedule.ps_tailor_date %}
-                                        <span>{{ order.o_productionschedule.ps_tailor_date }}</span>
+                                    {% if order.o_productionschedule.ps_contract_balance %}
+                                        <span>{{ order.o_productionschedule.ps_price_type }}{{ order.o_productionschedule.ps_contract_balance }}</span>
                                     {% endif %}
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="one_space"></div>
+                </div>
 
-                    <div class="center-order-li">
-                        <div class="center-order-li-li">
-                            <div class="center-order-li-li-left">
-                                <div class="center-order-li-li-left-title">
-                                    <b>绣花时间</b>
-                                </div>
-                            </div>
-                            <div class="center-order-li-li-right">
-                                <div class="center-order-li-li-right-content">
-                                    {% if order.o_productionschedule.ps_embroider_date %}
-                                        <span>{{ order.o_productionschedule.ps_embroider_date }}</span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="center-order-li-li-space"></div>
-                        <div class="center-order-li-li">
-                            <div class="center-order-li-li-left">
-                                <div class="center-order-li-li-left-title">
-                                    <b>印花时间</b>
-                                </div>
-                            </div>
-                            <div class="center-order-li-li-right">
-                                <div class="center-order-li-li-right-content">
-                                    {% if order.o_productionschedule.ps_print_date %}
-                                        <span>{{ order.o_productionschedule.ps_print_date }}</span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="center-order-li-li-space"></div>
-                        <div class="center-order-li-li">
-                            <div class="center-order-li-li-left">
-                                <div class="center-order-li-li-left-title">
-                                    <b>水洗时间</b>
-                                </div>
-                            </div>
-                            <div class="center-order-li-li-right">
-                                <div class="center-order-li-li-right-content">
-                                    {% if order.o_productionschedule.ps_Water_washing_date %}
-                                        <span>{{ order.o_productionschedule.ps_Water_washing_date }}</span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="center-order-li">
-                        <div class="center-order-li-li">
-                            <div class="center-order-li-li-left">
-                                <div class="center-order-li-li-left-title">
-                                    <b>车缝时间</b>
-                                </div>
-                            </div>
-                            <div class="center-order-li-li-right">
-                                <div class="center-order-li-li-right-content">
-                                    {% if order.o_productionschedule.ps_sewing_date %}
-                                        <span>{{ order.o_productionschedule.ps_sewing_date }}</span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="center-order-li-li-space"></div>
-                        <div class="center-order-li-li">
-                            <div class="center-order-li-li-left">
-                                <div class="center-order-li-li-left-title">
-                                    <b>QC时间</b>
-                                </div>
-                            </div>
-                            <div class="center-order-li-li-right">
-                                <div class="center-order-li-li-right-content">
-                                    {% if order.o_productionschedule.ps_qc_date %}
-                                        <span>{{ order.o_productionschedule.ps_qc_date }}</span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="center-order-li-li-space"></div>
-                        <div class="center-order-li-li">
-                            <div class="center-order-li-li-left">
-                                <div class="center-order-li-li-left-title">
-                                    <b>外运时间</b>
-                                </div>
-                            </div>
-                            <div class="center-order-li-li-right">
-                                <div class="center-order-li-li-right-content">
-                                    {% if order.o_productionschedule.ps_outward_transport_date %}
-                                        <span>{{ order.o_productionschedule.ps_outward_transport_date }}</span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ten_space"></div>
-            <div class="center-order-li">
-                <div class="center-order-li-li">
-                    <div class="center-order-li-li-left">
-                        <div class="center-order-li-li-left-title font-red">
-                            <b>收款时间</b>
-                        </div>
-                    </div>
-                    <div class="center-order-li-li-right">
-                        <div class="center-order-li-li-right-content">
-                            {% if order.o_productionschedule.ps_gathering_date %}
-                                <span>{{ order.o_productionschedule.ps_gathering_date }}</span>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                <div class="center-order-li-li-space"></div>
-                <div class="center-order-li-li">
-                    <div class="center-order-li-li-left">
-                        <div class="center-order-li-li-left-title font-red">
-                            <b>收款金额</b>
-                        </div>
-                    </div>
-                    <div class="center-order-li-li-right">
-                        <div class="center-order-li-li-right-content">
-                            {% if order.o_productionschedule.ps_gathering_price %}
-                                <span>{{ order.o_productionschedule.ps_price_type }}{{ order.o_productionschedule.ps_gathering_price }}</span>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                <div class="center-order-li-li-space"></div>
-                <div class="center-order-li-li">
-                    <div class="center-order-li-li-left">
-                        <div class="center-order-li-li-left-title font-red">
-                            <b>合同余额</b>
-                        </div>
-                    </div>
-                    <div class="center-order-li-li-right">
-                        <div class="center-order-li-li-right-content">
-                            {% if order.o_productionschedule.ps_contract_balance %}
-                                <span>{{ order.o_productionschedule.ps_price_type }}{{ order.o_productionschedule.ps_contract_balance }}</span>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="one_space"></div>
+                <div class="one_space"></div>
         </div>
+
         <div class="one_space"></div>
     </div>
     <div class="one_space"></div>
 {% endblock %}
 {% block js%}
+    <script src="/static/js/orderadd.js"></script>
 {% endblock %}

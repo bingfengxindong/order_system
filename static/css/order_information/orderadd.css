@@ -25,6 +25,36 @@
     outline: none;
 }
 
+
+/*颜色样式*/
+.center-order-li-left,.center-order-li-right{
+    float: left;
+    margin: 0;
+    display: inline-block;
+    min-height: 60px;
+}
+.center-order-li-left{
+    width: 12%;
+    line-height: 60px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.center-order-li-right{
+    width: 88%;
+}
+.center-order-li-right-li{
+    float: left;
+    margin: 0;
+    display: inline-block;
+    width: 8%;
+    height: 60px;
+}
+.center-order-li-right-li input{
+    float: left;
+ }
+
+
 /*提交按钮*/
 .center-submit{
     width: 100%;

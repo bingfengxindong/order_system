@@ -4,26 +4,22 @@ from production_schedule.models import ProductionSchedule
 from user.models import User
 # Create your models here.
 class Order(models.Model):
-    choice = (
-        (0, "无"),
-        (1, "绣花"),
-        (2, "印花"),
-    )
     o_id = models.UUIDField(verbose_name="编号")
     o_number = models.CharField(max_length=200,verbose_name="订单号")
     o_date = models.DateField(blank=True,null=True,verbose_name="订单日期")
     o_image = models.ImageField(blank=True,null=True,upload_to="%Y/%m/%d/",verbose_name="图片")
+    o_proofingprogress_number = models.IntegerField(blank=True,null=True,verbose_name="打样数量")
 
     o_customer = models.ForeignKey("Customer",blank=True,null=True,on_delete=models.CASCADE,verbose_name="客户")
     o_captype = models.ForeignKey("CapType",blank=True,null=True,on_delete=models.CASCADE,verbose_name="帽型")
-    o_capcolor = models.ForeignKey("CapColor",blank=True,null=True,on_delete=models.CASCADE,verbose_name="颜色")
+    o_capcolor = models.ManyToManyField("CapColor",blank=True,null=True,verbose_name="颜色")
     o_embroiderorprint = models.ForeignKey("EmbroiderOrPrint",blank=True,null=True,on_delete=models.CASCADE,verbose_name="绣印花")
     o_capeyebrow = models.ForeignKey("CapEyebrow",blank=True,null=True,on_delete=models.CASCADE,verbose_name="帽眉")
     o_versionnumber = models.ForeignKey("VersionNumber",blank=True,null=True,on_delete=models.CASCADE,verbose_name="版号")
     o_afterdeduction = models.ForeignKey("AfterDeduction",blank=True,null=True,on_delete=models.CASCADE,verbose_name="后扣")
     o_productinfo = models.OneToOneField("ProductInfo",blank=True,null=True,on_delete=models.CASCADE,verbose_name="大货信息")
 
-    o_proofingprogress = models.OneToOneField(ProofingProgress,blank=True,null=True,on_delete=models.CASCADE,verbose_name="打样进度")
+    o_proofingprogress = models.ManyToManyField(ProofingProgress,blank=True,null=True,verbose_name="打样进度")
     o_productionschedule = models.OneToOneField(ProductionSchedule,blank=True,null=True,on_delete=models.CASCADE,verbose_name="大货进度")
     o_user = models.ForeignKey(User,blank=True,null=True,on_delete=models.CASCADE,verbose_name="业务员")
     create_date = models.DateTimeField(auto_now_add=True)
