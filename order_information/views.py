@@ -4,6 +4,7 @@ from .models import *
 from user.models import *
 from production_schedule.models import *
 from .create_order import CreateOrder
+from .add_order import AddOrder
 from django.core.paginator import Paginator
 
 import datetime
@@ -58,40 +59,18 @@ class Orderlist(View):
         pagintor = Paginator(orders, 6)
         page = pagintor.page(pagenow)
         pagintor_list = page.object_list
-        page_list = pagintor.page_range
-
-        page_num = 5
-        page_count = pagintor.num_pages
-        if page_count <= page_num:
-            page_range = page_list
-        else:
-            if 1 <= pagenow <= page_num // 2:
-                page_start = 1
-                page_end = page_num
-            else:
-                page_start = pagenow - page_num // 2 + 1
-                page_end = pagenow + page_num // 2 + 1
-
-            if page_end > page_count:
-                page_end = page_count
-            if page_end == page_count:
-                page_start = page_count - page_num + 1
-
-            if page_end <= page_num:
-                page_end = page_num
-
-            page_range = [page for page in range(page_start, page_end + 1)]
 
         captypes = CapType.objects.all()
         users = User.objects.all()
         productionworkshops = ProductionWorkshop.objects.all()
+
         context = {
             "title": "订单列表",
             "orders": pagintor_list,
             "page": page,
             "pagenow": pagenow,
             "order_len":len(orders),
-            "page_list": page_range,
+            "page_list": self.page_range_list(pagenow,pagintor,page_num=5),
             "search_type": search_type,
             "captypes": captypes,
             "users": users,
@@ -112,6 +91,29 @@ class Orderlist(View):
             if pw_workshop_pk != 0:
                 context["pw_workshop"] = ProductionWorkshop.objects.get(pk=pw_workshop_pk)
         return render(request=request, template_name="orderlist.html", context=context)
+
+    def page_range_list(self,pagenow,pagintor,page_num=5):
+        page_count = pagintor.num_pages
+        if page_count <= page_num:
+            return pagintor.page_range
+        else:
+            if 1 <= pagenow <= page_num // 2:
+                page_start = 1
+                page_end = page_num
+            else:
+                page_start = pagenow - page_num // 2 + 1
+                page_end = pagenow + page_num // 2 + 1
+
+            if page_end > page_count:
+                page_end = page_count
+            if page_end == page_count:
+                page_start = page_count - page_num + 1
+
+            if page_end <= page_num:
+                page_end = page_num
+
+            return [page for page in range(page_start, page_end + 1)]
+
 
 class OrderDetail(View):
     def get(self,request):
@@ -161,92 +163,69 @@ class OrderEdit(View):
         order_pk = request.POST.get("order_pk")
         order = Order.objects.get(pk=order_pk)
         createorder = CreateOrder()
-
+        addorder = AddOrder(order, createorder)
+        #打样数量
         order_proofingprogress_number = request.POST.get("order_proofingprogress_number")
-        if order_proofingprogress_number:
-            order.o_proofingprogress_number = order_proofingprogress_number
-
+        addorder.add_order_proofingprogress_number(order_proofingprogress_number)
+        #图片
         image_file = request.FILES.get("add_iamge")
-        if image_file:
-            order.o_image = image_file
-
+        addorder.add_image_file(image_file)
+        #客户
         customer_pk = request.POST.get("customer_pk")
         customer_contack = request.POST.get("customer_contack")
         customer_email = request.POST.get("customer_email")
-        if customer_pk and customer_contack and customer_email:
-            customer = createorder.query_customer(customer_pk=customer_pk)
-            order.o_customer = customer
-
+        addorder.add_customer(customer_pk,customer_contack,customer_email)
+        #帽型
         captype_pk = request.POST.get("captype")
-        if captype_pk:
-            captype = createorder.query_captype(captype_pk=captype_pk)
-            order.o_captype = captype
-
+        addorder.add_captype(captype_pk)
+        #业务员
         user_pk = request.POST.get("user")
-        if user_pk:
-            user = createorder.query_user(user_pk=user_pk)
-            order.o_user = user
-
+        addorder.add_user(user_pk)
+        #颜色
         order.o_capcolor.remove(*order.o_capcolor.all())
         capcolor_pks = request.POST.getlist("capcolor")
-        capcolors = CapColor.objects.filter(pk__in=capcolor_pks)
-        if len(capcolor_pks) != 0:
-            order.o_capcolor.add(*capcolors)
-
+        addorder.add_capcolors(capcolor_pks)
+        #绣印花
         embroiderorprint_pk = request.POST.get("embroiderorprint")
-        if embroiderorprint_pk:
-            embroiderorprint = EmbroiderOrPrint.objects.get(pk=embroiderorprint_pk)
-            order.o_embroiderorprint = embroiderorprint
-
+        addorder.add_embroiderorprint(embroiderorprint_pk)
+        #帽眉
         capeyebrow_pk = request.POST.get("capeyebrow")
-        if capeyebrow_pk:
-            capeyebrow = createorder.query_capeyebrow(capeyebrow_pk=capeyebrow_pk)
-            order.o_capeyebrow = capeyebrow
-
+        addorder.add_capeyebrow(capeyebrow_pk)
+        #版号
         versionnumber_pk = request.POST.get("versionnumber")
-        if versionnumber_pk:
-            versionnumber = createorder.query_versionnumber(versionnumber_pk=versionnumber_pk)
-            order.o_versionnumber = versionnumber
-
+        addorder.add_versionnumber(versionnumber_pk)
+        #后扣
         afterdeduction_pk = request.POST.get("afterdeduction")
-        if afterdeduction_pk:
-            afterdeduction = createorder.query_afterdeduction(afterdeduction_pk=afterdeduction_pk)
-            order.o_afterdeduction = afterdeduction
-
+        addorder.add_afterdeduction(afterdeduction_pk)
+        #大货信息
         pi_amount = request.POST.get("pi_amount")
         pi_unit_price = request.POST.get("pi_unit_price")
         pi_date = request.POST.get("pi_date")
         pi_price_type = pi_unit_price[0]
         productinfo = order.o_productinfo
         productinfo.pi_id = uuid.uuid1()
-        if pi_amount:
-            productinfo.pi_amount = pi_amount
-        if len(pi_unit_price) > 1:
-            productinfo.pi_unit_price = pi_unit_price[1:]
-        if pi_date:
-            productinfo.pi_date = self.edit_date(pi_date)
-        productinfo.pi_price_type = pi_price_type
-        productinfo.save()
+        addorder.add_productinfo(productinfo=productinfo,
+                                 pi_amount=pi_amount,
+                                 pi_unit_price=pi_unit_price,
+                                 pi_price_type=pi_price_type,
+                                 pi_date=pi_date,)
 
+        #打样进度
         pp_pks = request.POST.getlist("pp_pk")
         for pp_pk in pp_pks:
-            pp_sample_order_date = self.edit_date(request.POST.get("pp_sample_order_date_{}".format(pp_pk)))
-            pp_sample_arrival_date = self.edit_date(request.POST.get("pp_sample_arrival_date_{}".format(pp_pk)))
-            pp_sample_express_date = self.edit_date(request.POST.get("pp_sample_express_date_{}".format(pp_pk)))
+            pp_sample_order_date = request.POST.get("pp_sample_order_date_{}".format(pp_pk))
+            pp_sample_arrival_date = request.POST.get("pp_sample_arrival_date_{}".format(pp_pk))
+            pp_sample_express_date = request.POST.get("pp_sample_express_date_{}".format(pp_pk))
             pp_customer_feedback = request.POST.get("pp_customer_feedback_{}".format(pp_pk))
             pp_corrective_information = request.POST.get("pp_corrective_information_{}".format(pp_pk))
             proofingprogress = order.o_proofingprogress.get(pk=pp_pk)
             proofingprogress.pp_id = uuid.uuid1()
-            proofingprogress.pp_sample_order_date = self.edit_date(pp_sample_order_date)
-            if pp_sample_arrival_date:
-                proofingprogress.pp_sample_arrival_date = pp_sample_arrival_date
-            if pp_sample_express_date:
-                proofingprogress.pp_sample_express_date = pp_sample_express_date
-            if pp_customer_feedback:
-                proofingprogress.pp_customer_feedback = pp_customer_feedback
-            if pp_corrective_information:
-                proofingprogress.pp_corrective_information = pp_corrective_information
-            proofingprogress.save()
+            addorder.add_proofingprogress(proofingprogress=proofingprogress,
+                                          pp_sample_order_date=pp_sample_order_date,
+                                          pp_sample_arrival_date=pp_sample_arrival_date,
+                                          pp_sample_express_date=pp_sample_express_date,
+                                          pp_customer_feedback=pp_customer_feedback,
+                                          pp_corrective_information=pp_corrective_information,)
 
         pp_sample_order_date = request.POST.get("pp_sample_order_date")
         pp_sample_arrival_date = request.POST.get("pp_sample_arrival_date")
@@ -256,19 +235,14 @@ class OrderEdit(View):
         if pp_sample_order_date or pp_sample_arrival_date or pp_sample_express_date or pp_customer_feedback or pp_corrective_information:
             proofingprogress_add = ProofingProgress()
             proofingprogress_add.pp_id = uuid.uuid1()
-            if pp_sample_order_date:
-                proofingprogress_add.pp_sample_order_date = self.edit_date(pp_sample_order_date)
-            if pp_sample_arrival_date:
-                proofingprogress_add.pp_sample_arrival_date = self.edit_date(pp_sample_arrival_date)
-            if pp_sample_express_date:
-                proofingprogress_add.pp_sample_express_date = self.edit_date(pp_sample_express_date)
-            if pp_customer_feedback:
-                proofingprogress_add.pp_customer_feedback = pp_customer_feedback
-            if pp_corrective_information:
-                proofingprogress_add.pp_corrective_information = pp_corrective_information
-            proofingprogress_add.save()
+            addorder.add_proofingprogress(proofingprogress=proofingprogress_add,
+                                          pp_sample_order_date=pp_sample_order_date,
+                                          pp_sample_arrival_date=pp_sample_arrival_date,
+                                          pp_sample_express_date=pp_sample_express_date,
+                                          pp_customer_feedback=pp_customer_feedback,
+                                          pp_corrective_information=pp_corrective_information, )
             order.o_proofingprogress.add(proofingprogress_add)
-
+        #大货进度
         workshop_pk = request.POST.get("pw_workshop")
         ps_number = request.POST.get("ps_number")
         ps_order_date = self.edit_date(request.POST.get("ps_order_date"))
@@ -285,38 +259,21 @@ class OrderEdit(View):
         ps_contract_balance = request.POST.get("ps_contract_balance")
         productionschedule = order.o_productionschedule
         productionschedule.ps_id = uuid.uuid1()
-        if ps_order_date:
-            productionschedule.ps_order_date = ps_order_date
-        if ps_number:
-            productionschedule.ps_number = ps_number
-        if ps_arrival_date:
-            productionschedule.ps_arrival_date = ps_arrival_date
-        if ps_tailor_date:
-            productionschedule.ps_tailor_date = ps_tailor_date
-        if ps_embroider_date:
-            productionschedule.ps_embroider_date = ps_embroider_date
-        if ps_print_date:
-            productionschedule.ps_print_date = ps_print_date
-        if ps_Water_washing_date:
-            productionschedule.ps_Water_washing_date = ps_Water_washing_date
-        if ps_sewing_date:
-            productionschedule.ps_sewing_date = ps_sewing_date
-        if ps_qc_date:
-            productionschedule.ps_qc_date = ps_qc_date
-        if ps_outward_transport_date:
-            productionschedule.ps_outward_transport_date = ps_outward_transport_date
-        if ps_gathering_date:
-            productionschedule.ps_gathering_date = ps_gathering_date
-        productionschedule.ps_price_type = ps_gathering_price[0]
-        if len(ps_gathering_price) > 1:
-            productionschedule.ps_gathering_price = ps_gathering_price[1:]
-        if len(ps_contract_balance) > 1:
-            productionschedule.ps_contract_balance = ps_contract_balance[1:]
-        if workshop_pk:
-            workshop = createorder.query_workshop(workshop_pk=workshop_pk)
-            productionschedule.ps_workshop = workshop
-        productionschedule.save()
-
+        addorder.add_productionschedule(productionschedule=productionschedule,
+                                        ps_order_date=ps_order_date,
+                                        ps_number=ps_number,
+                                        ps_arrival_date=ps_arrival_date,
+                                        ps_tailor_date=ps_tailor_date,
+                                        ps_embroider_date=ps_embroider_date,
+                                        ps_print_date=ps_print_date,
+                                        ps_Water_washing_date=ps_Water_washing_date,
+                                        ps_sewing_date=ps_sewing_date,
+                                        ps_qc_date=ps_qc_date,
+                                        ps_outward_transport_date=ps_outward_transport_date,
+                                        ps_gathering_date=ps_gathering_date,
+                                        ps_gathering_price=ps_gathering_price,
+                                        ps_contract_balance=ps_contract_balance,
+                                        workshop_pk=workshop_pk,)
         order.save()
         return redirect("/order/orderlist")
 
@@ -364,73 +321,53 @@ class OrderAdd(View):
         order_number = request.POST.get("order_number")
         order_date = request.POST.get("order_date")
         order = createorder.create_order(order_number=order_number,order_date=self.edit_date(order_date))
-
+        addorder = AddOrder(order,createorder)
+        #打样数量
         order_proofingprogress_number = request.POST.get("order_proofingprogress_number")
-        if order_proofingprogress_number:
-            order.o_proofingprogress_number = order_proofingprogress_number
-
+        addorder.add_order_proofingprogress_number(order_proofingprogress_number)
+        #图片
         image_file = request.FILES.get("add_iamge")
-        if image_file:
-            order.o_image = image_file
-
+        addorder.add_image_file(image_file)
+        #客户
         customer_pk = request.POST.get("customer_pk")
         customer_contack = request.POST.get("customer_contack")
         customer_email = request.POST.get("customer_email")
-        if customer_pk and customer_contack and customer_email:
-            customer = createorder.query_customer(customer_pk=customer_pk)
-            order.o_customer = customer
-
+        addorder.add_customer(customer_pk,customer_contack,customer_email)
+        #帽型
         captype_pk = request.POST.get("captype")
-        if captype_pk:
-            captype = createorder.query_captype(captype_pk=captype_pk)
-            order.o_captype = captype
-
+        addorder.add_captype(captype_pk)
+        #业务员
         user_pk = request.POST.get("user")
-        if user_pk:
-            user = createorder.query_user(user_pk=user_pk)
-            order.o_user = user
-
+        addorder.add_user(user_pk)
+        #颜色
         capcolor_pks = request.POST.getlist("capcolor")
-        capcolors = CapColor.objects.filter(pk__in=capcolor_pks)
-        if len(capcolor_pks) != 0:
-            order.o_capcolor.add(*capcolors)
-
+        addorder.add_capcolors(capcolor_pks)
+        #绣印花
         embroiderorprint_pk = request.POST.get("embroiderorprint")
-        if embroiderorprint_pk:
-            embroiderorprint = EmbroiderOrPrint.objects.get(pk=embroiderorprint_pk)
-            order.o_embroiderorprint = embroiderorprint
-
+        addorder.add_embroiderorprint(embroiderorprint_pk)
+        #帽眉
         capeyebrow_pk = request.POST.get("capeyebrow")
-        if capeyebrow_pk:
-            capeyebrow = createorder.query_capeyebrow(capeyebrow_pk=capeyebrow_pk)
-            order.o_capeyebrow = capeyebrow
-
+        addorder.add_capeyebrow(capeyebrow_pk)
+        #版号
         versionnumber_pk = request.POST.get("versionnumber")
-        if versionnumber_pk:
-            versionnumber = createorder.query_versionnumber(versionnumber_pk=versionnumber_pk)
-            order.o_versionnumber = versionnumber
-
+        addorder.add_versionnumber(versionnumber_pk)
+        #后扣
         afterdeduction_pk = request.POST.get("afterdeduction")
-        if afterdeduction_pk:
-            afterdeduction = createorder.query_afterdeduction(afterdeduction_pk=afterdeduction_pk)
-            order.o_afterdeduction = afterdeduction
-
+        addorder.add_afterdeduction(afterdeduction_pk)
+        #大货信息
         pi_amount = request.POST.get("pi_amount")
         pi_unit_price = request.POST.get("pi_unit_price")
         pi_date = request.POST.get("pi_date")
         pi_price_type = pi_unit_price[0]
         productinfo = ProductInfo()
         productinfo.pi_id = uuid.uuid1()
-        if pi_amount:
-            productinfo.pi_amount = pi_amount
-        if len(pi_unit_price) > 1:
-            productinfo.pi_unit_price = pi_unit_price[1:]
-        if pi_date:
-            productinfo.pi_date = pi_date
-        productinfo.pi_price_type = pi_price_type
-        productinfo.save()
+        addorder.add_productinfo(productinfo=productinfo,
+                                 pi_amount=pi_amount,
+                                 pi_unit_price=pi_unit_price,
+                                 pi_price_type=pi_price_type,
+                                 pi_date=pi_date, )
         order.o_productinfo = productinfo
-
+        #打样进度
         pp_sample_order_date = request.POST.get("pp_sample_order_date")
         pp_sample_arrival_date = request.POST.get("pp_sample_arrival_date")
         pp_sample_express_date = request.POST.get("pp_sample_express_date")
@@ -438,18 +375,14 @@ class OrderAdd(View):
         pp_corrective_information = request.POST.get("pp_corrective_information")
         proofingprogress = ProofingProgress()
         proofingprogress.pp_id = uuid.uuid1()
-        proofingprogress.pp_sample_order_date = self.edit_date(pp_sample_order_date)
-        if pp_sample_arrival_date:
-            proofingprogress.pp_sample_arrival_date = pp_sample_arrival_date
-        if pp_sample_express_date:
-            proofingprogress.pp_sample_express_date = pp_sample_express_date
-        if pp_customer_feedback:
-            proofingprogress.pp_customer_feedback = pp_customer_feedback
-        if pp_corrective_information:
-            proofingprogress.pp_corrective_information = pp_corrective_information
-        proofingprogress.save()
+        addorder.add_proofingprogress(proofingprogress=proofingprogress,
+                                      pp_sample_order_date=pp_sample_order_date,
+                                      pp_sample_arrival_date=pp_sample_arrival_date,
+                                      pp_sample_express_date=pp_sample_express_date,
+                                      pp_customer_feedback=pp_customer_feedback,
+                                      pp_corrective_information=pp_corrective_information, )
         order.o_proofingprogress.add(proofingprogress)
-
+        #大货进度
         workshop_pk = request.POST.get("pw_workshop")
         ps_number = request.POST.get("ps_number")
         ps_order_date = request.POST.get("ps_order_date")
@@ -466,37 +399,21 @@ class OrderAdd(View):
         ps_contract_balance = request.POST.get("ps_contract_balance")
         productionschedule = ProductionSchedule()
         productionschedule.ps_id = uuid.uuid1()
-        if ps_number:
-            productionschedule.ps_number = ps_number
-        if ps_order_date:
-            productionschedule.ps_order_date = ps_order_date
-        if ps_arrival_date:
-            productionschedule.ps_arrival_date = ps_arrival_date
-        if ps_tailor_date:
-            productionschedule.ps_tailor_date = ps_tailor_date
-        if ps_embroider_date:
-            productionschedule.ps_embroider_date = ps_embroider_date
-        if ps_print_date:
-            productionschedule.ps_print_date = ps_print_date
-        if ps_Water_washing_date:
-            productionschedule.ps_Water_washing_date = ps_Water_washing_date
-        if ps_sewing_date:
-            productionschedule.ps_sewing_date = ps_sewing_date
-        if ps_qc_date:
-            productionschedule.ps_qc_date = ps_qc_date
-        if ps_outward_transport_date:
-            productionschedule.ps_outward_transport_date = ps_outward_transport_date
-        if ps_gathering_date:
-            productionschedule.ps_gathering_date = ps_gathering_date
-        productionschedule.ps_price_type = ps_gathering_price[0]
-        if len(ps_gathering_price) > 1:
-            productionschedule.ps_gathering_price = ps_gathering_price[1:]
-        if len(ps_contract_balance) > 1:
-            productionschedule.ps_contract_balance = ps_contract_balance[1:]
-        if workshop_pk:
-            workshop = createorder.query_workshop(workshop_pk=workshop_pk)
-            productionschedule.ps_workshop = workshop
-        productionschedule.save()
+        addorder.add_productionschedule(productionschedule=productionschedule,
+                                        ps_order_date=ps_order_date,
+                                        ps_number=ps_number,
+                                        ps_arrival_date=ps_arrival_date,
+                                        ps_tailor_date=ps_tailor_date,
+                                        ps_embroider_date=ps_embroider_date,
+                                        ps_print_date=ps_print_date,
+                                        ps_Water_washing_date=ps_Water_washing_date,
+                                        ps_sewing_date=ps_sewing_date,
+                                        ps_qc_date=ps_qc_date,
+                                        ps_outward_transport_date=ps_outward_transport_date,
+                                        ps_gathering_date=ps_gathering_date,
+                                        ps_gathering_price=ps_gathering_price,
+                                        ps_contract_balance=ps_contract_balance,
+                                        workshop_pk=workshop_pk, )
         order.o_productionschedule = productionschedule
 
         order.save()
