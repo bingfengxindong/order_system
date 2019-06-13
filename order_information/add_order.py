@@ -89,8 +89,8 @@ class AddOrder:
             kwargs["productionschedule"].ps_embroider_date = self.edit_date(kwargs["ps_embroider_date"])
         if kwargs["ps_print_date"]:
             kwargs["productionschedule"].ps_print_date = self.edit_date(kwargs["ps_print_date"])
-        if kwargs["ps_Water_washing_date"]:
-            kwargs["productionschedule"].ps_Water_washing_date = self.edit_date(kwargs["ps_Water_washing_date"])
+        if kwargs["ps_water_washing_date"]:
+            kwargs["productionschedule"].ps_water_washing_date = self.edit_date(kwargs["ps_water_washing_date"])
         if kwargs["ps_sewing_date"]:
             kwargs["productionschedule"].ps_sewing_date = self.edit_date(kwargs["ps_sewing_date"])
         if kwargs["ps_qc_date"]:

@@ -250,7 +250,7 @@ class OrderEdit(View):
         ps_tailor_date = self.edit_date(request.POST.get("ps_tailor_date"))
         ps_embroider_date = self.edit_date(request.POST.get("ps_embroider_date"))
         ps_print_date = self.edit_date(request.POST.get("ps_print_date"))
-        ps_Water_washing_date = self.edit_date(request.POST.get("ps_Water_washing_date"))
+        ps_water_washing_date = self.edit_date(request.POST.get("ps_water_washing_date"))
         ps_sewing_date = self.edit_date(request.POST.get("ps_sewing_date"))
         ps_qc_date = self.edit_date(request.POST.get("ps_qc_date"))
         ps_outward_transport_date = self.edit_date(request.POST.get("ps_outward_transport_date"))
@@ -266,7 +266,7 @@ class OrderEdit(View):
                                         ps_tailor_date=ps_tailor_date,
                                         ps_embroider_date=ps_embroider_date,
                                         ps_print_date=ps_print_date,
-                                        ps_Water_washing_date=ps_Water_washing_date,
+                                        ps_water_washing_date=ps_water_washing_date,
                                         ps_sewing_date=ps_sewing_date,
                                         ps_qc_date=ps_qc_date,
                                         ps_outward_transport_date=ps_outward_transport_date,
@@ -390,7 +390,7 @@ class OrderAdd(View):
         ps_tailor_date = request.POST.get("ps_tailor_date")
         ps_embroider_date = request.POST.get("ps_embroider_date")
         ps_print_date = request.POST.get("ps_print_date")
-        ps_Water_washing_date = request.POST.get("ps_Water_washing_date")
+        ps_water_washing_date = request.POST.get("ps_water_washing_date")
         ps_sewing_date = request.POST.get("ps_sewing_date")
         ps_qc_date = request.POST.get("ps_qc_date")
         ps_outward_transport_date = request.POST.get("ps_outward_transport_date")
@@ -406,7 +406,7 @@ class OrderAdd(View):
                                         ps_tailor_date=ps_tailor_date,
                                         ps_embroider_date=ps_embroider_date,
                                         ps_print_date=ps_print_date,
-                                        ps_Water_washing_date=ps_Water_washing_date,
+                                        ps_water_washing_date=ps_water_washing_date,
                                         ps_sewing_date=ps_sewing_date,
                                         ps_qc_date=ps_qc_date,
                                         ps_outward_transport_date=ps_outward_transport_date,

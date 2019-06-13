@@ -24,7 +24,7 @@ class ProductionSchedule(models.Model):
     ps_tailor_date = models.DateField(blank=True,null=True,verbose_name="裁剪时间")
     ps_embroider_date = models.DateField(blank=True,null=True,verbose_name="绣花时间")
     ps_print_date = models.DateField(blank=True,null=True,verbose_name="印花时间")
-    ps_Water_washing_date = models.DateField(blank=True,null=True,verbose_name="水洗时间")
+    ps_water_washing_date = models.DateField(blank=True,null=True,verbose_name="水洗时间")
     ps_sewing_date = models.DateField(blank=True,null=True,verbose_name="车缝时间")
     ps_qc_date = models.DateField(blank=True,null=True,verbose_name="QC时间")
     ps_outward_transport_date = models.DateField(blank=True,null=True,verbose_name="外运时间")

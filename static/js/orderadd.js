@@ -92,12 +92,13 @@ function change_amount(pi_amount,pi_amount_1,pi_unit_price,pi_total_price) {
 
     // 总价
     var unit_price;
-    var pi_unit_price_val = pi_unit_price.val().replace("$","");
+    var pi_unit_price_type_val = pi_unit_price.val()[0];
+    var pi_unit_price_val = pi_unit_price.val().replace(pi_unit_price_type_val,"");
     if(pi_unit_price_val.length == 0){
 
     }else{
         unit_price = parseFloat(pi_unit_price_val);
-        pi_total_price.val("$" + (pi_amount_val * unit_price).toFixed(2).toString());
+        pi_total_price.val(pi_unit_price_type_val + (pi_amount_val * unit_price).toFixed(2).toString());
     }
 }
 
@@ -111,7 +112,8 @@ function change_unit_price(pi_unit_price,pi_unit_price_1,pi_amount,pi_total_pric
     if(pi_amount_val == 0){
 
     }else{
-        unit_price = parseFloat(pi_unit_price_val.replace("$",""));
-        pi_total_price.val("$" + (pi_amount_val * unit_price).toFixed(2).toString());
+        var pi_unit_price_type_val = pi_unit_price.val()[0];
+        unit_price = parseFloat(pi_unit_price_val.replace(pi_unit_price_type_val,""));
+        pi_total_price.val(pi_unit_price_type_val + (pi_amount_val * unit_price).toFixed(2).toString());
     }
 }
