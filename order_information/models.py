@@ -7,6 +7,7 @@ class Order(models.Model):
     o_id = models.UUIDField(verbose_name="编号")
     o_number = models.CharField(max_length=200,verbose_name="订单号")
     o_date = models.DateField(blank=True,null=True,verbose_name="订单日期")
+    o_price_type = models.ForeignKey("PriceType",blank=True,null=True,on_delete=models.CASCADE,verbose_name="币种")
     o_image = models.ImageField(blank=True,null=True,upload_to="%Y/%m/%d/",verbose_name="图片")
     o_proofingprogress_number = models.IntegerField(blank=True,null=True,verbose_name="打样数量")
 
@@ -32,6 +33,22 @@ class Order(models.Model):
         ordering = ["pk"]
         verbose_name = "订单"
         verbose_name_plural = "订单"
+
+class PriceType(models.Model):
+    pt_id = models.UUIDField(verbose_name="编号")
+    pt_type = models.CharField(max_length=20,verbose_name="币种")
+    pt_type_name = models.CharField(max_length=50,blank=True,null=True,verbose_name="名称")
+    create_date = models.DateTimeField(auto_now_add=True)
+    create_end_date = models.DateTimeField(auto_now=True)
+    isdelete = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "{}".format(self.pt_type)
+
+    class Meta:
+        ordering = ["pk"]
+        verbose_name = "币种"
+        verbose_name_plural = "币种"
 
 class Customer(models.Model):
     c_id = models.UUIDField(verbose_name="编号")
@@ -143,7 +160,6 @@ class AfterDeduction(models.Model):
 class ProductInfo(models.Model):
     pi_id = models.UUIDField(verbose_name="编号")
     pi_amount = models.IntegerField(blank=True,null=True,verbose_name="大货数量")
-    pi_price_type = models.CharField(blank=True,null=True,max_length=50,verbose_name="价格类型")
     pi_unit_price = models.CharField(blank=True,null=True,max_length=100,verbose_name="大货报价")
     pi_date = models.DateField(blank=True,null=True,verbose_name="交货日期")
 

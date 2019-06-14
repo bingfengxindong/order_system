@@ -9,6 +9,11 @@ class AddOrder:
         if order_proofingprogress_number:
             self.order.o_proofingprogress_number = order_proofingprogress_number
 
+    def add_pricetype(self,pricetype_pk):
+        if pricetype_pk:
+            pricetype = self.createorder.query_pricetype(pricetype_pk=pricetype_pk)
+            self.order.o_price_type = pricetype
+
     def add_image_file(self,image_file):
         if image_file:
             self.order.o_image = image_file
@@ -60,7 +65,6 @@ class AddOrder:
             kwargs["productinfo"].pi_unit_price = kwargs["pi_unit_price"][1:]
         if kwargs["pi_date"]:
             kwargs["productinfo"].pi_date = self.edit_date(kwargs["pi_date"])
-        kwargs["productinfo"].pi_price_type = kwargs["pi_price_type"]
         kwargs["productinfo"].save()
 
     def add_proofingprogress(self,**kwargs):
@@ -99,7 +103,6 @@ class AddOrder:
             kwargs["productionschedule"].ps_outward_transport_date = self.edit_date(kwargs["ps_outward_transport_date"])
         if kwargs["ps_gathering_date"]:
             kwargs["productionschedule"].ps_gathering_date = self.edit_date(kwargs["ps_gathering_date"])
-            kwargs["productionschedule"].ps_price_type = kwargs["ps_gathering_price"][0]
         if len(kwargs["ps_gathering_price"]) > 1:
             kwargs["productionschedule"].ps_gathering_price = kwargs["ps_gathering_price"][1:]
         if len(kwargs["ps_contract_balance"]) > 1:

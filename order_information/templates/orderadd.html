@@ -135,12 +135,17 @@
                     <div class="center-order-li-li">
                         <div class="center-order-li-li-left">
                             <div class="center-order-li-li-left-title">
-                                <b>打样数量</b>
+                                <b>币种</b>
                             </div>
                         </div>
                         <div class="center-order-li-li-right">
                             <div class="center-order-li-li-right-content">
-                                <input type="number" name="order_proofingprogress_number" id="order_proofingprogress_number" class="order-number"/>
+                                <select name="pricetype" id="pricetype">
+                                    <option disabled selected>$</option>
+                                    {% for pricetype in pricetypes %}
+                                        <option value="{{ pricetype.pk }}">{{ pricetype.pt_type }}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -159,6 +164,21 @@
                                         <option value="{{ embroiderorprint.pk }}">{{ embroiderorprint.eop_type }}</option>
                                     {% endfor %}
                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="center-order-li">
+                    <div class="center-order-li-li">
+                        <div class="center-order-li-li-left">
+                            <div class="center-order-li-li-left-title">
+                                <b>打样数量</b>
+                            </div>
+                        </div>
+                        <div class="center-order-li-li-right">
+                            <div class="center-order-li-li-right-content">
+                                <input type="number" name="order_proofingprogress_number" id="order_proofingprogress_number" class="order-number"/>
                             </div>
                         </div>
                     </div>
@@ -286,7 +306,7 @@
                                 </div>
                                 <div class="center-order-li-igp-in-in-right">
                                     <div class="center-order-li-igp-in-in-right-content">
-                                        <input type="text" name="pi_unit_price" id="pi_unit_price" value="$" autocomplete="off"/>
+                                        <input type="text" name="pi_unit_price" id="pi_unit_price" autocomplete="off"/>
                                     </div>
                                 </div>
                             </div>
@@ -609,7 +629,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" name="ps_gathering_price" id="ps_gathering_price" value="$" autocomplete="off"/>
+                                    <input type="text" name="ps_gathering_price" id="ps_gathering_price" autocomplete="off"/>
                                 </div>
                             </div>
                         </div>
@@ -622,7 +642,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" name="ps_contract_balance" id="ps_contract_balance" value="$" autocomplete="off"/>
+                                    <input type="text" name="ps_contract_balance" id="ps_contract_balance" autocomplete="off"/>
                                 </div>
                             </div>
                         </div>
@@ -642,7 +662,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" name="pi_unit_price_1" id="pi_unit_price_1" value="$"/>
+                                    <input type="text" name="pi_unit_price_1" id="pi_unit_price_1"/>
                                 </div>
                             </div>
                         </div>
@@ -668,7 +688,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" name="pi_total_price" id="pi_total_price" value="$"/>
+                                    <input type="text" name="pi_total_price" id="pi_total_price"/>
                                 </div>
                             </div>
                         </div>
@@ -683,7 +703,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" value="$"/>
+                                    <input type="text"/>
                                 </div>
                             </div>
                         </div>
@@ -696,7 +716,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" value="$"/>
+                                    <input type="text"/>
                                 </div>
                             </div>
                         </div>
@@ -709,7 +729,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" value="$"/>
+                                    <input type="text"/>
                                 </div>
                             </div>
                         </div>
@@ -724,7 +744,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" value="$"/>
+                                    <input type="text"/>
                                 </div>
                             </div>
                         </div>
@@ -737,7 +757,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" value="$"/>
+                                    <input type="text"/>
                                 </div>
                             </div>
                         </div>
@@ -750,7 +770,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" value="$"/>
+                                    <input type="text"/>
                                 </div>
                             </div>
                         </div>
@@ -765,7 +785,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" value="$"/>
+                                    <input type="text"/>
                                 </div>
                             </div>
                         </div>
@@ -778,7 +798,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" value="$"/>
+                                    <input type="text"/>
                                 </div>
                             </div>
                         </div>
@@ -791,7 +811,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" value="$"/>
+                                    <input type="text"/>
                                 </div>
                             </div>
                         </div>
@@ -810,7 +830,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" value="$"/>
+                                    <input type="text"/>
                                 </div>
                             </div>
                         </div>
@@ -823,7 +843,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" value="$"/>
+                                    <input type="text"/>
                                 </div>
                             </div>
                         </div>
@@ -838,7 +858,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" value="$"/>
+                                    <input type="text"/>
                                 </div>
                             </div>
                         </div>
@@ -851,7 +871,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" value="$"/>
+                                    <input type="text"/>
                                 </div>
                             </div>
                         </div>
@@ -864,7 +884,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" value="$"/>
+                                    <input type="text"/>
                                 </div>
                             </div>
                         </div>
@@ -879,7 +899,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" value="$"/>
+                                    <input type="text"/>
                                 </div>
                             </div>
                         </div>
@@ -905,7 +925,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" value="$"/>
+                                            <input type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -918,7 +938,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" value="$"/>
+                                            <input type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -931,7 +951,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" value="$"/>
+                                            <input type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -946,7 +966,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" value="$"/>
+                                            <input type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -959,7 +979,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" value="$"/>
+                                            <input type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -972,7 +992,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" value="$"/>
+                                            <input type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1003,7 +1023,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" value="$"/>
+                                            <input type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1059,7 +1079,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" value="$"/>
+                                            <input type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1115,7 +1135,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" value="$"/>
+                                            <input type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1188,7 +1208,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" value="$"/>
+                                            <input type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1201,7 +1221,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" value="$"/>
+                                            <input type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1214,7 +1234,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" value="$"/>
+                                            <input type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1246,7 +1266,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" value="$"/>
+                                            <input type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1259,7 +1279,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" value="$"/>
+                                            <input type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1272,7 +1292,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" value="$"/>
+                                            <input type="text"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1287,7 +1307,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" value="$"/>
+                                            <input type="text"/>
                                         </div>
                                     </div>
                                 </div>

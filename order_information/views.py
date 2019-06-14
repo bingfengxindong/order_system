@@ -49,6 +49,7 @@ class Orderlist(View):
                  "o_image":i.o_image,
                  "o_number":i.o_number,
                  "o_user":i.o_user,
+                 "o_price_type":i.o_price_type,
                  "o_productinfo":i.o_productinfo,
                  "o_customer":i.o_customer,
                  "o_capcolor":i.o_capcolor.all(),
@@ -142,6 +143,7 @@ class OrderEdit(View):
         versionnumbers = VersionNumber.objects.all()
         afterdeductions = AfterDeduction.objects.all()
         productionworkshops = ProductionWorkshop.objects.all()
+        pricetypes = PriceType.objects.all()
         context = {
             "title":"订单编辑",
             "order":order,
@@ -155,7 +157,8 @@ class OrderEdit(View):
             "capeyebrows": capeyebrows,
             "versionnumbers": versionnumbers,
             "afterdeductions": afterdeductions,
-            "productionworkshops": productionworkshops
+            "productionworkshops": productionworkshops,
+            "pricetypes": pricetypes,
         }
         return render(request=request,template_name="orderedit.html",context=context)
 
@@ -167,6 +170,9 @@ class OrderEdit(View):
         #打样数量
         order_proofingprogress_number = request.POST.get("order_proofingprogress_number")
         addorder.add_order_proofingprogress_number(order_proofingprogress_number)
+        # 币种
+        pricetype_pk = request.POST.get("pricetype")
+        addorder.add_pricetype(pricetype_pk)
         #图片
         image_file = request.FILES.get("add_iamge")
         addorder.add_image_file(image_file)
@@ -201,13 +207,11 @@ class OrderEdit(View):
         pi_amount = request.POST.get("pi_amount")
         pi_unit_price = request.POST.get("pi_unit_price")
         pi_date = request.POST.get("pi_date")
-        pi_price_type = pi_unit_price[0]
         productinfo = order.o_productinfo
         productinfo.pi_id = uuid.uuid1()
         addorder.add_productinfo(productinfo=productinfo,
                                  pi_amount=pi_amount,
                                  pi_unit_price=pi_unit_price,
-                                 pi_price_type=pi_price_type,
                                  pi_date=pi_date,)
 
         #打样进度
@@ -299,6 +303,7 @@ class OrderAdd(View):
         versionnumbers = VersionNumber.objects.all()
         afterdeductions = AfterDeduction.objects.all()
         productionworkshops = ProductionWorkshop.objects.all()
+        pricetypes = PriceType.objects.all()
         # order_number = "FW19-{}".format(self.ordernumber())
         context = {
             "title":"添加订单",
@@ -311,6 +316,7 @@ class OrderAdd(View):
             "versionnumbers":versionnumbers,
             "afterdeductions":afterdeductions,
             "productionworkshops":productionworkshops,
+            "pricetypes":pricetypes,
             # "order_number":order_number,
             "today":datetime.date.today().strftime("%Y-%m-%d"),
         }
@@ -322,6 +328,10 @@ class OrderAdd(View):
         order_date = request.POST.get("order_date")
         order = createorder.create_order(order_number=order_number,order_date=self.edit_date(order_date))
         addorder = AddOrder(order,createorder)
+        #币种
+        pricetype_pk = request.POST.get("pricetype",1)
+        print(pricetype_pk)
+        addorder.add_pricetype(pricetype_pk)
         #打样数量
         order_proofingprogress_number = request.POST.get("order_proofingprogress_number")
         addorder.add_order_proofingprogress_number(order_proofingprogress_number)
@@ -358,13 +368,11 @@ class OrderAdd(View):
         pi_amount = request.POST.get("pi_amount")
         pi_unit_price = request.POST.get("pi_unit_price")
         pi_date = request.POST.get("pi_date")
-        pi_price_type = pi_unit_price[0]
         productinfo = ProductInfo()
         productinfo.pi_id = uuid.uuid1()
         addorder.add_productinfo(productinfo=productinfo,
                                  pi_amount=pi_amount,
                                  pi_unit_price=pi_unit_price,
-                                 pi_price_type=pi_price_type,
                                  pi_date=pi_date, )
         order.o_productinfo = productinfo
         #打样进度

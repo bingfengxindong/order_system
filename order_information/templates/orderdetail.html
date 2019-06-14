@@ -255,7 +255,7 @@
                             <div class="center-order-li-igp-in-in-right">
                                 <div class="center-order-li-igp-in-in-right-content">
                                     {% if order.o_productinfo.pi_unit_price %}
-                                        <span>{{ order.o_productinfo.pi_price_type }}{{ order.o_productinfo.pi_unit_price }}</span>
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_unit_price }}</span>
                                     {% endif %}
                                 </div>
                             </div>
@@ -606,7 +606,7 @@
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
                                     {% if order.o_productionschedule.ps_gathering_price %}
-                                        <span>{{ order.o_productionschedule.ps_price_type }}{{ order.o_productionschedule.ps_gathering_price }}</span>
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productionschedule.ps_gathering_price }}</span>
                                     {% endif %}
                                 </div>
                             </div>
@@ -621,7 +621,7 @@
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
                                     {% if order.o_productionschedule.ps_contract_balance %}
-                                        <span>{{ order.o_productionschedule.ps_price_type }}{{ order.o_productionschedule.ps_contract_balance }}</span>
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productionschedule.ps_contract_balance }}</span>
                                     {% endif %}
                                 </div>
                             </div>

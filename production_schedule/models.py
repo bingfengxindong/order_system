@@ -29,7 +29,6 @@ class ProductionSchedule(models.Model):
     ps_qc_date = models.DateField(blank=True,null=True,verbose_name="QC时间")
     ps_outward_transport_date = models.DateField(blank=True,null=True,verbose_name="外运时间")
     ps_gathering_date = models.DateField(blank=True,null=True,verbose_name="收款时间")
-    ps_price_type = models.CharField(blank=True,null=True,max_length=50,verbose_name="金额类型")
     ps_gathering_price = models.CharField(blank=True,null=True,max_length=100,verbose_name="收款金额")
     ps_contract_balance = models.CharField(blank=True,null=True,max_length=100,verbose_name="合同余额")
     ps_workshop = models.ForeignKey(ProductionWorkshop,blank=True,null=True,on_delete=models.CASCADE,verbose_name="生产车间")

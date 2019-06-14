@@ -207,7 +207,7 @@
                             </td>
                             <td>
                                 {% if order.o_productinfo.pi_unit_price %}
-                                    {{ order.o_productinfo.pi_price_type }}{{ order.o_productinfo.pi_unit_price }}
+                                    {{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_unit_price }}
                                 {% endif %}
                             </td>
                             <td>{{ order.o_customer.c_name }}</td>

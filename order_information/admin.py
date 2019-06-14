@@ -2,11 +2,17 @@ from django.contrib import admin
 from .models import *
 # Register your models here.
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ("o_number","o_date","o_image","o_proofingprogress_number","o_embroiderorprint","create_date")
+    list_display = ("o_number","o_date","o_image","o_price_type","o_proofingprogress_number","o_embroiderorprint","create_date")
     list_per_page = 100  # 设置每页记录
     date_hierarchy = "create_date"  # 详细时间分层筛选
     list_filter = ("o_embroiderorprint",)  # 过滤器
 admin.site.register(Order,OrderAdmin)
+
+class PriceTypeAdmin(admin.ModelAdmin):
+    list_display = ("pk","pt_type","pt_type_name")
+    list_per_page = 100
+    date_hierarchy = "create_date"
+admin.site.register(PriceType,PriceTypeAdmin)
 
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ("c_name", "c_contack","c_email","create_date")
@@ -51,7 +57,7 @@ class AfterDeductionAdmin(admin.ModelAdmin):
 admin.site.register(AfterDeduction,AfterDeductionAdmin)
 
 class ProductInforAdmin(admin.ModelAdmin):
-    list_display = ("pi_amount","pi_price_type","pi_unit_price", "pi_date")
+    list_display = ("pi_amount","pi_unit_price", "pi_date")
     list_per_page = 100
     date_hierarchy = "pi_date"
 admin.site.register(ProductInfo,ProductInforAdmin)

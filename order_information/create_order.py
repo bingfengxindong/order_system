@@ -9,6 +9,9 @@ class CreateOrder:
         return Order.objects.create(o_id=uuid.uuid1(),
                                     o_number=order_number,
                                     o_date=order_date)
+    #币种
+    def query_pricetype(self,pricetype_pk):
+        return PriceType.objects.get(pk=pricetype_pk)
     #客户
     def query_customer(self,customer_pk):
         return Customer.objects.get(pk=customer_pk)
