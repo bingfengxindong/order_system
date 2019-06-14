@@ -61,10 +61,31 @@ class AddOrder:
     def add_productinfo(self,**kwargs):
         if kwargs["pi_amount"]:
             kwargs["productinfo"].pi_amount = kwargs["pi_amount"]
-        if len(kwargs["pi_unit_price"]) > 1:
-            kwargs["productinfo"].pi_unit_price = kwargs["pi_unit_price"][1:]
+        if kwargs["pi_unit_price"]:
+            kwargs["productinfo"].pi_unit_price = kwargs["pi_unit_price"]
         if kwargs["pi_date"]:
             kwargs["productinfo"].pi_date = self.edit_date(kwargs["pi_date"])
+
+        if kwargs["pi_total_price"]:
+            kwargs["productinfo"].pi_total_price = kwargs["pi_total_price"]
+        if kwargs["pi_fabric_quotation"]:
+            kwargs["productinfo"].pi_fabric_quotation = kwargs["pi_fabric_quotation"]
+        if kwargs["pi_ingredients_quotation"]:
+            kwargs["productinfo"].pi_ingredients_quotation = kwargs["pi_ingredients_quotation"]
+        if kwargs["pi_labor_payment_quotation"]:
+            kwargs["productinfo"].pi_labor_payment_quotation = kwargs["pi_labor_payment_quotation"]
+        if kwargs["pi_water_washing_quotation"]:
+            kwargs["productinfo"].pi_water_washing_quotation = kwargs["pi_water_washing_quotation"]
+        if kwargs["pi_print_quotation"]:
+            kwargs["productinfo"].pi_print_quotation = kwargs["pi_print_quotation"]
+        if kwargs["pi_embroider_quotation"]:
+            kwargs["productinfo"].pi_embroider_quotation = kwargs["pi_embroider_quotation"]
+        if kwargs["pi_packaging_quotation"]:
+            kwargs["productinfo"].pi_packaging_quotation = kwargs["pi_packaging_quotation"]
+        if kwargs["pi_other_quotation"]:
+            kwargs["productinfo"].pi_other_quotation = kwargs["pi_other_quotation"]
+        if kwargs["pi_reserved_profits"]:
+            kwargs["productinfo"].pi_reserved_profits = kwargs["pi_reserved_profits"]
         kwargs["productinfo"].save()
 
     def add_proofingprogress(self,**kwargs):
@@ -103,14 +124,19 @@ class AddOrder:
             kwargs["productionschedule"].ps_outward_transport_date = self.edit_date(kwargs["ps_outward_transport_date"])
         if kwargs["ps_gathering_date"]:
             kwargs["productionschedule"].ps_gathering_date = self.edit_date(kwargs["ps_gathering_date"])
-        if len(kwargs["ps_gathering_price"]) > 1:
-            kwargs["productionschedule"].ps_gathering_price = kwargs["ps_gathering_price"][1:]
-        if len(kwargs["ps_contract_balance"]) > 1:
-            kwargs["productionschedule"].ps_contract_balance = kwargs["ps_contract_balance"][1:]
+        if kwargs["ps_gathering_price"]:
+            kwargs["productionschedule"].ps_gathering_price = kwargs["ps_gathering_price"]
+        if kwargs["ps_contract_balance"]:
+            kwargs["productionschedule"].ps_contract_balance = kwargs["ps_contract_balance"]
         if kwargs["workshop_pk"]:
             workshop = self.createorder.query_workshop(workshop_pk=kwargs["workshop_pk"])
             kwargs["productionschedule"].ps_workshop = workshop
         kwargs["productionschedule"].save()
 
     def edit_date(self,date):
-        return date.replace("年","-").replace("月","-").replace("日","")
+        try:
+            ed = date.replace("年","-").replace("月","-").replace("日","")
+        except:
+            return
+        else:
+            return ed

@@ -641,7 +641,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_productinfo.pi_unit_price %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_unit_price }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -654,7 +656,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_productinfo.pi_amount %}
+                                        <span>{{ order.o_productinfo.pi_amount }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -667,7 +671,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_productinfo.pi_total_price %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_total_price }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -682,7 +688,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_productinfo.pi_fabric_quotation %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_fabric_quotation }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -695,7 +703,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_productinfo.pi_ingredients_quotation %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_ingredients_quotation }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -708,7 +718,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_productinfo.pi_labor_payment_quotation %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_labor_payment_quotation }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -723,7 +735,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_productinfo.pi_water_washing_quotation %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_water_washing_quotation }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -736,7 +750,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_productinfo.pi_print_quotation %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_print_quotation }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -749,7 +765,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_productinfo.pi_embroider_quotation %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_embroider_quotation }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -764,7 +782,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_productinfo.pi_packaging_quotation %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_packaging_quotation }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -777,7 +797,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_productinfo.pi_other_quotation %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_other_quotation }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -790,7 +812,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_productinfo.pi_reserved_profits %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_reserved_profits }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

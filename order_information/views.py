@@ -166,7 +166,7 @@ class OrderEdit(View):
         order_pk = request.POST.get("order_pk")
         order = Order.objects.get(pk=order_pk)
         createorder = CreateOrder()
-        addorder = AddOrder(order, createorder)
+        addorder = AddOrder(order,createorder)
         #打样数量
         order_proofingprogress_number = request.POST.get("order_proofingprogress_number")
         addorder.add_order_proofingprogress_number(order_proofingprogress_number)
@@ -207,12 +207,35 @@ class OrderEdit(View):
         pi_amount = request.POST.get("pi_amount")
         pi_unit_price = request.POST.get("pi_unit_price")
         pi_date = request.POST.get("pi_date")
+
+        pi_total_price = request.POST.get("pi_total_price")
+        pi_fabric_quotation = request.POST.get("pi_fabric_quotation")
+        pi_ingredients_quotation = request.POST.get("pi_ingredients_quotation")
+        pi_labor_payment_quotation = request.POST.get("pi_labor_payment_quotation")
+        pi_water_washing_quotation = request.POST.get("pi_water_washing_quotation")
+        pi_print_quotation = request.POST.get("pi_print_quotation")
+        pi_embroider_quotation = request.POST.get("pi_embroider_quotation")
+        pi_packaging_quotation = request.POST.get("pi_packaging_quotation")
+        pi_other_quotation = request.POST.get("pi_other_quotation")
+        pi_reserved_profits = request.POST.get("pi_reserved_profits")
         productinfo = order.o_productinfo
         productinfo.pi_id = uuid.uuid1()
         addorder.add_productinfo(productinfo=productinfo,
                                  pi_amount=pi_amount,
                                  pi_unit_price=pi_unit_price,
-                                 pi_date=pi_date,)
+                                 pi_date=pi_date,
+
+                                 pi_total_price=pi_total_price,
+                                 pi_fabric_quotation=pi_fabric_quotation,
+                                 pi_ingredients_quotation=pi_ingredients_quotation,
+                                 pi_labor_payment_quotation=pi_labor_payment_quotation,
+                                 pi_water_washing_quotation=pi_water_washing_quotation,
+                                 pi_print_quotation=pi_print_quotation,
+                                 pi_embroider_quotation=pi_embroider_quotation,
+                                 pi_packaging_quotation=pi_packaging_quotation,
+                                 pi_other_quotation=pi_other_quotation,
+                                 pi_reserved_profits=pi_reserved_profits,
+                                 )
 
         #打样进度
         pp_pks = request.POST.getlist("pp_pk")
@@ -249,16 +272,16 @@ class OrderEdit(View):
         #大货进度
         workshop_pk = request.POST.get("pw_workshop")
         ps_number = request.POST.get("ps_number")
-        ps_order_date = self.edit_date(request.POST.get("ps_order_date"))
-        ps_arrival_date = self.edit_date(request.POST.get("ps_arrival_date"))
-        ps_tailor_date = self.edit_date(request.POST.get("ps_tailor_date"))
-        ps_embroider_date = self.edit_date(request.POST.get("ps_embroider_date"))
-        ps_print_date = self.edit_date(request.POST.get("ps_print_date"))
-        ps_water_washing_date = self.edit_date(request.POST.get("ps_water_washing_date"))
-        ps_sewing_date = self.edit_date(request.POST.get("ps_sewing_date"))
-        ps_qc_date = self.edit_date(request.POST.get("ps_qc_date"))
-        ps_outward_transport_date = self.edit_date(request.POST.get("ps_outward_transport_date"))
-        ps_gathering_date = self.edit_date(request.POST.get("ps_gathering_date"))
+        ps_order_date = request.POST.get("ps_order_date")
+        ps_arrival_date = request.POST.get("ps_arrival_date")
+        ps_tailor_date = request.POST.get("ps_tailor_date")
+        ps_embroider_date = request.POST.get("ps_embroider_date")
+        ps_print_date = request.POST.get("ps_print_date")
+        ps_water_washing_date = request.POST.get("ps_water_washing_date")
+        ps_sewing_date = request.POST.get("ps_sewing_date")
+        ps_qc_date = request.POST.get("ps_qc_date")
+        ps_outward_transport_date = request.POST.get("ps_outward_transport_date")
+        ps_gathering_date = request.POST.get("ps_gathering_date")
         ps_gathering_price = request.POST.get("ps_gathering_price")
         ps_contract_balance = request.POST.get("ps_contract_balance")
         productionschedule = order.o_productionschedule
@@ -368,12 +391,34 @@ class OrderAdd(View):
         pi_amount = request.POST.get("pi_amount")
         pi_unit_price = request.POST.get("pi_unit_price")
         pi_date = request.POST.get("pi_date")
+
+        pi_total_price = request.POST.get("pi_total_price")
+        pi_fabric_quotation = request.POST.get("pi_fabric_quotation")
+        pi_ingredients_quotation = request.POST.get("pi_ingredients_quotation")
+        pi_labor_payment_quotation = request.POST.get("pi_labor_payment_quotation")
+        pi_water_washing_quotation = request.POST.get("pi_water_washing_quotation")
+        pi_print_quotation = request.POST.get("pi_print_quotation")
+        pi_embroider_quotation = request.POST.get("pi_embroider_quotation")
+        pi_packaging_quotation = request.POST.get("pi_packaging_quotation")
+        pi_other_quotation = request.POST.get("pi_other_quotation")
+        pi_reserved_profits = request.POST.get("pi_reserved_profits")
         productinfo = ProductInfo()
         productinfo.pi_id = uuid.uuid1()
         addorder.add_productinfo(productinfo=productinfo,
                                  pi_amount=pi_amount,
                                  pi_unit_price=pi_unit_price,
-                                 pi_date=pi_date, )
+                                 pi_date=pi_date,
+
+                                 pi_total_price=pi_total_price,
+                                 pi_fabric_quotation=pi_fabric_quotation,
+                                 pi_ingredients_quotation=pi_ingredients_quotation,
+                                 pi_labor_payment_quotation=pi_labor_payment_quotation,
+                                 pi_water_washing_quotation=pi_water_washing_quotation,
+                                 pi_print_quotation=pi_print_quotation,
+                                 pi_embroider_quotation=pi_embroider_quotation,
+                                 pi_packaging_quotation=pi_packaging_quotation,
+                                 pi_other_quotation=pi_other_quotation,
+                                 pi_reserved_profits=pi_reserved_profits,)
         order.o_productinfo = productinfo
         #打样进度
         pp_sample_order_date = request.POST.get("pp_sample_order_date")
