@@ -13,14 +13,14 @@ class Order(models.Model):
 
     o_customer = models.ForeignKey("Customer",blank=True,null=True,on_delete=models.CASCADE,verbose_name="客户")
     o_captype = models.ForeignKey("CapType",blank=True,null=True,on_delete=models.CASCADE,verbose_name="帽型")
-    o_capcolor = models.ManyToManyField("CapColor",blank=True,null=True,verbose_name="颜色")
+    o_capcolor = models.ManyToManyField("CapColor",blank=True,verbose_name="颜色")
     o_embroiderorprint = models.ForeignKey("EmbroiderOrPrint",blank=True,null=True,on_delete=models.CASCADE,verbose_name="绣印花")
     o_capeyebrow = models.ForeignKey("CapEyebrow",blank=True,null=True,on_delete=models.CASCADE,verbose_name="帽眉")
     o_versionnumber = models.ForeignKey("VersionNumber",blank=True,null=True,on_delete=models.CASCADE,verbose_name="版号")
     o_afterdeduction = models.ForeignKey("AfterDeduction",blank=True,null=True,on_delete=models.CASCADE,verbose_name="后扣")
     o_productinfo = models.OneToOneField("ProductInfo",blank=True,null=True,on_delete=models.CASCADE,verbose_name="大货信息")
 
-    o_proofingprogress = models.ManyToManyField(ProofingProgress,blank=True,null=True,verbose_name="打样进度")
+    o_proofingprogress = models.ManyToManyField(ProofingProgress,blank=True,verbose_name="打样进度")
     o_productionschedule = models.OneToOneField(ProductionSchedule,blank=True,null=True,on_delete=models.CASCADE,verbose_name="大货进度")
     o_user = models.ForeignKey(User,blank=True,null=True,on_delete=models.CASCADE,verbose_name="业务员")
     create_date = models.DateTimeField(auto_now_add=True)
@@ -160,10 +160,11 @@ class AfterDeduction(models.Model):
 class ProductInfo(models.Model):
     pi_id = models.UUIDField(verbose_name="编号")
     pi_amount = models.IntegerField(blank=True,null=True,verbose_name="大货数量")
-    pi_unit_price = models.CharField(blank=True,null=True,max_length=100,verbose_name="大货报价")
+    pi_unit_price = models.CharField(blank=True,null=True,max_length=100,verbose_name="大货单价")
     pi_date = models.DateField(blank=True,null=True,verbose_name="交货日期")
-
     pi_total_price = models.CharField(blank=True,null=True,max_length=100,verbose_name="大货总金额")
+
+    pi_offer = models.CharField(blank=True,null=True,max_length=100,verbose_name="大货报价")
     pi_fabric_quotation = models.CharField(blank=True,null=True,max_length=100,verbose_name="面料报价")
     pi_ingredients_quotation = models.CharField(blank=True,null=True,max_length=100,verbose_name="辅料报价")
     pi_labor_payment_quotation = models.CharField(blank=True,null=True,max_length=100,verbose_name="工缴报价")

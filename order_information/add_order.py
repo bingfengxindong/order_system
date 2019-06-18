@@ -65,9 +65,11 @@ class AddOrder:
             kwargs["productinfo"].pi_unit_price = kwargs["pi_unit_price"]
         if kwargs["pi_date"]:
             kwargs["productinfo"].pi_date = self.edit_date(kwargs["pi_date"])
-
         if kwargs["pi_total_price"]:
             kwargs["productinfo"].pi_total_price = kwargs["pi_total_price"]
+
+        if kwargs["pi_offer"]:
+            kwargs["productinfo"].pi_offer = kwargs["pi_offer"]
         if kwargs["pi_fabric_quotation"]:
             kwargs["productinfo"].pi_fabric_quotation = kwargs["pi_fabric_quotation"]
         if kwargs["pi_ingredients_quotation"]:

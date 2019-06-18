@@ -150,10 +150,11 @@
                     <b>颜色</b>
                 </div>
                 <div class="center-order-li-right">
+                    <div class="center-order-li-right-li"></div>
                     {% for capcolor in order.o_capcolor.all %}
                         <div class="center-order-li-right-li">
                             <div class="ten_space"></div>
-                                <div class="ten_space"></div>
+                            <div class="ten_space"></div>
                             <label>{{ capcolor.cc_color }}</label>
                         </div>
                     {% endfor %}
@@ -249,7 +250,7 @@
                         <div class="center-order-li-igp-in-in">
                             <div class="center-order-li-igp-in-in-left">
                                 <div class="center-order-li-igp-in-in-left-title">
-                                    <b>大货报价</b>
+                                    <b>大货单价</b>
                                 </div>
                             </div>
                             <div class="center-order-li-igp-in-in-right">
@@ -641,38 +642,8 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    {% if order.o_productinfo.pi_unit_price %}
-                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_unit_price }}</span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="center-order-li-li-space"></div>
-                        <div class="center-order-li-li">
-                            <div class="center-order-li-li-left">
-                                <div class="center-order-li-li-left-title">
-                                    <b>大货数量</b>
-                                </div>
-                            </div>
-                            <div class="center-order-li-li-right">
-                                <div class="center-order-li-li-right-content">
-                                    {% if order.o_productinfo.pi_amount %}
-                                        <span>{{ order.o_productinfo.pi_amount }}</span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="center-order-li-li-space"></div>
-                        <div class="center-order-li-li">
-                            <div class="center-order-li-li-left">
-                                <div class="center-order-li-li-left-title">
-                                    <b>大货总金额</b>
-                                </div>
-                            </div>
-                            <div class="center-order-li-li-right">
-                                <div class="center-order-li-li-right-content">
-                                    {% if order.o_productinfo.pi_total_price %}
-                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_total_price }}</span>
+                                    {% if order.o_productinfo.pi_offer %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_offer }}</span>
                                     {% endif %}
                                 </div>
                             </div>
@@ -833,7 +804,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_productinfo.pi_total_price %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_productinfo.pi_total_price }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

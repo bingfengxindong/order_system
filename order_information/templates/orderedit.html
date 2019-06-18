@@ -209,6 +209,7 @@
                         <b>颜色</b>
                     </div>
                     <div class="center-order-li-right">
+                        <div class="center-order-li-right-li"></div>
                         {% for capcolor in capcolors %}
                             <div class="center-order-li-right-li">
                                 <div class="ten_space"></div>
@@ -338,7 +339,7 @@
                             <div class="center-order-li-igp-in-in">
                                 <div class="center-order-li-igp-in-in-left">
                                     <div class="center-order-li-igp-in-in-left-title">
-                                        <b>大货报价</b>
+                                        <b>大货单价</b>
                                     </div>
                                 </div>
                                 <div class="center-order-li-igp-in-in-right">
@@ -798,33 +799,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" {% if order.o_productinfo.pi_unit_price %}value="{{ order.o_productinfo.pi_unit_price }}" {% endif %} name="pi_unit_price_1" id="pi_unit_price_1"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="center-order-li-li-space"></div>
-                        <div class="center-order-li-li">
-                            <div class="center-order-li-li-left">
-                                <div class="center-order-li-li-left-title">
-                                    <b>大货数量</b>
-                                </div>
-                            </div>
-                            <div class="center-order-li-li-right">
-                                <div class="center-order-li-li-right-content">
-                                    <input type="number" {% if order.o_productinfo.pi_amount %}value="{{ order.o_productinfo.pi_amount }}" {% endif %} name="pi_amount_1" id="pi_amount_1" class="order-number"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="center-order-li-li-space"></div>
-                        <div class="center-order-li-li">
-                            <div class="center-order-li-li-left">
-                                <div class="center-order-li-li-left-title">
-                                    <b>大货总金额</b>
-                                </div>
-                            </div>
-                            <div class="center-order-li-li-right">
-                                <div class="center-order-li-li-right-content">
-                                    <input type="text" {% if order.o_productinfo.pi_total_price %}value="{{ order.o_productinfo.pi_total_price }}" {% endif %} name="pi_total_price" id="pi_total_price"/>
+                                    <input type="text" {% if order.o_productinfo.pi_offer %}value="{{ order.o_productinfo.pi_offer }}" {% endif %} name="pi_offer" id="pi_offer"/>
                                 </div>
                             </div>
                         </div>
@@ -966,7 +941,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text"/>
+                                    <input type="text" {% if order.o_productinfo.pi_total_price %}value="{{ order.o_productinfo.pi_total_price }}" {% endif %} name="pi_total_price" id="pi_total_price"/>
                                 </div>
                             </div>
                         </div>

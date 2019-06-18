@@ -96,9 +96,11 @@
 }
 .center-order-li-left{
     width: 12%;
-    line-height: 60px;
+    line-height: 58px;
     text-align: center;
     font-size: 18px;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 .center-order-li-right{

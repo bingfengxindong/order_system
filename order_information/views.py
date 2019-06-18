@@ -207,8 +207,9 @@ class OrderEdit(View):
         pi_amount = request.POST.get("pi_amount")
         pi_unit_price = request.POST.get("pi_unit_price")
         pi_date = request.POST.get("pi_date")
-
         pi_total_price = request.POST.get("pi_total_price")
+
+        pi_offer = request.POST.get("pi_offer")
         pi_fabric_quotation = request.POST.get("pi_fabric_quotation")
         pi_ingredients_quotation = request.POST.get("pi_ingredients_quotation")
         pi_labor_payment_quotation = request.POST.get("pi_labor_payment_quotation")
@@ -224,8 +225,9 @@ class OrderEdit(View):
                                  pi_amount=pi_amount,
                                  pi_unit_price=pi_unit_price,
                                  pi_date=pi_date,
-
                                  pi_total_price=pi_total_price,
+
+                                 pi_offer=pi_offer,
                                  pi_fabric_quotation=pi_fabric_quotation,
                                  pi_ingredients_quotation=pi_ingredients_quotation,
                                  pi_labor_payment_quotation=pi_labor_payment_quotation,
@@ -305,14 +307,6 @@ class OrderEdit(View):
         return redirect("/order/orderlist")
 
 class OrderAdd(View):
-    def ordernumber(self):
-        try:
-            last_order_number = str(int(Order.objects.filter().order_by("-pk")[0].o_number.split("-")[-1]) + 1)
-        except:
-            last_order_number = "100"
-        last_order_number_len = len(last_order_number)
-        return "{}{}".format("0"*(4 - last_order_number_len),last_order_number)
-
     def edit_date(self,date):
         return date.replace("年","-").replace("月","-").replace("日","")
 
@@ -327,7 +321,6 @@ class OrderAdd(View):
         afterdeductions = AfterDeduction.objects.all()
         productionworkshops = ProductionWorkshop.objects.all()
         pricetypes = PriceType.objects.all()
-        # order_number = "FW19-{}".format(self.ordernumber())
         context = {
             "title":"添加订单",
             "customers":customers,
@@ -340,7 +333,6 @@ class OrderAdd(View):
             "afterdeductions":afterdeductions,
             "productionworkshops":productionworkshops,
             "pricetypes":pricetypes,
-            # "order_number":order_number,
             "today":datetime.date.today().strftime("%Y-%m-%d"),
         }
         return render(request=request,template_name="orderadd.html",context=context)
@@ -391,8 +383,9 @@ class OrderAdd(View):
         pi_amount = request.POST.get("pi_amount")
         pi_unit_price = request.POST.get("pi_unit_price")
         pi_date = request.POST.get("pi_date")
-
         pi_total_price = request.POST.get("pi_total_price")
+
+        pi_offer = request.POST.get("pi_offer")
         pi_fabric_quotation = request.POST.get("pi_fabric_quotation")
         pi_ingredients_quotation = request.POST.get("pi_ingredients_quotation")
         pi_labor_payment_quotation = request.POST.get("pi_labor_payment_quotation")
@@ -408,8 +401,9 @@ class OrderAdd(View):
                                  pi_amount=pi_amount,
                                  pi_unit_price=pi_unit_price,
                                  pi_date=pi_date,
-
                                  pi_total_price=pi_total_price,
+
+                                 pi_offer=pi_offer,
                                  pi_fabric_quotation=pi_fabric_quotation,
                                  pi_ingredients_quotation=pi_ingredients_quotation,
                                  pi_labor_payment_quotation=pi_labor_payment_quotation,
