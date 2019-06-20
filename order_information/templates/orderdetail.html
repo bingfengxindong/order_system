@@ -819,7 +819,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_accountingdocuments.ad_total_profit %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_total_profit }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -834,7 +836,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_accountingdocuments.ad_fabric_ingredients_total_amount %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_fabric_ingredients_total_amount }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -847,7 +851,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_accountingdocuments.ad_labor_paymentl_amount %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_labor_paymentl_amount }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -860,7 +866,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_accountingdocuments.ad_embroide_print_amount %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_embroide_print_amount }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -875,7 +883,9 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <span></span>
+                                    {% if order.o_accountingdocuments.ad_packaging_shipping_amount %}
+                                        <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_packaging_shipping_amount }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -896,25 +906,14 @@
                                 <div class="center-order-li-li">
                                     <div class="center-order-li-li-left">
                                         <div class="center-order-li-li-left-title">
-                                            <b>面辅料金额</b>
-                                        </div>
-                                    </div>
-                                    <div class="center-order-li-li-right">
-                                        <div class="center-order-li-li-right-content">
-                                            <span></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="center-order-li-li-space"></div>
-                                <div class="center-order-li-li">
-                                    <div class="center-order-li-li-left">
-                                        <div class="center-order-li-li-left-title">
                                             <b>面料金额</b>
                                         </div>
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_fabric_amount %}
+                                                <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_fabric_amount }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -927,7 +926,24 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_fabric_express_amount %}
+                                                <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_fabric_express_amount }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-space"></div>
+                                <div class="center-order-li-li">
+                                    <div class="center-order-li-li-left">
+                                        <div class="center-order-li-li-left-title">
+                                            <b>粘合金额</b>
+                                        </div>
+                                    </div>
+                                    <div class="center-order-li-li-right">
+                                        <div class="center-order-li-li-right-content">
+                                            {% if order.o_accountingdocuments.ad_bonding_amount %}
+                                                <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_bonding_amount }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -937,25 +953,14 @@
                                 <div class="center-order-li-li">
                                     <div class="center-order-li-li-left">
                                         <div class="center-order-li-li-left-title">
-                                            <b>粘合金额</b>
-                                        </div>
-                                    </div>
-                                    <div class="center-order-li-li-right">
-                                        <div class="center-order-li-li-right-content">
-                                            <span></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="center-order-li-li-space"></div>
-                                <div class="center-order-li-li">
-                                    <div class="center-order-li-li-left">
-                                        <div class="center-order-li-li-left-title">
                                             <b>辅料金额</b>
                                         </div>
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_ingredients_amount %}
+                                                <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_ingredients_amount }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -968,7 +973,24 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_ingredients_express_amount %}
+                                                <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_ingredients_express_amount }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-space"></div>
+                                <div class="center-order-li-li">
+                                    <div class="center-order-li-li-left">
+                                        <div class="center-order-li-li-left-title">
+                                            <b>面辅料其他</b>
+                                        </div>
+                                    </div>
+                                    <div class="center-order-li-li-right">
+                                        <div class="center-order-li-li-right-content">
+                                            {% if order.o_accountingdocuments.ad_fabric_ingredients_other_amount %}
+                                                <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_fabric_ingredients_other_amount }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -999,7 +1021,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_tailor_total_amount %}
+                                                <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_tailor_total_amount }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1014,7 +1038,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_tailor_start_date %}
+                                                <span>{{ order.o_accountingdocuments.ad_tailor_start_date }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1027,7 +1053,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_tailor_end_date %}
+                                                <span>{{ order.o_accountingdocuments.ad_tailor_end_date }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1040,7 +1068,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_tailor_number_people %}
+                                                <span>{{ order.o_accountingdocuments.ad_tailor_number_people }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1055,7 +1085,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_sewing_total_amount %}
+                                                <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_sewing_total_amount }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1070,7 +1102,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_sewing_start_date %}
+                                                <span>{{ order.o_accountingdocuments.ad_sewing_start_date }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1083,7 +1117,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_sewing_end_date %}
+                                                <span>{{ order.o_accountingdocuments.ad_sewing_end_date }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1096,7 +1132,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_sewing_number_people %}
+                                                <span>}{{ order.o_accountingdocuments.ad_sewing_number_people }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1111,7 +1149,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_iron_total_amount %}
+                                                <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_iron_total_amount }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1126,7 +1166,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_iron_start_date %}
+                                                <span>{{ order.o_accountingdocuments.ad_iron_start_date }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1139,7 +1181,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_iron_end_date %}
+                                                <span>{{ order.o_accountingdocuments.ad_iron_end_date }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1152,7 +1196,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_iron_number_people %}
+                                                <span>{{ order.o_accountingdocuments.ad_iron_number_people }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1184,7 +1230,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_water_washing_amount %}
+                                                <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_water_washing_amount }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1197,7 +1245,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_embroide_amount %}
+                                                <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_embroide_amount }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1210,7 +1260,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_print_amount %}
+                                                <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_print_amount }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1242,7 +1294,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_paperboard_amount %}
+                                                <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_paperboard_amount }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1255,7 +1309,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_physical_distribution_amount %}
+                                                <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_physical_distribution_amount }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1268,7 +1324,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_warehouse_entry_amount %}
+                                                <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_warehouse_entry_amount }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -1283,7 +1341,9 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <span></span>
+                                            {% if order.o_accountingdocuments.ad_customs_declaration_amount %}
+                                                <span>{{ order.o_price_type.pt_type }}{{ order.o_accountingdocuments.ad_customs_declaration_amount }}</span>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>

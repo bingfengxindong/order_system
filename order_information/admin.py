@@ -61,3 +61,9 @@ class ProductInforAdmin(admin.ModelAdmin):
     list_per_page = 100
     date_hierarchy = "pi_date"
 admin.site.register(ProductInfo,ProductInforAdmin)
+
+class AccountingDocumentsAdmin(admin.ModelAdmin):
+    list_display = ("ad_total_profit","ad_fabric_ingredients_total_amount", "ad_labor_paymentl_amount","ad_embroide_print_amount","ad_packaging_shipping_amount")
+    list_per_page = 100
+    date_hierarchy = "create_date"
+admin.site.register(AccountingDocuments,AccountingDocumentsAdmin)

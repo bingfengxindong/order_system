@@ -303,6 +303,77 @@ class OrderEdit(View):
                                         ps_gathering_price=ps_gathering_price,
                                         ps_contract_balance=ps_contract_balance,
                                         workshop_pk=workshop_pk,)
+        # 按单核算
+        ad_total_profit = request.POST.get("ad_total_profit")
+
+        ad_fabric_ingredients_total_amount = request.POST.get("ad_fabric_ingredients_total_amount")
+        ad_fabric_amount = request.POST.get("ad_fabric_amount")
+        ad_fabric_express_amount = request.POST.get("ad_fabric_express_amount")
+        ad_bonding_amount = request.POST.get("ad_bonding_amount")
+        ad_ingredients_amount = request.POST.get("ad_ingredients_amount")
+        ad_ingredients_express_amount = request.POST.get("ad_ingredients_express_amount")
+        ad_fabric_ingredients_other_amount = request.POST.get("ad_fabric_ingredients_other_amount")
+
+        ad_labor_paymentl_amount = request.POST.get("ad_labor_paymentl_amount")
+        ad_tailor_total_amount = request.POST.get("ad_tailor_total_amount")
+        ad_tailor_start_date = request.POST.get("ad_tailor_start_date")
+        ad_tailor_end_date = request.POST.get("ad_tailor_end_date")
+        ad_tailor_number_people = request.POST.get("ad_tailor_number_people")
+        ad_sewing_total_amount = request.POST.get("ad_sewing_total_amount")
+        ad_sewing_start_date = request.POST.get("ad_sewing_start_date")
+        ad_sewing_end_date = request.POST.get("ad_sewing_end_date")
+        ad_sewing_number_people = request.POST.get("ad_sewing_number_people")
+        ad_iron_total_amount = request.POST.get("ad_iron_total_amount")
+        ad_iron_start_date = request.POST.get("ad_iron_start_date")
+        ad_iron_end_date = request.POST.get("ad_iron_end_date")
+        ad_iron_number_people = request.POST.get("ad_iron_number_people")
+
+        ad_embroide_print_amount = request.POST.get("ad_embroide_print_amount")
+        ad_water_washing_amount = request.POST.get("ad_water_washing_amount")
+        ad_embroide_amount = request.POST.get("ad_embroide_amount")
+        ad_print_amount = request.POST.get("ad_print_amount")
+
+        ad_packaging_shipping_amount = request.POST.get("ad_packaging_shipping_amount")
+        ad_paperboard_amount = request.POST.get("ad_paperboard_amount")
+        ad_physical_distribution_amount = request.POST.get("ad_physical_distribution_amount")
+        ad_warehouse_entry_amount = request.POST.get("ad_warehouse_entry_amount")
+        ad_customs_declaration_amount = request.POST.get("ad_customs_declaration_amount")
+        accountingdocuments = order.o_accountingdocuments
+        addorder.add_accountingdocuments(accountingdocuments=accountingdocuments,
+                                         ad_total_profit=ad_total_profit,
+
+                                         ad_fabric_ingredients_total_amount=ad_fabric_ingredients_total_amount,
+                                         ad_fabric_amount=ad_fabric_amount,
+                                         ad_fabric_express_amount=ad_fabric_express_amount,
+                                         ad_bonding_amount=ad_bonding_amount,
+                                         ad_ingredients_amount=ad_ingredients_amount,
+                                         ad_ingredients_express_amount=ad_ingredients_express_amount,
+                                         ad_fabric_ingredients_other_amount=ad_fabric_ingredients_other_amount,
+
+                                         ad_labor_paymentl_amount=ad_labor_paymentl_amount,
+                                         ad_tailor_total_amount=ad_tailor_total_amount,
+                                         ad_tailor_start_date=ad_tailor_start_date,
+                                         ad_tailor_end_date=ad_tailor_end_date,
+                                         ad_tailor_number_people=ad_tailor_number_people,
+                                         ad_sewing_total_amount=ad_sewing_total_amount,
+                                         ad_sewing_start_date=ad_sewing_start_date,
+                                         ad_sewing_end_date=ad_sewing_end_date,
+                                         ad_sewing_number_people=ad_sewing_number_people,
+                                         ad_iron_total_amount=ad_iron_total_amount,
+                                         ad_iron_start_date=ad_iron_start_date,
+                                         ad_iron_end_date=ad_iron_end_date,
+                                         ad_iron_number_people=ad_iron_number_people,
+
+                                         ad_embroide_print_amount=ad_embroide_print_amount,
+                                         ad_water_washing_amount=ad_water_washing_amount,
+                                         ad_embroide_amount=ad_embroide_amount,
+                                         ad_print_amount=ad_print_amount,
+
+                                         ad_packaging_shipping_amount=ad_packaging_shipping_amount,
+                                         ad_paperboard_amount=ad_paperboard_amount,
+                                         ad_physical_distribution_amount=ad_physical_distribution_amount,
+                                         ad_warehouse_entry_amount=ad_warehouse_entry_amount,
+                                         ad_customs_declaration_amount=ad_customs_declaration_amount, )
         order.save()
         return redirect("/order/orderlist")
 
@@ -345,7 +416,6 @@ class OrderAdd(View):
         addorder = AddOrder(order,createorder)
         #币种
         pricetype_pk = request.POST.get("pricetype",1)
-        print(pricetype_pk)
         addorder.add_pricetype(pricetype_pk)
         #打样数量
         order_proofingprogress_number = request.POST.get("order_proofingprogress_number")
@@ -462,6 +532,78 @@ class OrderAdd(View):
                                         ps_contract_balance=ps_contract_balance,
                                         workshop_pk=workshop_pk, )
         order.o_productionschedule = productionschedule
+        #按单核算
+        ad_total_profit = request.POST.get("ad_total_profit")
 
+        ad_fabric_ingredients_total_amount = request.POST.get("ad_fabric_ingredients_total_amount")
+        ad_fabric_amount = request.POST.get("ad_fabric_amount")
+        ad_fabric_express_amount = request.POST.get("ad_fabric_express_amount")
+        ad_bonding_amount = request.POST.get("ad_bonding_amount")
+        ad_ingredients_amount = request.POST.get("ad_ingredients_amount")
+        ad_ingredients_express_amount = request.POST.get("ad_ingredients_express_amount")
+        ad_fabric_ingredients_other_amount = request.POST.get("ad_fabric_ingredients_other_amount")
+
+        ad_labor_paymentl_amount = request.POST.get("ad_labor_paymentl_amount")
+        ad_tailor_total_amount = request.POST.get("ad_tailor_total_amount")
+        ad_tailor_start_date = request.POST.get("ad_tailor_start_date")
+        ad_tailor_end_date = request.POST.get("ad_tailor_end_date")
+        ad_tailor_number_people = request.POST.get("ad_tailor_number_people")
+        ad_sewing_total_amount = request.POST.get("ad_sewing_total_amount")
+        ad_sewing_start_date = request.POST.get("ad_sewing_start_date")
+        ad_sewing_end_date = request.POST.get("ad_sewing_end_date")
+        ad_sewing_number_people = request.POST.get("ad_sewing_number_people")
+        ad_iron_total_amount = request.POST.get("ad_iron_total_amount")
+        ad_iron_start_date = request.POST.get("ad_iron_start_date")
+        ad_iron_end_date = request.POST.get("ad_iron_end_date")
+        ad_iron_number_people = request.POST.get("ad_iron_number_people")
+
+        ad_embroide_print_amount = request.POST.get("ad_embroide_print_amount")
+        ad_water_washing_amount = request.POST.get("ad_water_washing_amount")
+        ad_embroide_amount = request.POST.get("ad_embroide_amount")
+        ad_print_amount = request.POST.get("ad_print_amount")
+
+        ad_packaging_shipping_amount = request.POST.get("ad_packaging_shipping_amount")
+        ad_paperboard_amount = request.POST.get("ad_paperboard_amount")
+        ad_physical_distribution_amount = request.POST.get("ad_physical_distribution_amount")
+        ad_warehouse_entry_amount = request.POST.get("ad_warehouse_entry_amount")
+        ad_customs_declaration_amount = request.POST.get("ad_customs_declaration_amount")
+        accountingdocuments = AccountingDocuments()
+        accountingdocuments.ad_id = uuid.uuid1()
+        addorder.add_accountingdocuments(accountingdocuments=accountingdocuments,
+                                         ad_total_profit=ad_total_profit,
+
+                                         ad_fabric_ingredients_total_amount=ad_fabric_ingredients_total_amount,
+                                         ad_fabric_amount=ad_fabric_amount,
+                                         ad_fabric_express_amount=ad_fabric_express_amount,
+                                         ad_bonding_amount=ad_bonding_amount,
+                                         ad_ingredients_amount=ad_ingredients_amount,
+                                         ad_ingredients_express_amount=ad_ingredients_express_amount,
+                                         ad_fabric_ingredients_other_amount=ad_fabric_ingredients_other_amount,
+
+                                         ad_labor_paymentl_amount=ad_labor_paymentl_amount,
+                                         ad_tailor_total_amount=ad_tailor_total_amount,
+                                         ad_tailor_start_date=ad_tailor_start_date,
+                                         ad_tailor_end_date=ad_tailor_end_date,
+                                         ad_tailor_number_people=ad_tailor_number_people,
+                                         ad_sewing_total_amount=ad_sewing_total_amount,
+                                         ad_sewing_start_date=ad_sewing_start_date,
+                                         ad_sewing_end_date=ad_sewing_end_date,
+                                         ad_sewing_number_people=ad_sewing_number_people,
+                                         ad_iron_total_amount=ad_iron_total_amount,
+                                         ad_iron_start_date=ad_iron_start_date,
+                                         ad_iron_end_date=ad_iron_end_date,
+                                         ad_iron_number_people=ad_iron_number_people,
+
+                                         ad_embroide_print_amount=ad_embroide_print_amount,
+                                         ad_water_washing_amount=ad_water_washing_amount,
+                                         ad_embroide_amount=ad_embroide_amount,
+                                         ad_print_amount=ad_print_amount,
+
+                                         ad_packaging_shipping_amount=ad_packaging_shipping_amount,
+                                         ad_paperboard_amount=ad_paperboard_amount,
+                                         ad_physical_distribution_amount=ad_physical_distribution_amount,
+                                         ad_warehouse_entry_amount=ad_warehouse_entry_amount,
+                                         ad_customs_declaration_amount=ad_customs_declaration_amount,)
+        order.o_accountingdocuments = accountingdocuments
         order.save()
         return redirect("/order/orderlist")

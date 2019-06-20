@@ -135,6 +135,74 @@ class AddOrder:
             kwargs["productionschedule"].ps_workshop = workshop
         kwargs["productionschedule"].save()
 
+    def add_accountingdocuments(self,**kwargs):
+        if kwargs["ad_total_profit"]:
+            kwargs["accountingdocuments"].ad_total_profit = kwargs["ad_total_profit"]
+
+        if kwargs["ad_fabric_ingredients_total_amount"]:
+            kwargs["accountingdocuments"].ad_fabric_ingredients_total_amount = kwargs["ad_fabric_ingredients_total_amount"]
+        if kwargs["ad_fabric_amount"]:
+            kwargs["accountingdocuments"].ad_fabric_amount = kwargs["ad_fabric_amount"]
+        if kwargs["ad_fabric_express_amount"]:
+            kwargs["accountingdocuments"].ad_fabric_express_amount = kwargs["ad_fabric_express_amount"]
+        if kwargs["ad_bonding_amount"]:
+            kwargs["accountingdocuments"].ad_bonding_amount = kwargs["ad_bonding_amount"]
+        if kwargs["ad_ingredients_amount"]:
+            kwargs["accountingdocuments"].ad_ingredients_amount = kwargs["ad_ingredients_amount"]
+        if kwargs["ad_ingredients_express_amount"]:
+            kwargs["accountingdocuments"].ad_ingredients_express_amount = kwargs["ad_ingredients_express_amount"]
+        if kwargs["ad_fabric_ingredients_other_amount"]:
+            kwargs["accountingdocuments"].ad_fabric_ingredients_other_amount = kwargs["ad_fabric_ingredients_other_amount"]
+
+        if kwargs["ad_labor_paymentl_amount"]:
+            kwargs["accountingdocuments"].ad_labor_paymentl_amount = kwargs["ad_totalad_labor_paymentl_amount_profit"]
+        if kwargs["ad_tailor_total_amount"]:
+            kwargs["accountingdocuments"].ad_tailor_total_amount = kwargs["ad_tailor_total_amount"]
+        if kwargs["ad_tailor_start_date"]:
+            kwargs["accountingdocuments"].ad_tailor_start_date = self.edit_date(kwargs["ad_tailor_start_date"])
+        if kwargs["ad_tailor_end_date"]:
+            kwargs["accountingdocuments"].ad_tailor_end_date = self.edit_date(kwargs["ad_tailor_end_date"])
+        if kwargs["ad_tailor_number_people"]:
+            kwargs["accountingdocuments"].ad_tailor_number_people = kwargs["ad_tailor_number_people"]
+        if kwargs["ad_sewing_total_amount"]:
+            kwargs["accountingdocuments"].ad_sewing_total_amount = kwargs["ad_sewing_total_amount"]
+        if kwargs["ad_sewing_start_date"]:
+            kwargs["accountingdocuments"].ad_sewing_start_date = self.edit_date(kwargs["ad_sewing_start_date"])
+        if kwargs["ad_sewing_end_date"]:
+            kwargs["accountingdocuments"].ad_sewing_end_date = self.edit_date(kwargs["ad_sewing_end_date"])
+        if kwargs["ad_sewing_number_people"]:
+            kwargs["accountingdocuments"].ad_sewing_number_people = kwargs["ad_sewing_number_people"]
+        if kwargs["ad_iron_total_amount"]:
+            kwargs["accountingdocuments"].ad_iron_total_amount = kwargs["ad_iron_total_amount"]
+        if kwargs["ad_iron_start_date"]:
+            kwargs["accountingdocuments"].ad_iron_start_date = self.edit_date(kwargs["ad_iron_start_date"])
+        if kwargs["ad_iron_end_date"]:
+            kwargs["accountingdocuments"].ad_iron_end_date = self.edit_date(kwargs["ad_iron_end_date"])
+        if kwargs["ad_iron_number_people"]:
+            kwargs["accountingdocuments"].ad_iron_number_people = kwargs["ad_iron_number_people"]
+
+        if kwargs["ad_embroide_print_amount"]:
+            kwargs["accountingdocuments"].ad_embroide_print_amount = kwargs["ad_embroide_print_amount"]
+        if kwargs["ad_water_washing_amount"]:
+            kwargs["accountingdocuments"].ad_water_washing_amount = kwargs["ad_water_washing_amount"]
+        if kwargs["ad_embroide_amount"]:
+            kwargs["accountingdocuments"].ad_embroide_amount = kwargs["ad_embroide_amount"]
+        if kwargs["ad_print_amount"]:
+            kwargs["accountingdocuments"].ad_print_amount = kwargs["ad_print_amount"]
+
+        if kwargs["ad_packaging_shipping_amount"]:
+            kwargs["accountingdocuments"].ad_packaging_shipping_amount = kwargs["ad_packaging_shipping_amount"]
+        if kwargs["ad_paperboard_amount"]:
+            kwargs["accountingdocuments"].ad_paperboard_amount = kwargs["ad_paperboard_amount"]
+        if kwargs["ad_physical_distribution_amount"]:
+            kwargs["accountingdocuments"].ad_physical_distribution_amount = kwargs["ad_physical_distribution_amount"]
+        if kwargs["ad_warehouse_entry_amount"]:
+            kwargs["accountingdocuments"].ad_warehouse_entry_amount = kwargs["ad_warehouse_entry_amount"]
+        if kwargs["ad_customs_declaration_amount"]:
+            kwargs["accountingdocuments"].ad_customs_declaration_amount = kwargs["ad_customs_declaration_amount"]
+        kwargs["accountingdocuments"].save()
+
+
     def edit_date(self,date):
         try:
             ed = date.replace("年","-").replace("月","-").replace("日","")

@@ -97,7 +97,7 @@
                         </div>
                         <div class="center-order-li-li-right">
                             <div class="center-order-li-li-right-content">
-                                <input type="text" value="{{ order.o_date|date:'Y-m-j' }}" name="order_date" id="order_date" autocomplete="off" readonly/>
+                                <input type="text" value="{{ order.o_date|date:'Y-m-j'}}" name="order_date" id="order_date" autocomplete="off" readonly/>
                             </div>
                         </div>
                     </div>
@@ -954,7 +954,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text"/>
+                                    <input type="text" {% if order.o_accountingdocuments.ad_total_profit %}value="{{ order.o_accountingdocuments.ad_total_profit }}" {% endif %} name="ad_total_profit" id="ad_total_profit"/>
                                 </div>
                             </div>
                         </div>
@@ -969,7 +969,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text"/>
+                                    <input type="text" {% if order.o_accountingdocuments.ad_fabric_ingredients_total_amount %}value="{{ order.o_accountingdocuments.ad_fabric_ingredients_total_amount }}" {% endif %} name="ad_fabric_ingredients_total_amount" id="ad_fabric_ingredients_total_amount"/>
                                 </div>
                             </div>
                         </div>
@@ -982,7 +982,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text"/>
+                                    <input type="text" {% if order.o_accountingdocuments.ad_labor_paymentl_amount %}value="{{ order.o_accountingdocuments.ad_labor_paymentl_amount }}" {% endif %} name="ad_labor_paymentl_amount" id="ad_labor_paymentl_amount"/>
                                 </div>
                             </div>
                         </div>
@@ -995,7 +995,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text"/>
+                                    <input type="text" {% if order.o_accountingdocuments.ad_embroide_print_amount %}value="{{ order.o_accountingdocuments.ad_embroide_print_amount }}" {% endif %} name="ad_embroide_print_amount" id="ad_embroide_print_amount"/>
                                 </div>
                             </div>
                         </div>
@@ -1010,7 +1010,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text"/>
+                                    <input type="text" {% if order.o_accountingdocuments.ad_packaging_shipping_amount %}value="{{ order.o_accountingdocuments.ad_packaging_shipping_amount }}" {% endif %} name="ad_packaging_shipping_amount" id="ad_packaging_shipping_amount"/>
                                 </div>
                             </div>
                         </div>
@@ -1031,25 +1031,12 @@
                                 <div class="center-order-li-li">
                                     <div class="center-order-li-li-left">
                                         <div class="center-order-li-li-left-title">
-                                            <b>面辅料金额</b>
-                                        </div>
-                                    </div>
-                                    <div class="center-order-li-li-right">
-                                        <div class="center-order-li-li-right-content">
-                                            <input type="text"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="center-order-li-li-space"></div>
-                                <div class="center-order-li-li">
-                                    <div class="center-order-li-li-left">
-                                        <div class="center-order-li-li-left-title">
                                             <b>面料金额</b>
                                         </div>
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text"/>
+                                            <input type="text" {% if order.o_accountingdocuments.ad_fabric_amount %}value="{{ order.o_accountingdocuments.ad_fabric_amount }}" {% endif %} name="ad_fabric_amount" id="ad_fabric_amount"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1062,7 +1049,20 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text"/>
+                                            <input type="text" {% if order.o_accountingdocuments.ad_fabric_express_amount %}value="{{ order.o_accountingdocuments.ad_fabric_express_amount }}" {% endif %} name="ad_fabric_express_amount" id="ad_fabric_express_amount"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-space"></div>
+                                <div class="center-order-li-li">
+                                    <div class="center-order-li-li-left">
+                                        <div class="center-order-li-li-left-title">
+                                            <b>粘合金额</b>
+                                        </div>
+                                    </div>
+                                    <div class="center-order-li-li-right">
+                                        <div class="center-order-li-li-right-content">
+                                            <input type="text" {% if order.o_accountingdocuments.ad_bonding_amount %}value="{{ order.o_accountingdocuments.ad_bonding_amount }}" {% endif %} name="ad_bonding_amount" id="ad_bonding_amount"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1072,25 +1072,12 @@
                                 <div class="center-order-li-li">
                                     <div class="center-order-li-li-left">
                                         <div class="center-order-li-li-left-title">
-                                            <b>粘合金额</b>
-                                        </div>
-                                    </div>
-                                    <div class="center-order-li-li-right">
-                                        <div class="center-order-li-li-right-content">
-                                            <input type="text"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="center-order-li-li-space"></div>
-                                <div class="center-order-li-li">
-                                    <div class="center-order-li-li-left">
-                                        <div class="center-order-li-li-left-title">
                                             <b>辅料金额</b>
                                         </div>
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text"/>
+                                            <input type="text" {% if order.o_accountingdocuments.ad_ingredients_amount %}value="{{ order.o_accountingdocuments.ad_ingredients_amount }}" {% endif %} name="ad_ingredients_amount" id="ad_ingredients_amount"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1103,7 +1090,20 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text"/>
+                                            <input type="text" {% if order.o_accountingdocuments.ad_ingredients_express_amount %}value="{{ order.o_accountingdocuments.ad_ingredients_express_amount }}" {% endif %} name="ad_ingredients_express_amount" id="ad_ingredients_express_amount"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="center-order-li-li-space"></div>
+                                <div class="center-order-li-li">
+                                    <div class="center-order-li-li-left">
+                                        <div class="center-order-li-li-left-title">
+                                            <b>面辅料其他</b>
+                                        </div>
+                                    </div>
+                                    <div class="center-order-li-li-right">
+                                        <div class="center-order-li-li-right-content">
+                                            <input type="text" {% if order.o_accountingdocuments.ad_fabric_ingredients_other_amount %}value="{{ order.o_accountingdocuments.ad_fabric_ingredients_other_amount }}" {% endif %} name="ad_fabric_ingredients_other_amount" id="ad_fabric_ingredients_other_amount"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1134,7 +1134,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text"/>
+                                            <input type="text" {% if order.o_accountingdocuments.ad_tailor_total_amount %}value="{{ order.o_accountingdocuments.ad_tailor_total_amount }}" {% endif %} name="ad_tailor_total_amount" id="ad_tailor_total_amount"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1149,7 +1149,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" class="form_datetime" readonly/>
+                                            <input type="text" class="form_datetime_hi" {% if order.o_accountingdocuments.ad_tailor_start_date %}value="{{ order.o_accountingdocuments.ad_tailor_start_date|date:'Y-m-j H:i' }}" {% endif %} name="ad_tailor_start_date" id="ad_tailor_start_date" autocomplete="off"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1162,7 +1162,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" class="form_datetime" readonly/>
+                                            <input type="text" class="form_datetime_hi" {% if order.o_accountingdocuments.ad_tailor_end_date %}value="{{ order.o_accountingdocuments.ad_tailor_end_date|date:'Y-m-j H:i' }}" {% endif %} name="ad_tailor_end_date" id="ad_tailor_end_date" autocomplete="off"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1175,7 +1175,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="number" class="order-number"/>
+                                            <input type="number" class="order-number" {% if order.o_accountingdocuments.ad_tailor_number_people %}value="{{ order.o_accountingdocuments.ad_tailor_number_people }}" {% endif %} name="ad_tailor_number_people" id="ad_tailor_number_people"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1190,7 +1190,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text"/>
+                                            <input type="text" {% if order.o_accountingdocuments.ad_sewing_total_amount %}value="{{ order.o_accountingdocuments.ad_sewing_total_amount }}" {% endif %} name="ad_sewing_total_amount" id="ad_sewing_total_amount"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1205,7 +1205,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" class="form_datetime" readonly/>
+                                            <input type="text" class="form_datetime_hi" {% if order.o_accountingdocuments.ad_sewing_start_date %}value="{{ order.o_accountingdocuments.ad_sewing_start_date|date:'Y-m-j H:i' }}" {% endif %} name="ad_sewing_start_date" id="ad_sewing_start_date" autocomplete="off"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1218,7 +1218,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" class="form_datetime" readonly/>
+                                            <input type="text" class="form_datetime_hi" {% if order.o_accountingdocuments.ad_sewing_end_date %}value="{{ order.o_accountingdocuments.ad_sewing_end_date|date:'Y-m-j H:i' }}" {% endif %} name="ad_sewing_end_date" id="ad_sewing_end_date" autocomplete="off"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1231,7 +1231,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="number" class="order-number"/>
+                                            <input type="number" class="order-number" {% if order.o_accountingdocuments.ad_sewing_number_people %}value="{{ order.o_accountingdocuments.ad_sewing_number_people }}" {% endif %} name="ad_sewing_number_people" id="ad_sewing_number_people"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1246,7 +1246,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text"/>
+                                            <input type="text" {% if order.o_accountingdocuments.ad_iron_total_amount %}value="{{ order.o_accountingdocuments.ad_iron_total_amount }}" {% endif %} name="ad_iron_total_amount" id="ad_iron_total_amount"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1261,7 +1261,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" class="form_datetime" readonly/>
+                                            <input type="text" class="form_datetime_hi" {% if order.o_accountingdocuments.ad_iron_start_date %}value="{{ order.o_accountingdocuments.ad_iron_start_date|date:'Y-m-j H:i' }}" {% endif %} name="ad_iron_start_date" id="ad_iron_start_date" autocomplete="off"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1274,7 +1274,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" class="form_datetime" readonly/>
+                                            <input type="text" class="form_datetime_hi" {% if order.o_accountingdocuments.ad_iron_end_date %}value="{{ order.o_accountingdocuments.ad_iron_end_date|date:'Y-m-j H:i' }}" {% endif %} name="ad_iron_end_date" id="ad_iron_end_date" autocomplete="off"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1287,7 +1287,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="number" class="order-number"/>
+                                            <input type="number" class="order-number" {% if order.o_accountingdocuments.ad_iron_number_people %}value="{{ order.o_accountingdocuments.ad_iron_number_people }}" {% endif %} name="ad_iron_number_people" id="ad_iron_number_people"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1319,7 +1319,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text"/>
+                                            <input type="text" {% if order.o_accountingdocuments.ad_water_washing_amount %}value="{{ order.o_accountingdocuments.ad_water_washing_amount }}" {% endif %} name="ad_water_washing_amount" id="ad_water_washing_amount"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1332,7 +1332,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text"/>
+                                            <input type="text" {% if order.o_accountingdocuments.ad_embroide_amount %}value="{{ order.o_accountingdocuments.ad_embroide_amount }}" {% endif %} name="ad_embroide_amount" id="ad_embroide_amount"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1345,7 +1345,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text"/>
+                                            <input type="text" {% if order.o_accountingdocuments.ad_print_amount %}value="{{ order.o_accountingdocuments.ad_print_amount }}" {% endif %} name="ad_print_amount" id="ad_print_amount"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1377,7 +1377,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text"/>
+                                            <input type="text" {% if order.o_accountingdocuments.ad_paperboard_amount %}value="{{ order.o_accountingdocuments.ad_paperboard_amount }}" {% endif %} name="ad_paperboard_amount" id="ad_paperboard_amount"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1390,7 +1390,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text"/>
+                                            <input type="text" {% if order.o_accountingdocuments.ad_physical_distribution_amount %}value="{{ order.o_accountingdocuments.ad_physical_distribution_amount }}" {% endif %} name="ad_physical_distribution_amount" id="ad_physical_distribution_amount"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1403,7 +1403,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text"/>
+                                            <input type="text" {% if order.o_accountingdocuments.ad_warehouse_entry_amount %}value="{{ order.o_accountingdocuments.ad_warehouse_entry_amount }}" {% endif %} name="ad_warehouse_entry_amount" id="ad_warehouse_entry_amount"/>
                                         </div>
                                     </div>
                                 </div>
@@ -1418,7 +1418,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text"/>
+                                            <input type="text" {% if order.o_accountingdocuments.ad_customs_declaration_amount %}value="{{ order.o_accountingdocuments.ad_customs_declaration_amount }}" {% endif %} name="ad_customs_declaration_amount" id="ad_customs_declaration_amount"/>
                                         </div>
                                     </div>
                                 </div>

@@ -22,6 +22,7 @@ class Order(models.Model):
 
     o_proofingprogress = models.ManyToManyField(ProofingProgress,blank=True,verbose_name="打样进度")
     o_productionschedule = models.OneToOneField(ProductionSchedule,blank=True,null=True,on_delete=models.CASCADE,verbose_name="大货进度")
+    o_accountingdocuments = models.OneToOneField("AccountingDocuments",blank=True,null=True,on_delete=models.CASCADE,verbose_name="按单核算")
     o_user = models.ForeignKey(User,blank=True,null=True,on_delete=models.CASCADE,verbose_name="业务员")
     create_date = models.DateTimeField(auto_now_add=True)
     create_end_date = models.DateTimeField(auto_now=True)
@@ -185,3 +186,51 @@ class ProductInfo(models.Model):
         ordering = ["pk"]
         verbose_name = "大货信息"
         verbose_name_plural = "大货信息"
+
+class AccountingDocuments(models.Model):
+    ad_id = models.UUIDField(verbose_name="编号")
+    ad_total_profit = models.CharField(blank=True,null=True,max_length=100,verbose_name="利润总金额")
+
+    ad_fabric_ingredients_total_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="面辅料金额")
+    ad_fabric_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="面料金额")
+    ad_fabric_express_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="面料快递金额")
+    ad_bonding_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="粘合金额")
+    ad_ingredients_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="辅料金额")
+    ad_ingredients_express_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="辅料快递金额")
+    ad_fabric_ingredients_other_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="面辅料其他金额")
+
+    ad_labor_paymentl_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="工缴金额")
+    ad_tailor_total_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="裁剪总金额")
+    ad_tailor_start_date = models.DateTimeField(blank=True, null=True, verbose_name="裁剪开始时间")
+    ad_tailor_end_date = models.DateTimeField(blank=True, null=True, verbose_name="裁剪结束时间")
+    ad_tailor_number_people = models.IntegerField(blank=True, null=True, verbose_name="裁剪人数")
+    ad_sewing_total_amount = models.CharField(blank=True, null=True, max_length=100, verbose_name="车缝总金额")
+    ad_sewing_start_date = models.DateTimeField(blank=True, null=True, verbose_name="车缝开始时间")
+    ad_sewing_end_date = models.DateTimeField(blank=True, null=True, verbose_name="车缝结束时间")
+    ad_sewing_number_people = models.IntegerField(blank=True, null=True, verbose_name="车缝人数")
+    ad_iron_total_amount = models.CharField(blank=True, null=True, max_length=100, verbose_name="整烫总金额")
+    ad_iron_start_date = models.DateTimeField(blank=True, null=True, verbose_name="整烫开始时间")
+    ad_iron_end_date = models.DateTimeField(blank=True, null=True, verbose_name="整烫结束时间")
+    ad_iron_number_people = models.IntegerField(blank=True, null=True, verbose_name="整烫人数")
+
+    ad_embroide_print_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="绣印花金额")
+    ad_water_washing_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="水洗金额")
+    ad_embroide_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="绣花金额")
+    ad_print_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="印花金额")
+
+    ad_packaging_shipping_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="包装船务金额")
+    ad_paperboard_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="纸板金额")
+    ad_physical_distribution_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="物流金额")
+    ad_warehouse_entry_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="进仓金额")
+    ad_customs_declaration_amount = models.CharField(blank=True,null=True,max_length=100,verbose_name="报关金额")
+    create_date = models.DateTimeField(auto_now_add=True)
+    create_end_date = models.DateTimeField(auto_now=True)
+    isdelete = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "{}".format(self.ad_total_profit)
+
+    class Meta:
+        ordering = ["pk"]
+        verbose_name = "按单核算"
+        verbose_name_plural = "按单核算"

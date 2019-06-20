@@ -1,6 +1,8 @@
 $(function () {
     order_date_timepicker();
-    order_start_end_date();
+    var order_date = $("#order_date");
+    var order_end_date = $("#order_end_date");
+    order_start_end_date(order_date,order_end_date);
     customer_name_change();
 });
 
@@ -16,18 +18,23 @@ function order_date_timepicker() {
         pickerPosition: "top-left",
         language:"zh-CN",
     });
+    $(".form_datetime_hi").datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        minView: "hour",
+        language:"zh-CN",
+    });
 }
 
-function order_start_end_date() {
-    $("#order_date").datetimepicker({
+function order_start_end_date(start_date,end_date) {
+    start_date.datetimepicker({
         format: 'yyyy-mm-dd',
         minView: "month",
         language:"zh-CN",
     });
 
-    $("#order_date").change(function () {
-        var sd =  $(this).val();
-        $("#order_end_date").datetimepicker({
+    start_date.change(function () {
+        var sd =  start_date.val();
+        end_date.datetimepicker({
             format: 'yyyy-mm-dd',
             minView: "month",
             language:"zh-CN",
@@ -35,7 +42,6 @@ function order_start_end_date() {
         });
     })
 }
-
 function customer_name_change() {
     $("#customer_name").change(function () {
         var pk = $(this).val();
