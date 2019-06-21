@@ -5,8 +5,7 @@
 {% block center %}
     <div class="center-screen">
         <div class="ten_space"></div>
-        <form method="get" action="">
-            <input type="hidden" name="st" id="search_type" value="sc"/>
+        <form method="get" action="{% url 'order:scsearch' %}">
             <div class="center-screen-in">
                 <div class="center-screen-in-li">
                     <div class="center-screen-in-li-in">
@@ -47,22 +46,22 @@
             <div class="center-screen-in">
                 <div class="center-screen-in-li">
                     <div class="center-screen-in-li-in">
-                        <a href="{% url 'order:orderlist' %}?pn=1">全部</a>
+                        <a href="{% url 'order:orderlist' %}">全部</a>
                     </div>
                 </div>
                 <div class="center-screen-in-li">
                     <div class="center-screen-in-li-in">
-                        <a href="{% url 'order:orderlist' %}?pn={{ pagenow }}&st=pp">打样中</a>
+                        <a href="{% url 'order:ppsearch' %}">打样中</a>
                     </div>
                 </div>
                 <div class="center-screen-in-li">
                     <div class="center-screen-in-li-in">
-                        <a href="{% url 'order:orderlist' %}?pn={{ pagenow }}&st=ps">大货中</a>
+                        <a href="{% url 'order:pssearch' %}">大货中</a>
                     </div>
                 </div>
                 <div class="center-screen-in-li">
                     <div class="center-screen-in-li-in">
-                        <a href="{% url 'order:orderlist' %}?pn={{ pagenow }}&st=cp">收款中</a>
+                        <a href="{% url 'order:cpsearch' %}">收款中</a>
                     </div>
                 </div>
             </div>
@@ -75,7 +74,7 @@
                 <div class="center-screen-in-li">
                     <div class="center-screen-in-li-in">
                         <select name="cp" id="captype">
-                            {% ifequal search_type "sc" %}
+                            {% ifequal search_type "s" %}
                                 {% ifequal captype_pk 0 %}
                                     <option disabled selected>请选择帽型</option>
                                 {% else %}
@@ -98,7 +97,7 @@
                 <div class="center-screen-in-li">
                     <div class="center-screen-in-li-in">
                         <select name="up" id="user">
-                            {% ifequal search_type "sc" %}
+                            {% ifequal search_type "s" %}
                                 {% ifequal user_pk 0 %}
                                     <option disabled selected>请选择业务员</option>
                                 {% else %}
@@ -122,7 +121,7 @@
                 <div class="center-screen-in-li">
                     <div class="center-screen-in-li-in">
                         <select name="pwp" id="pw_workshop">
-                            {% ifequal search_type "sc" %}
+                            {% ifequal search_type "s" %}
                                 {% ifequal pw_workshop_pk 0 %}
                                     <option disabled selected>请选择车间</option>
                                 {% else %}
@@ -254,35 +253,9 @@
             {% endifequal %}
         </div>
     </div>
-    {% ifequal order_len 0 %}
+    {% ifequal search_type "s" %}
     {% else %}
-        {% ifequal search_type "sc" %}
-            <div class="center-page">
-                {% ifequal orders 0 %}
-                {% else %}
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination">
-                            {% if page.has_previous %}
-                                <li>
-                                    <a href="{% url 'order:orderlist' %}?pn={{ page.previous_page_number }}&st={{ search_type }}&od={{ order_date }}&oed={{ order_end_date }}&on={{ number }}&cn={{ customername }}&cp={{ captype_pk }}&up={{ user_pk }}&pwp={{ pw_workshop_pk }}" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                            {% endif %}
-                            {% for page_l in page_list %}
-                                <li {% ifequal pagenow page_l %}class="active"{% endifequal %}><a href="{% url 'order:orderlist' %}?pn={{ page_l }}&st={{ search_type }}&od={{ order_date }}&oed={{ order_end_date }}&on={{ number }}&cn={{ customername }}&cp={{ captype_pk }}&up={{ user_pk }}&pwp={{ pw_workshop_pk }}">{{ page_l }}</a></li>
-                            {% endfor %}
-                            {% if page.has_next %}
-                                <li>
-                                    <a href="{% url 'order:orderlist' %}?pn={{ page.next_page_number }}&st={{ search_type }}&od={{ order_date }}&oed={{ order_end_date }}&on={{ number }}&cn={{ customername }}&cp={{ captype_pk }}&up={{ user_pk }}&pwp={{ pw_workshop_pk }}" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </nav>
-                {% endifequal %}
-            </div>
+        {% ifequal order_len 0 %}
         {% else %}
             <div class="center-page">
                 {% ifequal orders 0 %}
@@ -291,17 +264,17 @@
                         <ul class="pagination">
                             {% if page.has_previous %}
                                 <li>
-                                    <a href="{% url 'order:orderlist' %}?pn={{ page.previous_page_number }}&st={{ search_type }}" aria-label="Previous">
+                                    <a href="{% url 'order:orderlist' %}?pn={{ page.previous_page_number }}" aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                             {% endif %}
                             {% for page_l in page_list %}
-                                <li {% ifequal pagenow page_l %}class="active"{% endifequal %}><a href="{% url 'order:orderlist' %}?pn={{ page_l }}&st={{ search_type }}">{{ page_l }}</a></li>
+                                <li {% ifequal pagenow page_l %}class="active"{% endifequal %}><a href="{% url 'order:orderlist' %}?pn={{ page_l }}">{{ page_l }}</a></li>
                             {% endfor %}
                             {% if page.has_next %}
                                 <li>
-                                    <a href="{% url 'order:orderlist' %}?pn={{ page.next_page_number }}&st={{ search_type }}" aria-label="Next">
+                                    <a href="{% url 'order:orderlist' %}?pn={{ page.next_page_number }}" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
