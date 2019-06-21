@@ -16,7 +16,7 @@ class Orderlist(View):
         search_type = request.GET.get("st","a")
 
         if search_type == "pp":
-            orders = [i for i in Order.objects.all() if i.o_proofingprogress.pp_sample_order_date and not i.o_proofingprogress.pp_sample_express_date]
+            orders = [i for i in Order.objects.all() if len([j for j in i.o_proofingprogress.all() if j.pp_sample_order_date and not j.pp_sample_express_date]) != 0]
         elif search_type == "ps":
             orders = [i for i in Order.objects.all() if i.o_productionschedule.ps_order_date and not i.o_productionschedule.ps_outward_transport_date]
         elif search_type == "cp":
