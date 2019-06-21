@@ -29,6 +29,10 @@ class PPSearch(View):
             "captypes": captypes,
             "users": users,
             "productionworkshops": productionworkshops,
+
+            "captype_pk": 0,
+            "user_pk": 0,
+            "pw_workshop_pk": 0,
         }
         return render(request=request, template_name="orderlist.html", context=context)
 
@@ -57,6 +61,10 @@ class PSSearch(View):
             "captypes": captypes,
             "users": users,
             "productionworkshops": productionworkshops,
+
+            "captype_pk": 0,
+            "user_pk": 0,
+            "pw_workshop_pk": 0,
         }
         return render(request=request, template_name="orderlist.html", context=context)
 
@@ -85,6 +93,10 @@ class CPSearch(View):
             "captypes": captypes,
             "users": users,
             "productionworkshops": productionworkshops,
+
+            "captype_pk": 0,
+            "user_pk": 0,
+            "pw_workshop_pk": 0,
         }
         return render(request=request, template_name="orderlist.html", context=context)
 
