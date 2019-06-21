@@ -805,7 +805,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" name="pi_total_price" id="pi_total_price"/>
+                                    <input type="text" name="pi_total_price" id="pi_total_price" readonly/>
                                 </div>
                             </div>
                         </div>
@@ -818,7 +818,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" name="ad_total_profit" id="ad_total_profit"/>
+                                    <input type="text" name="ad_total_profit" id="ad_total_profit" readonly/>
                                 </div>
                             </div>
                         </div>
@@ -833,7 +833,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" name="ad_fabric_ingredients_total_amount" id="ad_fabric_ingredients_total_amount"/>
+                                    <input type="text" name="ad_fabric_ingredients_total_amount" id="ad_fabric_ingredients_total_amount" readonly/>
                                 </div>
                             </div>
                         </div>
@@ -846,7 +846,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" name="ad_labor_paymentl_amount" id="ad_labor_paymentl_amount"/>
+                                    <input type="text" name="ad_labor_paymentl_amount" id="ad_labor_paymentl_amount" readonly/>
                                 </div>
                             </div>
                         </div>
@@ -859,7 +859,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" name="ad_embroide_print_amount" id="ad_embroide_print_amount"/>
+                                    <input type="text" name="ad_embroide_print_amount" id="ad_embroide_print_amount" readonly/>
                                 </div>
                             </div>
                         </div>
@@ -874,7 +874,7 @@
                             </div>
                             <div class="center-order-li-li-right">
                                 <div class="center-order-li-li-right-content">
-                                    <input type="text" name="ad_packaging_shipping_amount" id="ad_packaging_shipping_amount"/>
+                                    <input type="text" name="ad_packaging_shipping_amount" id="ad_packaging_shipping_amount" readonly/>
                                 </div>
                             </div>
                         </div>
@@ -986,7 +986,9 @@
                         </div>
                         <div class="center-order-li-igp-in2">
                             <div class="ten_space"></div>
-                            <div class="ten_space"></div>
+                            <div class="ten_space">
+                                <span id="tsi-error"></span>
+                            </div>
                             <div class="ten_space"></div>
 
                             <div class="center-order-li">
@@ -998,7 +1000,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" name="ad_tailor_total_amount" id="ad_tailor_total_amount"/>
+                                            <input type="text" name="ad_tailor_total_amount" id="ad_tailor_total_amount" readonly/>
                                         </div>
                                     </div>
                                 </div>
@@ -1054,7 +1056,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" name="ad_sewing_total_amount" id="ad_sewing_total_amount"/>
+                                            <input type="text" name="ad_sewing_total_amount" id="ad_sewing_total_amount" readonly/>
                                         </div>
                                     </div>
                                 </div>
@@ -1110,7 +1112,7 @@
                                     </div>
                                     <div class="center-order-li-li-right">
                                         <div class="center-order-li-li-right-content">
-                                            <input type="text" name="ad_iron_total_amount" id="ad_iron_total_amount"/>
+                                            <input type="text" name="ad_iron_total_amount" id="ad_iron_total_amount" readonly/>
                                         </div>
                                     </div>
                                 </div>
@@ -1310,4 +1312,6 @@
 {% block js%}
     <script src="/static/js/orderlist.js"></script>
     <script src="/static/js/orderadd.js"></script>
+    <script src="/static/js/calculate_offer.js"></script>
+    <script src="/static/js/calculate_accounting_documents.js"></script>
 {% endblock %}
