@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>al</title>
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+    <script src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="header" style="width: 1000px;min-height: 50px;margin: 0 auto;text-align: center;line-height: 50px;font-size: 25px;">
+        <b>订单</b>
+    </div>
+    <div class="center" style="width: 1000px;min-height: 50px;margin: 0 auto;">
+        <table class="table table-striped">
+            <tr>
+                <td>a</td>
+                <td>b</td>
+                <td>状态</td>
+            </tr>
+            {% for al in als %}
+                <tr>
+                    <td><a href="{% url 'demo:ad' %}?pk={{ al.pk }}">{{ al.a }}</a></td>
+                    <td>{{ al.b }}</td>
+                    <td>
+                        {% ifequal al.ab_end False %}
+                            打样中
+                        {% else %}
+                            大货中
+                        {% endifequal %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="bottom" style="width: 1000px;min-height: 50px;margin: 0 auto;"></div>
+</body>
+</html>
