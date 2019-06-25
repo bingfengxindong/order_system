@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "production_schedule",
     "proofing_progress",
     "user",
+    "demo",
 ]
 
 MIDDLEWARE = [
