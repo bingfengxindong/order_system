@@ -25,10 +25,25 @@ class ADHandler(View):
     def get(self,request):
         pk = request.GET.get("pk")
         a = A.objects.get(pk=pk)
+        try:
+            be = a.a_b.all().order_by("-pk")[0]
+        except IndexError:
+            be = {"b_end":True}
         context = {
             "a": a,
+            "be": be,
         }
         return render(request=request,template_name="ad.html",context=context)
+
+    def post(self,request):
+        pk = request.POST.get("pk")
+        a1 = A.objects.get(pk=pk)
+        a = request.POST.get("a")
+        b = request.POST.get("b")
+        a1.a = a
+        a1.b = b
+        a1.save()
+        return redirect("/demo/ad?pk={}".format(pk))
 
 class AEHandler(View):
     def get(self,request):
