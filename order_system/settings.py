@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'order_system.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "order_system",
+        'NAME': "order_system_B",
         'USER': "root",
         'PASSWORD': "root",
         'HOST': "localhost",
