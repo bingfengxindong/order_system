@@ -22,7 +22,7 @@
     <option name="TEMPLATE_FOLDERS">
       <list>
         <option value="$MODULE_DIR$/templates" />
-        <option value="$MODULE_DIR$/order_information/templates" />
+        <option value="$MODULE_DIR$/order/templates" />
       </list>
     </option>
   </component>

@@ -1,0 +1,63 @@
+/*头部内*/
+.header-in{
+    width: 1000px;
+    height: 50px;
+    margin: 0 auto;
+    font-size: 30px;
+    line-height: 50px;
+    text-align: center;
+}
+
+/*中间内*/
+.center-in{
+    width: 1000px;
+    min-height: 50px;
+    margin: 0 auto;
+}
+
+/*颜色*/
+#color-title{
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    border-radius: 4px;
+}
+#color-content{
+    border: 1px solid #cccccc;
+    min-height: 28px;
+    border-radius: 4px;
+}
+
+/*图片*/
+#order-image{
+    width: 282px;
+    height: 162px;
+    text-align: center;
+    line-height: 160px;
+    border: 1px solid #cccccc;
+}
+#order-image img{
+    height: 158px;
+}
+
+/*订单信息（产品信息、大货信息）*/
+.o-info{
+    position: relative;
+}
+.o-info-title-img,.o-info-title{
+    width: 100px;
+    height: 35px;
+    text-align: center;
+    border-radius: 4px;
+    position: absolute;
+    top: -17px;
+    left: 118px;
+}
+.o-info-title-img{
+    line-height: 33px;
+    border: 1px solid #cccccc;
+    background: white;
+}
+.o-info-title{
+    background: rgb(255,255,128);
+    line-height: 35px;
+}

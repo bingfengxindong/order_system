@@ -1,0 +1,295 @@
+{% extends "base.html"%}
+{% block head %}
+    <link rel="stylesheet" href="/static/css/order.css" />
+{% endblock %}
+
+{% block header %}
+    <div class="header-in">
+        <b>{{ title }}</b>
+    </div>
+{% endblock %}
+
+{% block center %}
+    <div class="center-in">
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>客户名</span>
+                        </span>
+                        <select class="form-control" id="c_name" name="c_name" onchange="customer_info()">
+                            <option selected disabled>请选择客户</option>
+                            {% for customer in customers %}
+                                <option value="{{ customer.c_contack }},{{ customer.c_email }},{{ customer.pk }}">{{ customer.c_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>联系人</span>
+                        </span>
+                        <input type="text" id="c_contack" name="c_contack" class="form-control" disabled />
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>联系人邮件</span>
+                        </span>
+                        <input type="text" id="c_email" name="c_email" class="form-control" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="ten_space"></div>
+
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>客人款号</span>
+                        </span>
+                        <input type="text" id="o_customer_number" name="o_customer_number" class="form-control">
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>下单日期</span>
+                        </span>
+                        <input type="text" id="o_date" name="o_date" class="form-control form_datetime" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>业务员</span>
+                        </span>
+                        <select class="form-control" id="user" name="user">
+                            <option selected disabled>请选择业务员</option>
+                            {% for user in users %}
+                                <option value="{{ user.pk }}">{{ user.u_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="ten_space"></div>
+
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <span class="input-group-addon" id="color-title">
+                                <span>颜色</span>
+                            </span>
+                        </div>
+                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" id="color-content">
+                            {% for capcolor in capcolors %}
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="capcolor" value="{{ capcolor.pk }}"> {{ capcolor.cc_color }}
+                                </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>数量</span>
+                        </span>
+                        <input type="text" id="o_count" name="o_count" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="ten_space"></div>
+            <div class="ten_space"></div>
+            <div class="ten_space"></div>
+
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 o-info">
+                     <div class="o-info-title-img">
+                        <b>图片</b>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <input type="file" id="o_image" name="o_image" class="hide">
+                            <div class="ten_space"></div>
+                            <div id="order-image">
+                                <b>请添加图片</b>
+                            </div>
+                            <div class="ten_space"></div>
+                            <div id="image-button">
+                                <a class="btn btn-default" onclick="order_image()">添加图片</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <a class="a_black" onclick="upload_file()">点击上传文件</a>
+                        </span>
+                        <input type="file" id="o_file" name="o_file" class="hide">
+                        <input type="text" id="upload-file" class="form-control" disabled>
+                    </div>
+                    <div class="ten_space"></div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 o-info">
+                    <div class="o-info-title">
+                        <b>产品信息</b>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="ten_space"></div>
+                            <div class="ten_space"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span>帽型</span>
+                                </span>
+                                <select class="form-control" id="captype" name="captype">
+                                    <option selected disabled>请选择帽型</option>
+                                    {% for captype in captypes %}
+                                        <option value="{{ captype.pk }}">{{ captype.ct_type }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="ten_space"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span>主面料</span>
+                                </span>
+                                <input type="text" id="o_main_fabric" name="o_main_fabric" class="form-control">
+                            </div>
+                            <div class="ten_space"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span>绣印花</span>
+                                </span>
+                                <select class="form-control" id="embroidererprint" name="embroidererprint">
+                                    <option selected disabled>请选择绣印花</option>
+                                    {% for embroiderorprint in embroiderorprints %}
+                                        <option value="{{ embroiderorprint.pk }}">{{ embroiderorprint.eop_type }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="ten_space"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span>帽眉</span>
+                                </span>
+                                <select class="form-control" id="capeyebrow" name="capeyebrow">
+                                    <option selected disabled>请选择帽眉</option>
+                                    {% for capeyebrow in capeyebrows %}
+                                        <option value="{{ capeyebrow.pk }}">{{ capeyebrow.ce_type }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="ten_space"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span>版号</span>
+                                </span>
+                                <select class="form-control" id="versionnumber" name="versionnumber">
+                                    <option selected disabled>请选择版号</option>
+                                    {% for versionnumber in versionnumbers %}
+                                        <option value="{{ versionnumber.pk }}">{{ versionnumber.vn_version }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="ten_space"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span>后扣</span>
+                                </span>
+                                <select class="form-control" id="afterdeduction" name="afterdeduction">
+                                    <option selected disabled>请选择后扣</option>
+                                    {% for afterdeduction in afterdeductions %}
+                                        <option value="{{ afterdeduction.pk }}">{{ afterdeduction.ad_type }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="ten_space"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 o-info">
+                    <div class="o-info-title">
+                        <b>大货信息</b>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="ten_space"></div>
+                            <div class="ten_space"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span>大货单价</span>
+                                </span>
+                                <span class="input-group-addon">
+                                    <span>￥</span>
+                                </span>
+                                <input type="text" id="o_ps_price" name="o_ps_price" class="form-control">
+                            </div>
+                            <div class="ten_space"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span>美元汇率</span>
+                                </span>
+                                <input type="text" id="o_dollar_exchange_rate" name="o_dollar_exchange_rate" placeholder="6.9" class="form-control">
+                            </div>
+                            <div class="ten_space"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span>美元单价</span>
+                                </span>
+                                <span class="input-group-addon">
+                                    <span>$</span>
+                                </span>
+                                <input type="text" id="o_dollar_price" name="o_dollar_price" class="form-control">
+                            </div>
+                            <div class="ten_space"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span>大货数量</span>
+                                </span>
+                                <input type="text" id="o_ps_amount" name="o_ps_amount" class="form-control">
+                            </div>
+                            <div class="ten_space"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span>大货总金额</span>
+                                </span>
+                                <span class="input-group-addon">
+                                    <span>$</span>
+                                </span>
+                                <input type="text" id="o_ps_dollar_total_price" name="o_ps_dollar_total_price" class="form-control">
+                            </div>
+                            <div class="ten_space"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span>交货期</span>
+                                </span>
+                                <input type="text" id="o_delivery_date" name="o_delivery_date" class="form-control form_datetime" autocomplete="off">
+                            </div>
+                            <div class="ten_space"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ten_space"></div>
+
+            <div class="row">
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"></div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <input type="submit" class="btn btn-default" value="提交订单">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="one_space"></div>
+{% endblock %}
+
+{% block js%}
+    <script src="/static/js/customer.js"></script>
+    <script src="/static/js/order_image.js"></script>
+{% endblock %}

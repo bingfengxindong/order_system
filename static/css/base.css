@@ -37,3 +37,9 @@ body{
 a,input,textarea,select,option{
     cursor: pointer;
 }
+.a_black{
+    color: black;
+}
+.a_black:hover{
+    text-decoration: none;
+}
