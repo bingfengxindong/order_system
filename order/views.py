@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 from django.views.generic.base import View
 from .models import *
 from user.models import *
@@ -89,12 +89,14 @@ class OrderAdd(View):
             createorder.add_afterdeduction(order,afterdeduction_pk)
 
         order.save()
-        return HttpResponse("/order/orderlist")
+        return redirect("/order/orderlist")
 
 class OrderList(View):
     def get(self,request):
+        orders = Order.objects.all()
         context = {
             "title": "订单列表",
+            "orders": orders,
         }
         return render(request=request,template_name="orderlist.html",context=context)
 

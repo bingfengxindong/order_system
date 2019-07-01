@@ -1,6 +1,7 @@
 {% extends "base.html"%}
 {% block head %}
     <link rel="stylesheet" href="/static/css/order.css" />
+    <link rel="stylesheet" href="/static/css/orderlist.css" />
 {% endblock %}
 
 {% block header %}
@@ -10,6 +11,31 @@
 {% endblock %}
 
 {% block center %}
+    <div class="center-in">
+        <table class="table table-striped">
+            <tr>
+                <th>客户款号</th>
+                <th>客户名</th>
+                <th>下单日期</th>
+                <th>业务员</th>
+                <th>操作</th>
+            </tr>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.o_customer_number }}</td>
+                    <td>{{ order.o_user.u_name }}</td>
+                    <td>{{ order.o_date }}</td>
+                    <td>{{ order.o_user.u_name }}</td>
+                    <td>
+                        <a href="">详情</a>
+                        /
+                        <a href="">编辑</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div class="one_space"></div>
+    </div>
 {% endblock %}
 
 {% block js%}
