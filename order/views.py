@@ -1,8 +1,8 @@
-from django.shortcuts import render,HttpResponse,redirect
+from django.shortcuts import render, redirect
 from django.views.generic.base import View
-from .models import *
+from order.models import *
 from user.models import *
-from create_order import CreateOrder
+from order.create_order import CreateOrder
 # Create your views here.
 
 class OrderAdd(View):
@@ -32,6 +32,7 @@ class OrderAdd(View):
         createorder = CreateOrder()
         customer_pk = request.POST.get("c_name").split(",")[2]
         o_customer_number = request.POST.get("o_customer_number")
+        print(customer_pk,o_customer_number)
         order = createorder.createorder(customer_pk = customer_pk,
                                         o_customer_number=o_customer_number,)
 
@@ -102,8 +103,11 @@ class OrderList(View):
 
 class OrderDetail(View):
     def get(self,request):
+        pk = request.GET.get("pk")
+        order = Order.objects.get(pk=pk)
         context = {
             "title": "订单详情",
+            "order": order,
         }
         return render(request=request,template_name="orderdetail.html",context=context)
 

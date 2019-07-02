@@ -15,17 +15,18 @@
     margin: 0 auto;
 }
 
-/*颜色*/
-#color-title{
-    border-left: 1px solid #cccccc;
-    border-right: 1px solid #cccccc;
-    border-radius: 4px;
-}
-#color-content{
-    border: 1px solid #cccccc;
-    min-height: 28px;
-    border-radius: 4px;
-}
+/*!*颜色*!*/
+/*#color-title{*/
+    /*border-left: 1px solid #cccccc;*/
+    /*border-right: 1px solid #cccccc;*/
+    /*border-radius: 4px;*/
+/*}*/
+/*#color-content{*/
+    /*border: 1px solid #cccccc;*/
+    /*min-height: 28px;*/
+    /*border-radius: 4px;*/
+    /*line-height: 22px;*/
+/*}*/
 
 /*图片*/
 #order-image{

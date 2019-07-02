@@ -11,6 +11,12 @@
 
 {% block center %}
     <div class="center-in">
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <a href="{% url 'order:orderlist' %}" class="btn btn-default">订单列表</a>
+            </div>
+        </div>
+        <div class="ten_space"></div>
         <form action="" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -80,20 +86,32 @@
 
             <div class="row">
                 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                    <div class="row">
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <span class="input-group-addon" id="color-title">
-                                <span>颜色</span>
-                            </span>
-                        </div>
-                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" id="color-content">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>颜色</span>
+                        </span>
+                        <span class="form-control">
                             {% for capcolor in capcolors %}
                                 <label class="checkbox-inline">
                                     <input type="checkbox" name="capcolor" value="{{ capcolor.pk }}"> {{ capcolor.cc_color }}
                                 </label>
                             {% endfor %}
-                        </div>
+                        </span>
                     </div>
+{#                    <div class="row">#}
+{#                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">#}
+{#                            <span class="input-group-addon" id="color-title">#}
+{#                                <span>颜色</span>#}
+{#                            </span>#}
+{#                        </div>#}
+{#                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" id="color-content">#}
+{#                            {% for capcolor in capcolors %}#}
+{#                                <label class="checkbox-inline">#}
+{#                                    <input type="checkbox" name="capcolor" value="{{ capcolor.pk }}"> {{ capcolor.cc_color }}#}
+{#                                </label>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+{#                    </div>#}
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     <div class="input-group">

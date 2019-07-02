@@ -12,6 +12,12 @@
 
 {% block center %}
     <div class="center-in">
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <a href="{% url 'order:orderadd' %}" class="btn btn-default">添加订单</a>
+            </div>
+        </div>
+        <div class="ten_space"></div>
         <table class="table table-striped">
             <tr>
                 <th>客户款号</th>
@@ -27,7 +33,7 @@
                     <td>{{ order.o_date }}</td>
                     <td>{{ order.o_user.u_name }}</td>
                     <td>
-                        <a href="">详情</a>
+                        <a href="{% url 'order:orderdetail' %}?pk={{ order.pk }}">详情</a>
                         /
                         <a href="">编辑</a>
                     </td>
