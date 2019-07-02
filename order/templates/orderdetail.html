@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block center %}
-        <div class="center-in">
+    <div class="center-in">
         <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <a href="{% url 'order:orderlist' %}" class="btn btn-default">订单列表</a>
@@ -19,235 +19,233 @@
             </div>
         </div>
         <div class="ten_space"></div>
-        <form action="" method="post" enctype="multipart/form-data">
-            <div class="row">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span>客户名</span>
-                        </span>
-                        <input type="text" id="c_name" name="c_name" {% if order.o_customer %}value="{{ order.o_customer.c_name }}"{% endif %} class="form-control" disabled />
-                    </div>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span>联系人</span>
-                        </span>
-                        <input type="text" id="c_contack" name="c_contack" {% if order.o_customer %}value="{{ order.o_customer.c_contack }}"{% endif %} class="form-control" disabled />
-                    </div>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span>联系人邮件</span>
-                        </span>
-                        <input type="text" id="c_email" name="c_email" {% if order.o_customer %}value="{{ order.o_customer.c_email }}"{% endif %} class="form-control" disabled />
-                    </div>
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span>客户名</span>
+                    </span>
+                    <input type="text" id="c_name" name="c_name" {% if order.o_customer %}value="{{ order.o_customer.c_name }}"{% endif %} class="form-control" disabled />
                 </div>
             </div>
-            <div class="ten_space"></div>
-
-            <div class="row">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span>客人款号</span>
-                        </span>
-                        <input type="text" id="o_customer_number" name="o_customer_number" {% if order.o_customer_number %}value="{{ order.o_customer_number }}"{% endif %} class="form-control" disabled>
-                    </div>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span>下单日期</span>
-                        </span>
-                        <input type="text" id="o_date" name="o_date" {% if order.o_date %}value="{{ order.o_date }}"{% endif %} class="form-control" disabled>
-                    </div>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span>业务员</span>
-                        </span>
-                        <input type="text" id="user" name="user" {% if order.o_user %}value="{{ order.o_user.u_name }}"{% endif %} class="form-control" disabled>
-                    </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span>联系人</span>
+                    </span>
+                    <input type="text" id="c_contack" name="c_contack" {% if order.o_customer %}value="{{ order.o_customer.c_contack }}"{% endif %} class="form-control" disabled />
                 </div>
             </div>
-            <div class="ten_space"></div>
-
-            <div class="row">
-                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span>颜色</span>
-                        </span>
-                        <span class="form-control" disabled>
-                            {% for capcolor in order.o_capcolor.all %}
-                                <span>{{ capcolor.cc_color }}</span>
-                            {% endfor %}
-                        </span>
-                    </div>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span>数量</span>
-                        </span>
-                        <input type="text" id="o_count" name="o_count" {% if order.o_count %}value="{{ order.o_count }}"{% endif %} class="form-control" disabled>
-                    </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span>联系人邮件</span>
+                    </span>
+                    <input type="text" id="c_email" name="c_email" {% if order.o_customer %}value="{{ order.o_customer.c_email }}"{% endif %} class="form-control" disabled />
                 </div>
             </div>
-            <div class="ten_space"></div>
-            <div class="ten_space"></div>
-            <div class="ten_space"></div>
+        </div>
+        <div class="ten_space"></div>
 
-            <div class="row">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 o-info">
-                     <div class="o-info-title-img">
-                        <b>图片</b>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <input type="file" id="o_image" name="o_image" class="hide">
-                            <div class="ten_space"></div>
-                            <div id="order-image">
-                                {% if order.o_image %}
-                                    <img src="/media/{{ order.o_image }}">
-                                {% else %}
-                                    <b>未添加图片</b>
-                                {% endif %}
-                            </div>
-                            <div class="ten_space"></div>
-                            <div id="image-button">
-                            </div>
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span>客人款号</span>
+                    </span>
+                    <input type="text" id="o_customer_number" name="o_customer_number" {% if order.o_customer_number %}value="{{ order.o_customer_number }}"{% endif %} class="form-control" disabled>
+                </div>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span>下单日期</span>
+                    </span>
+                    <input type="text" id="o_date" name="o_date" {% if order.o_date %}value="{{ order.o_date }}"{% endif %} class="form-control" disabled>
+                </div>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span>业务员</span>
+                    </span>
+                    <input type="text" id="user" name="user" {% if order.o_user %}value="{{ order.o_user.u_name }}"{% endif %} class="form-control" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="ten_space"></div>
+
+        <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span>颜色</span>
+                    </span>
+                    <span class="form-control" disabled>
+                        {% for capcolor in order.o_capcolor.all %}
+                            <span>{{ capcolor.cc_color }}</span>
+                        {% endfor %}
+                    </span>
+                </div>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span>数量</span>
+                    </span>
+                    <input type="text" id="o_count" name="o_count" {% if order.o_count %}value="{{ order.o_count }}"{% endif %} class="form-control" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="ten_space"></div>
+        <div class="ten_space"></div>
+        <div class="ten_space"></div>
+
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 o-info">
+                 <div class="o-info-title-img">
+                    <b>图片</b>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <input type="file" id="o_image" name="o_image" class="hide">
+                        <div class="ten_space"></div>
+                        <div id="order-image">
+                            {% if order.o_image %}
+                                <img src="/media/{{ order.o_image }}">
+                            {% else %}
+                                <b>未添加图片</b>
+                            {% endif %}
                         </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span>文件下载</span>
-                        </span>
-                        <a href="/media/{{ order.o_file }}" class="form-control" download="{{ order.o_file | filename }}">{% if order.o_file %}{{ order.o_file | filename }}{% endif %}</a>
-                    </div>
-                    <div class="ten_space"></div>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 o-info">
-                    <div class="o-info-title">
-                        <b>产品信息</b>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="ten_space"></div>
-                            <div class="ten_space"></div>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span>帽型</span>
-                                </span>
-                                <input type="text" id="captype" name="captype" {% if order.o_captype %}value="{{ order.o_captype.ct_type }}"{% endif %} class="form-control" disabled>
-                            </div>
-                            <div class="ten_space"></div>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span>主面料</span>
-                                </span>
-                                <input type="text" id="o_main_fabric" name="o_main_fabric" {% if order.o_main_fabric %}value="{{ order.o_main_fabric }}"{% endif %} class="form-control" disabled>
-                            </div>
-                            <div class="ten_space"></div>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span>绣印花</span>
-                                </span>
-                                <input type="text" id="embroidererprint" name="embroidererprint" {% if order.o_embroiderorprint %}value="{{ order.o_embroiderorprint.eop_type }}"{% endif %} class="form-control" disabled>
-                            </div>
-                            <div class="ten_space"></div>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span>帽眉</span>
-                                </span>
-                                <input type="text" id="capeyebrow" name="capeyebrow" {% if order.o_capeyebrow %}value="{{ order.o_capeyebrow.ce_type }}"{% endif %} class="form-control" disabled>
-                            </div>
-                            <div class="ten_space"></div>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span>版号</span>
-                                </span>
-                                <input type="text" id="versionnumber" name="versionnumber" {% if order.o_versionnumber %}value="{{ order.o_versionnumber.vn_version }}"{% endif %} class="form-control" disabled>
-                            </div>
-                            <div class="ten_space"></div>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span>后扣</span>
-                                </span>
-                                <input type="text" id="afterdeduction" name="afterdeduction" {% if order.o_afterdeduction %}value="{{ order.o_afterdeduction.ad_type }}"{% endif %} class="form-control" disabled>
-                            </div>
-                            <div class="ten_space"></div>
+                        <div class="ten_space"></div>
+                        <div id="image-button">
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 o-info">
-                    <div class="o-info-title">
-                        <b>大货信息</b>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="ten_space"></div>
-                            <div class="ten_space"></div>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span>大货单价</span>
-                                </span>
-                                <span class="input-group-addon">
-                                    <span>￥</span>
-                                </span>
-                                <input type="text" id="o_ps_price" name="o_ps_price" {% if order.o_ps_price %}value="{{ order.o_ps_price }}"{% endif %} class="form-control" disabled>
-                            </div>
-                            <div class="ten_space"></div>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span>美元汇率</span>
-                                </span>
-                                <input type="text" id="o_dollar_exchange_rate" name="o_dollar_exchange_rate" {% if order.o_dollar_exchange_rate %}value="{{ order.o_dollar_exchange_rate }}"{% endif %} class="form-control" disabled>
-                            </div>
-                            <div class="ten_space"></div>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span>美元单价</span>
-                                </span>
-                                <span class="input-group-addon">
-                                    <span>$</span>
-                                </span>
-                                <input type="text" id="o_dollar_price" name="o_dollar_price" {% if order.o_dollar_price %}value="{{ order.o_dollar_price }}"{% endif %} class="form-control" disabled>
-                            </div>
-                            <div class="ten_space"></div>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span>大货数量</span>
-                                </span>
-                                <input type="text" id="o_ps_amount" name="o_ps_amount" {% if order.o_ps_amount %}value="{{ order.o_ps_amount }}"{% endif %} class="form-control" disabled>
-                            </div>
-                            <div class="ten_space"></div>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span>大货总金额</span>
-                                </span>
-                                <span class="input-group-addon">
-                                    <span>$</span>
-                                </span>
-                                <input type="text" id="o_ps_dollar_total_price" name="o_ps_dollar_total_price" {% if order.o_ps_dollar_total_price %}value="{{ order.o_ps_dollar_total_price }}"{% endif %} class="form-control" disabled>
-                            </div>
-                            <div class="ten_space"></div>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span>交货期</span>
-                                </span>
-                                <input type="text" id="o_delivery_date" name="o_delivery_date" {% if order.o_delivery_date %}value="{{ order.o_delivery_date }}"{% endif %} class="form-control" disabled>
-                            </div>
-                            <div class="ten_space"></div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span>文件下载</span>
+                    </span>
+                    <a href="/media/{{ order.o_file }}" class="form-control" download="{{ order.o_file | filename }}">{% if order.o_file %}{{ order.o_file | filename }}{% endif %}</a>
+                </div>
+                <div class="one_space"></div>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 o-info">
+                <div class="o-info-title">
+                    <b>产品信息</b>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="ten_space"></div>
+                        <div class="ten_space"></div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>帽型</span>
+                            </span>
+                            <input type="text" id="captype" name="captype" {% if order.o_captype %}value="{{ order.o_captype.ct_type }}"{% endif %} class="form-control" disabled>
                         </div>
+                        <div class="ten_space"></div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>主面料</span>
+                            </span>
+                            <input type="text" id="o_main_fabric" name="o_main_fabric" {% if order.o_main_fabric %}value="{{ order.o_main_fabric }}"{% endif %} class="form-control" disabled>
+                        </div>
+                        <div class="ten_space"></div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>绣印花</span>
+                            </span>
+                            <input type="text" id="embroidererprint" name="embroidererprint" {% if order.o_embroiderorprint %}value="{{ order.o_embroiderorprint.eop_type }}"{% endif %} class="form-control" disabled>
+                        </div>
+                        <div class="ten_space"></div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>帽眉</span>
+                            </span>
+                            <input type="text" id="capeyebrow" name="capeyebrow" {% if order.o_capeyebrow %}value="{{ order.o_capeyebrow.ce_type }}"{% endif %} class="form-control" disabled>
+                        </div>
+                        <div class="ten_space"></div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>版号</span>
+                            </span>
+                            <input type="text" id="versionnumber" name="versionnumber" {% if order.o_versionnumber %}value="{{ order.o_versionnumber.vn_version }}"{% endif %} class="form-control" disabled>
+                        </div>
+                        <div class="ten_space"></div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>后扣</span>
+                            </span>
+                            <input type="text" id="afterdeduction" name="afterdeduction" {% if order.o_afterdeduction %}value="{{ order.o_afterdeduction.ad_type }}"{% endif %} class="form-control" disabled>
+                        </div>
+                        <div class="one_space"></div>
                     </div>
                 </div>
             </div>
-        </form>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 o-info">
+                <div class="o-info-title">
+                    <b>大货信息</b>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="ten_space"></div>
+                        <div class="ten_space"></div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>大货单价</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>￥</span>
+                            </span>
+                            <input type="text" id="o_ps_price" name="o_ps_price" {% if order.o_ps_price %}value="{{ order.o_ps_price }}"{% endif %} class="form-control" disabled>
+                        </div>
+                        <div class="ten_space"></div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>美元汇率</span>
+                            </span>
+                            <input type="text" id="o_dollar_exchange_rate" name="o_dollar_exchange_rate" {% if order.o_dollar_exchange_rate %}value="{{ order.o_dollar_exchange_rate }}"{% endif %} class="form-control" disabled>
+                        </div>
+                        <div class="ten_space"></div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>美元单价</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>$</span>
+                            </span>
+                            <input type="text" id="o_dollar_price" name="o_dollar_price" {% if order.o_dollar_price %}value="{{ order.o_dollar_price }}"{% endif %} class="form-control" disabled>
+                        </div>
+                        <div class="ten_space"></div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>大货数量</span>
+                            </span>
+                            <input type="text" id="o_ps_amount" name="o_ps_amount" {% if order.o_ps_amount %}value="{{ order.o_ps_amount }}"{% endif %} class="form-control" disabled>
+                        </div>
+                        <div class="ten_space"></div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>大货总金额</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>$</span>
+                            </span>
+                            <input type="text" id="o_ps_dollar_total_price" name="o_ps_dollar_total_price" {% if order.o_ps_dollar_total_price %}value="{{ order.o_ps_dollar_total_price }}"{% endif %} class="form-control" disabled>
+                        </div>
+                        <div class="ten_space"></div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>交货期</span>
+                            </span>
+                            <input type="text" id="o_delivery_date" name="o_delivery_date" {% if order.o_delivery_date %}value="{{ order.o_delivery_date }}"{% endif %} class="form-control" disabled>
+                        </div>
+                        <div class="one_space"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="one_space"></div>
 {% endblock %}

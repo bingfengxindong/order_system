@@ -36,7 +36,7 @@ def order_add(request,order,createorder):
         createorder.add_user(order, user_pk)
 
     capcolor_pks = request.POST.getlist("capcolor")
-    order.o_capcolor.remove(*order.o_capcolor.all())
+    order.o_capcolor.clear()
     if len(capcolor_pks) != 0:
         createorder.add_capcolor(order, capcolor_pks)
 
@@ -125,6 +125,8 @@ class OrderEdit(View):
         capeyebrows = CapEyebrow.objects.all()
         versionnumbers = VersionNumber.objects.all()
         afterdeductions = AfterDeduction.objects.all()
+        proofingprogresses_len = len(order.o_proofingprogress.all())
+        proofingprogress = order.o_proofingprogress.all().order_by("-pk")[0] if proofingprogresses_len > 0 else 0
         context = {
             "title": "订单修改",
             "order": order,
@@ -136,6 +138,8 @@ class OrderEdit(View):
             "capeyebrows": capeyebrows,
             "versionnumbers": versionnumbers,
             "afterdeductions": afterdeductions,
+            "proofingprogresses_len": proofingprogresses_len,
+            "proofingprogress": proofingprogress,
         }
         return render(request=request,template_name="orderedit.html",context=context)
 
