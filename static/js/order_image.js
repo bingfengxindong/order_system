@@ -31,12 +31,25 @@ function getObjectURL(file) {
     return url ;
 }
 function cancel_image() {
-    $("#order-image").html(
-         `
-            <b>请添加图片</b>
-        `
-    );
-    $("#image-button").html(
+    var o_image = $("#o_image");
+    var order_image = $("#order-image");
+    var image_button = $("#image-button");
+    var o_img = $("#o_img").val();
+    o_image.val(null);
+    if(o_img){
+        order_image.html(
+             `
+                <img src="`+ o_img +`">
+            `
+        );
+    }else{
+        order_image.html(
+             `
+                <b>请添加图片</b>
+            `
+        );
+    }
+    image_button.html(
         `
             <a class="btn btn-default" onclick="order_image()">添加图片</a>
         `

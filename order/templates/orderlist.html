@@ -29,13 +29,13 @@
             {% for order in orders %}
                 <tr>
                     <td>{{ order.o_customer_number }}</td>
-                    <td>{{ order.o_user.u_name }}</td>
+                    <td>{{ order.o_customer.c_name }}</td>
                     <td>{{ order.o_date }}</td>
                     <td>{{ order.o_user.u_name }}</td>
                     <td>
                         <a href="{% url 'order:orderdetail' %}?pk={{ order.pk }}">详情</a>
                         /
-                        <a href="">编辑</a>
+                        <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}">编辑</a>
                     </td>
                 </tr>
             {% endfor %}

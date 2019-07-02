@@ -56,3 +56,9 @@ class CreateOrder:
 
     def add_afterdeduction(self,order,afterdeduction_pk):
         order.o_afterdeduction_id = afterdeduction_pk
+
+    def edit_customer(self,order,customer_pk):
+        order.o_customer_id = customer_pk
+
+    def edit_customer_number(self,order,o_customer_number):
+        order.o_customer_number = o_customer_number
