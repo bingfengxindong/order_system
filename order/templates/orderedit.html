@@ -336,8 +336,13 @@
 
             <div class="row">
                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                    {% if proofingprogress.pp_end %}
-                        <a href="{% url 'pp:ppadd' %}?pk={{ order.pk }}" class="btn btn-default">添加打样</a>
+                    {% if proofingprogresses_len < 3 %}
+                        {% if proofingprogress.pp_end or proofingprogress %}
+                        {% else %}
+                            <a href="{% url 'pp:ppadd' %}?pk={{ order.pk }}" class="btn btn-default">添加打样</a>
+                        {% endif %}
+                    {% else %}
+                        <a href="" class="btn btn-default">打样已完成！请添加大货</a>
                     {% endif %}
                 </div>
                 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"></div>
