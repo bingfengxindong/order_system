@@ -335,17 +335,27 @@
             <div class="ten_space"></div>
 
             <div class="row">
-                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                    {% if proofingprogresses_len < 3 %}
-                        {% if proofingprogress.pp_end or proofingprogress %}
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    {% if order.o_pp_all_end %}
+                        <a href="" class="btn btn-default">打样已完成，请添加大货</a>
+                    {% else %}
+                        {% if proofingprogress %}
+                            {% if proofingprogresses_len < 3 %}
+                                {% if proofingprogress.pp_end %}
+                                    <a href="{% url 'pp:ppadd' %}?pk={{ order.pk }}" class="btn btn-default">添加打样</a>
+                                    <a href="{% url 'pp:endpp' %}?pk={{ order.pk }}" class="btn btn-default">结束打样</a>
+                                {% endif %}
+                            {% else %}
+                                {% if proofingprogress.pp_end %}
+                                    <a href="{% url 'pp:endpp' %}?pk={{ order.pk }}" class="btn btn-default">结束打样</a>
+                                {% endif %}
+                            {% endif %}
                         {% else %}
                             <a href="{% url 'pp:ppadd' %}?pk={{ order.pk }}" class="btn btn-default">添加打样</a>
                         {% endif %}
-                    {% else %}
-                        <a href="" class="btn btn-default">打样已完成！请添加大货</a>
                     {% endif %}
                 </div>
-                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"></div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"></div>
                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                     <input type="submit" class="btn btn-default" value="提交订单">
                 </div>
@@ -395,6 +405,7 @@
                             </td>
                             <td>
                                 {% if proofingprogress.pp_end %}
+                                    <b>已结束</b>
                                 {% else %}
                                     <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}">编辑</a>
                                 {% endif %}

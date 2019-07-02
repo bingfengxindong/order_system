@@ -85,3 +85,11 @@ class PPAdd(View):
         proofingprogress.save()
         order.o_proofingprogress.add(proofingprogress)
         return redirect("/order/orderedit?pk={}".format(pk))
+
+class EndPP(View):
+    def get(self,request):
+        pk = request.GET.get("pk")
+        order = Order.objects.get(pk=pk)
+        order.o_pp_all_end = True
+        order.save()
+        return redirect("/order/orderedit?pk={}".format(pk))

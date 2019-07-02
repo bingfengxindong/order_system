@@ -29,7 +29,7 @@ class Order(models.Model):
     o_afterdeduction = models.ForeignKey("AfterDeduction", blank=True, null=True, on_delete=models.CASCADE,verbose_name="后扣")
     o_user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, verbose_name="业务员")
 
-    o_proofingprogress = models.ManyToManyField(ProofingProgress, blank=True, null=True, verbose_name="打样")
+    o_proofingprogress = models.ManyToManyField(ProofingProgress, blank=True, verbose_name="打样")
     o_pp_all_end = models.BooleanField(default=False,verbose_name="打样是否完成/默认未完成")
     o_modifyopinion = models.ForeignKey(ModifyOpinion, blank=True, null=True, on_delete=models.CASCADE, verbose_name="打样修改意见")
     create_date = models.DateTimeField(auto_now_add=True)

@@ -126,7 +126,7 @@ class OrderEdit(View):
         versionnumbers = VersionNumber.objects.all()
         afterdeductions = AfterDeduction.objects.all()
         proofingprogresses_len = len(order.o_proofingprogress.all())
-        proofingprogress = order.o_proofingprogress.all().order_by("-pk")[0] if proofingprogresses_len > 0 else False
+        proofingprogress = order.o_proofingprogress.all().order_by("-pk")[0] if proofingprogresses_len > 0 else None
         context = {
             "title": "订单修改",
             "order": order,
