@@ -7,4 +7,6 @@ urlpatterns = [
     url(r"^endpp",csrf_exempt(EndPP.as_view()),name="endpp"),
     url(r"^ppedit",csrf_exempt(PPEdit.as_view()),name="ppedit"),
     url(r"^endallpp",csrf_exempt(EndAllPP.as_view()),name="endallpp"),
+    url(r"^moadd",csrf_exempt(MOAdd.as_view()),name="moadd"),
+    url(r"^moedit",csrf_exempt(MOEdit.as_view()),name="moedit"),
 ]

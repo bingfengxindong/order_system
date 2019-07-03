@@ -2,6 +2,7 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.views.generic.base import View
 from order.models import *
 from .create_pp import *
+from .create_mo import *
 
 def add_proofingprogress(request,create_pp,proofingprogress):
     pp_number = request.POST.get("pp_number")
@@ -98,11 +99,12 @@ class PPEdit(View):
     def get(self,request):
         pk = request.GET.get("pk")
         pp_pk = request.GET.get("pp_pk")
+        order = Order.objects.get(pk=pk)
         proofingprogress = ProofingProgress.objects.get(pk=pp_pk)
         workers = Worker.objects.all()
         context = {
             "title": "打样修改",
-            "pk": pk,
+            "order": order,
             "proofingprogress": proofingprogress,
             "workers": workers,
         }
@@ -124,4 +126,56 @@ class EndAllPP(View):
         order = Order.objects.get(pk=pk)
         order.o_pp_all_end = True
         order.save()
+        return redirect("/order/orderedit?pk={}".format(pk))
+
+def add_modifyopinion(request,create_mo,modifyopinion):
+    mo_customer_info = request.POST.get("mo_customer_info")
+    if mo_customer_info:
+        create_mo.add_mo_customer_info(modifyopinion, mo_customer_info)
+
+    mo_factory_info = request.POST.get("mo_factory_info")
+    if mo_factory_info:
+        create_mo.add_mo_factory_info(modifyopinion, mo_factory_info)
+
+class MOAdd(View):
+    def get(self,request):
+        pk = request.GET.get("pk")
+        order = Order.objects.get(pk=pk)
+        context = {
+            "title": "打样意见添加",
+            "order": order,
+        }
+        return render(request=request, template_name="moadd.html", context=context)
+
+    def post(self,request):
+        pk = request.POST.get("pk")
+        order = Order.objects.get(pk=pk)
+        create_mo = CreateMO(order)
+        modifyopinion = create_mo.add_mo()
+        add_modifyopinion(request,create_mo,modifyopinion)
+        modifyopinion.save()
+        order.o_modifyopinion = modifyopinion
+        order.save()
+        return redirect("/order/orderedit?pk={}".format(pk))
+
+class MOEdit(View):
+    def get(self,request):
+        pk = request.GET.get("pk")
+        mo_pk = request.GET.get("mo_pk")
+        order = Order.objects.get(pk=pk)
+        modifyopinion = ModifyOpinion.objects.get(pk=mo_pk)
+        context = {
+            "title": "打样意见修改",
+            "order": order,
+            "modifyopinion": modifyopinion,
+        }
+        return render(request=request, template_name="moedit.html", context=context)
+
+    def post(self,request):
+        pk = request.POST.get("pk")
+        order = Order.objects.get(pk=pk)
+        create_mo = CreateMO(order)
+        modifyopinion = order.o_modifyopinion
+        add_modifyopinion(request,create_mo,modifyopinion)
+        modifyopinion.save()
         return redirect("/order/orderedit?pk={}".format(pk))

@@ -1,0 +1,56 @@
+{% extends "base.html"%}
+{% block head %}
+    <link rel="stylesheet" href="/static/css/order.css" />
+    <link rel="stylesheet" href="/static/css/modifyopinion.css" />
+{% endblock %}
+
+{% block header %}
+    <div class="header-in">
+        <b>{{ title }}</b>
+    </div>
+{% endblock %}
+
+{% block center %}
+    <div class="center-in">
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}" class="btn btn-default">订单编辑</a>
+            </div>
+        </div>
+        <div class="ten_space"></div>
+        <form action="" method="post" enctype="multipart/form-data">
+            <input type="text" name="pk" id="pk" value="{{ order.pk }}" hidden>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>客人反馈信息</span>
+                        </span>
+                        <textarea id="mo_customer_info" name="mo_customer_info" {% if modifyopinion.mo_customer_info %}placeholder="{{ modifyopinion.mo_customer_info }}"{% endif %} class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>工厂修改信息</span>
+                        </span>
+                        <textarea id="mo_factory_info" name="mo_factory_info" {% if modifyopinion.mo_factory_info %}placeholder="{{ modifyopinion.mo_factory_info }}"{% endif %} class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="ten_space"></div>
+
+
+            <div class="row">
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"></div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <input type="submit" class="btn btn-default" value="提交修改意见">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="one_space"></div>
+{% endblock %}
+
+{% block js%}
+{% endblock %}

@@ -157,4 +157,4 @@ class OrderEdit(View):
             createorder.edit_customer_number(order,o_customer_number)
 
         order_add(request, order, createorder)
-        return redirect("/order/orderlist")
+        return redirect("/order/orderdetail?pk={}".format(pk))

@@ -335,7 +335,7 @@
             <div class="ten_space"></div>
 
             <div class="row">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                     {% if order.o_pp_all_end %}
                         <a href="" class="btn btn-default">打样已完成，请添加大货</a>
                     {% else %}
@@ -353,9 +353,15 @@
                         {% else %}
                             <a href="{% url 'pp:ppadd' %}?pk={{ order.pk }}" class="btn btn-default">添加打样</a>
                         {% endif %}
+                        {% if proofingprogresses_len > 0 %}
+                            {% if order.o_modifyopinion %}
+                                <a href="{% url 'pp:moedit' %}?pk={{ order.pk }}&mo_pk={{ order.o_modifyopinion.pk }}" class="btn btn-default">打样意见修改</a>
+                            {% else %}
+                                <a href="{% url 'pp:moadd' %}?pk={{ order.pk }}" class="btn btn-default">打样意见添加</a>
+                            {% endif %}
+                        {% endif %}
                     {% endif %}
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"></div>
                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                     <input type="submit" class="btn btn-default" value="提交订单">
                 </div>

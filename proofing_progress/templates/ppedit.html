@@ -13,13 +13,25 @@
     <div class="center-in">
         <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <a href="{% url 'order:orderedit' %}?pk={{ pk }}" class="btn btn-default">订单编辑</a>
+                <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}" class="btn btn-default">订单编辑</a>
             </div>
         </div>
         <div class="ten_space"></div>
         <form action="" method="post" enctype="multipart/form-data">
-            <input type="text" name="pk" id="pk" value="{{ pk }}" hidden>
+            <input type="text" name="pk" id="pk" value="{{ order.pk }}" hidden>
             <input type="text" name="pp_pk" id="pp_pk" value="{{ proofingprogress.pk }}" hidden>
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>客户款号</span>
+                        </span>
+                        <input type="text" id="o_customer_number" name="o_customer_number" value="{{ order.o_customer_number }}" class="form-control" disabled/>
+                    </div>
+                </div>
+            </div>
+            <div class="ten_space"></div>
+
             <div class="row">
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     <div class="input-group">
