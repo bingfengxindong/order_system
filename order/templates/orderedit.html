@@ -343,11 +343,11 @@
                             {% if proofingprogresses_len < 3 %}
                                 {% if proofingprogress.pp_end %}
                                     <a href="{% url 'pp:ppadd' %}?pk={{ order.pk }}" class="btn btn-default">添加打样</a>
-                                    <a href="{% url 'pp:endpp' %}?pk={{ order.pk }}" class="btn btn-default">结束打样</a>
+                                    <a href="{% url 'pp:endallpp' %}?pk={{ order.pk }}" class="btn btn-default">结束打样</a>
                                 {% endif %}
                             {% else %}
                                 {% if proofingprogress.pp_end %}
-                                    <a href="{% url 'pp:endpp' %}?pk={{ order.pk }}" class="btn btn-default">结束打样</a>
+                                    <a href="{% url 'pp:endallpp' %}?pk={{ order.pk }}" class="btn btn-default">结束打样</a>
                                 {% endif %}
                             {% endif %}
                         {% else %}
@@ -407,7 +407,9 @@
                                 {% if proofingprogress.pp_end %}
                                     <b>已结束</b>
                                 {% else %}
-                                    <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}">编辑</a>
+                                    <a href="{% url 'pp:ppedit' %}?pk={{ order.pk }}&pp_pk={{ proofingprogress.pk }}">编辑</a>
+                                    /
+                                    <a href="{% url 'pp:endpp' %}?pp_pk={{ proofingprogress.pk }}">结束本次打样</a>
                                 {% endif %}
                             </td>
                         </tr>

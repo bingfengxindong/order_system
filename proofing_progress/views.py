@@ -88,6 +88,38 @@ class PPAdd(View):
 
 class EndPP(View):
     def get(self,request):
+        pp_pk = request.GET.get("pp_pk")
+        proofingprogress = ProofingProgress.objects.get(pk=pp_pk)
+        proofingprogress.pp_end = True
+        proofingprogress.save()
+        return redirect("/order/orderedit?pk={}".format(proofingprogress.order_set.all()[0].pk))
+
+class PPEdit(View):
+    def get(self,request):
+        pk = request.GET.get("pk")
+        pp_pk = request.GET.get("pp_pk")
+        proofingprogress = ProofingProgress.objects.get(pk=pp_pk)
+        workers = Worker.objects.all()
+        context = {
+            "title": "打样修改",
+            "pk": pk,
+            "proofingprogress": proofingprogress,
+            "workers": workers,
+        }
+        return render(request=request, template_name="ppedit.html", context=context)
+
+    def post(self,request):
+        pk = request.POST.get("pk")
+        pp_pk = request.POST.get("pp_pk")
+        order = Order.objects.get(pk=pk)
+        create_pp = CreatePP(order)
+        proofingprogress = order.o_proofingprogress.get(pk=pp_pk)
+        add_proofingprogress(request, create_pp, proofingprogress)
+        proofingprogress.save()
+        return redirect("/order/orderedit?pk={}".format(pk))
+
+class EndAllPP(View):
+    def get(self,request):
         pk = request.GET.get("pk")
         order = Order.objects.get(pk=pk)
         order.o_pp_all_end = True

@@ -24,6 +24,7 @@
                 <th>客户名</th>
                 <th>下单日期</th>
                 <th>业务员</th>
+                <th>打样</th>
                 <th>操作</th>
             </tr>
             {% for order in orders %}
@@ -32,6 +33,13 @@
                     <td>{{ order.o_customer.c_name }}</td>
                     <td>{{ order.o_date }}</td>
                     <td>{{ order.o_user.u_name }}</td>
+                    <td>
+                        {% if order.o_pp_all_end %}
+                            已完成
+                        {% else %}
+                            未完成
+                        {% endif %}
+                    </td>
                     <td>
                         <a href="{% url 'order:orderdetail' %}?pk={{ order.pk }}">详情</a>
                         /
