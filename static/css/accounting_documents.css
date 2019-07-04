@@ -1,0 +1,14 @@
+.o-ad{
+    position: relative;
+}
+.o-ad-title{
+    width: 302px;
+    height: 34px;
+    text-align: center;
+    line-height: 34px;
+    background: rgb(255,255,128);
+    border-radius: 4px;
+    position: absolute;
+    top: -14px;
+    left: 348px;
+}

@@ -3,6 +3,7 @@ from user.models import User
 from proofing_progress.models import *
 from production_schedule.models import ProductionSchedule
 from quotation.models import Quotation
+from accounting_documents.models import AccountingDocuments
 
 # Create your models here.
 class Order(models.Model):
@@ -36,6 +37,7 @@ class Order(models.Model):
     o_modifyopinion = models.OneToOneField(ModifyOpinion, blank=True, null=True, on_delete=models.CASCADE, verbose_name="打样修改意见")
     o_productionschedule = models.OneToOneField(ProductionSchedule, blank=True, null=True, on_delete=models.CASCADE, verbose_name="大货表")
     o_quotation = models.OneToOneField(Quotation, blank=True, null=True, on_delete=models.CASCADE, verbose_name="报价单表")
+    o_accountingdocuments = models.OneToOneField(AccountingDocuments, blank=True, null=True, on_delete=models.CASCADE, verbose_name="核算单表")
     create_date = models.DateTimeField(auto_now_add=True)
     create_end_date = models.DateTimeField(auto_now=True)
     isdelete = models.BooleanField(default=False)

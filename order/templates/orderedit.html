@@ -25,7 +25,11 @@
                 {% else %}
                     <a href="{% url 'q:qadd' %}?pk={{ order.pk }}" class="btn btn-default">报价单添加</a>
                 {% endif %}
-                <a href="" class="btn btn-default">核算单添加</a>
+                {% if order.o_accountingdocuments %}
+                    <a href="{% url 'ad:adedit' %}?pk={{ order.pk }}" class="btn btn-default">核算单修改</a>
+                {% else %}
+                    <a href="{% url 'ad:adadd' %}?pk={{ order.pk }}" class="btn btn-default">核算单添加</a>
+                {% endif %}
             </div>
         </div>
         <div class="ten_space"></div>
@@ -139,7 +143,7 @@
                         <span class="input-group-addon">
                             <span>数量</span>
                         </span>
-                        <input type="text" id="o_count" name="o_count" {% if order.o_count %}placeholder="{{ order.o_count }}"{% endif %} class="form-control">
+                        <input type="number" id="o_count" name="o_count" {% if order.o_count %}placeholder="{{ order.o_count }}"{% endif %} class="form-control">
                     </div>
                 </div>
             </div>
@@ -292,7 +296,7 @@
                                     <span>大货单价</span>
                                 </span>
                                 <span class="input-group-addon">
-                                    <span>￥</span>
+                                    <span>{{ order.o_price_type }}</span>
                                 </span>
                                 <input type="text" id="o_ps_price" name="o_ps_price" {% if order.o_ps_price %}placeholder="{{ order.o_ps_price }}"{% endif %} class="form-control">
                             </div>
@@ -309,7 +313,7 @@
                                     <span>美元单价</span>
                                 </span>
                                 <span class="input-group-addon">
-                                    <span>$</span>
+                                    <span>{{ order.o_dollar_type }}</span>
                                 </span>
                                 <input type="text" id="o_dollar_price" name="o_dollar_price" {% if order.o_dollar_price %}placeholder="{{ order.o_dollar_price }}"{% endif %} class="form-control">
                             </div>
@@ -318,7 +322,7 @@
                                 <span class="input-group-addon">
                                     <span>大货数量</span>
                                 </span>
-                                <input type="text" id="o_ps_amount" name="o_ps_amount" {% if order.o_ps_amount %}placeholder="{{ order.o_ps_amount }}"{% endif %} class="form-control">
+                                <input type="number" id="o_ps_amount" name="o_ps_amount" {% if order.o_ps_amount %}placeholder="{{ order.o_ps_amount }}"{% endif %} class="form-control">
                             </div>
                             <div class="ten_space"></div>
                             <div class="input-group">
@@ -326,7 +330,7 @@
                                     <span>大货总金额</span>
                                 </span>
                                 <span class="input-group-addon">
-                                    <span>$</span>
+                                    <span>{{ order.o_dollar_type }}</span>
                                 </span>
                                 <input type="text" id="o_ps_dollar_total_price" name="o_ps_dollar_total_price" {% if order.o_ps_dollar_total_price %}placeholder="{{ order.o_ps_dollar_total_price }}"{% endif %} class="form-control">
                             </div>
@@ -386,7 +390,7 @@
             {% else %}
                 <table class="table table-striped">
                     <tr>
-                        <th>打样</th>
+                        <th>打样单</th>
                         <th>样品单号</th>
                         <th>ERP单号</th>
                         <th>接单时间</th>
@@ -462,7 +466,9 @@
             {% if order.o_productionschedule %}
                 <table class="table table-striped">
                     <tr>
-                        <th>大货</th>
+                        <th colspan="5">大货单（{{ order.o_price_type }}）</th>
+                    </tr>
+                    <tr>
                         <th>大货单号</th>
                         <th>大货交期</th>
                         <th>生产车间</th>
@@ -470,7 +476,6 @@
                         <th>收款时间</th>
                     </tr>
                     <tr>
-                        <td></td>
                         <td>
                             {% if order.o_productionschedule.ps_number %}
                                 {{ order.o_productionschedule.ps_number }}
@@ -504,13 +509,14 @@
             {% if order.o_quotation %}
                 <table class="table table-striped">
                     <tr>
-                        <th>报价单</th>
+                        <th colspan="3">报价单（{{ order.o_price_type }}）</th>
+                    </tr>
+                    <tr>
                         <th>大货单价</th>
                         <th>浮动率</th>
                         <th>最终报价</th>
                     </tr>
                     <tr>
-                        <td></td>
                         <td>
                             {% if order.o_quotation.q_offer %}
                                 {{ order.o_quotation.q_offer }}
@@ -524,6 +530,61 @@
                         <td>
                             {% if order.o_quotation.q_end_offer %}
                                 {{ order.o_quotation.q_end_offer }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+                <div class="ten_space"></div>
+            {% endif %}
+
+            {% if order.o_accountingdocuments %}
+                <table class="table table-striped">
+                    <tr>
+                        <th colspan="7">报价单（{{ order.o_price_type }}）</th>
+                    </tr>
+                    <tr>
+                        <th>大货总金额</th>
+                        <th>实际成本</th>
+                        <th>利润总金额</th>
+                        <th>面辅料总金额</th>
+                        <th>工缴金额</th>
+                        <th>绣印花金额</th>
+                        <th>包装船务金额</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% if order.o_accountingdocuments.ad_ps_dollar_total_price %}
+                                {{ order.o_accountingdocuments.ad_ps_dollar_total_price }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if order.o_accountingdocuments.ad_actual_cost %}
+                                {{ order.o_accountingdocuments.ad_actual_cost }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if order.o_accountingdocuments.ad_total_profit %}
+                                {{ order.o_accountingdocuments.ad_total_profit }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if order.o_accountingdocuments.ad_total_amount_materials %}
+                                {{ order.o_accountingdocuments.ad_total_amount_materials }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if order.o_accountingdocuments.ad_total_amount_labor_payment %}
+                                {{ order.o_accountingdocuments.ad_total_amount_labor_payment }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if order.o_accountingdocuments.ad_total_amount_embroide_print %}
+                                {{ order.o_accountingdocuments.ad_total_amount_embroide_print }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if order.o_accountingdocuments.ad_total_amount_packaging_shipping %}
+                                {{ order.o_accountingdocuments.ad_total_amount_packaging_shipping }}
                             {% endif %}
                         </td>
                     </tr>
