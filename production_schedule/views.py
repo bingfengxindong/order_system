@@ -116,3 +116,12 @@ class PSEdit(View):
         add_productionschedule(request, create_ps, productionschedule)
         productionschedule.save()
         return redirect("/order/orderedit?pk={}".format(pk))
+
+class EndPS(View):
+    def get(self,request):
+        pk = request.GET.get("pk")
+        order = Order.objects.get(pk=pk)
+        productionschedule = order.o_productionschedule
+        productionschedule.ps_end = True
+        productionschedule.save()
+        return redirect("/order/orderedit?pk={}".format(pk))

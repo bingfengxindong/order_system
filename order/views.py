@@ -158,3 +158,11 @@ class OrderEdit(View):
 
         order_add(request, order, createorder)
         return redirect("/order/orderdetail?pk={}".format(pk))
+
+class EndOrder(View):
+    def get(self,request):
+        pk = request.GET.get("pk")
+        order = Order.objects.get(pk=pk)
+        order.o_end = True
+        order.save()
+        return redirect("/order/orderdetail?pk={}".format(pk))

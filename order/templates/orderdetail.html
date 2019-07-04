@@ -15,7 +15,9 @@
         <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <a href="{% url 'order:orderlist' %}" class="btn btn-default">订单列表</a>
-                <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}" class="btn btn-default">订单编辑</a>
+                {% if order.o_end == False  %}
+                    <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}" class="btn btn-default">订单编辑</a>
+                {% endif %}
             </div>
         </div>
         <div class="ten_space"></div>

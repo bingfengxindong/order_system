@@ -42,8 +42,10 @@
                     </td>
                     <td>
                         <a href="{% url 'order:orderdetail' %}?pk={{ order.pk }}">详情</a>
-                        /
-                        <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}">编辑</a>
+                        {% if order.o_end == False %}
+                            /
+                            <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}">编辑</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
