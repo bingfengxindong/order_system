@@ -2,9 +2,6 @@ from proofing_progress.models import *
 import uuid
 
 class CreateMO:
-    def __init__(self,order):
-        self.order = order
-
     def add_mo(self):
         return ModifyOpinion.objects.create(mo_id=uuid.uuid1())
 

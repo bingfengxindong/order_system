@@ -80,7 +80,7 @@ class PPAdd(View):
     def post(self,request):
         pk = request.POST.get("pk")
         order = Order.objects.get(pk=pk)
-        create_pp = CreatePP(order)
+        create_pp = CreatePP()
         proofingprogress = create_pp.add_pp()
         add_proofingprogress(request, create_pp, proofingprogress)
         proofingprogress.save()
@@ -114,7 +114,7 @@ class PPEdit(View):
         pk = request.POST.get("pk")
         pp_pk = request.POST.get("pp_pk")
         order = Order.objects.get(pk=pk)
-        create_pp = CreatePP(order)
+        create_pp = CreatePP()
         proofingprogress = order.o_proofingprogress.get(pk=pp_pk)
         add_proofingprogress(request, create_pp, proofingprogress)
         proofingprogress.save()
@@ -150,7 +150,7 @@ class MOAdd(View):
     def post(self,request):
         pk = request.POST.get("pk")
         order = Order.objects.get(pk=pk)
-        create_mo = CreateMO(order)
+        create_mo = CreateMO()
         modifyopinion = create_mo.add_mo()
         add_modifyopinion(request,create_mo,modifyopinion)
         modifyopinion.save()
@@ -174,7 +174,7 @@ class MOEdit(View):
     def post(self,request):
         pk = request.POST.get("pk")
         order = Order.objects.get(pk=pk)
-        create_mo = CreateMO(order)
+        create_mo = CreateMO()
         modifyopinion = order.o_modifyopinion
         add_modifyopinion(request,create_mo,modifyopinion)
         modifyopinion.save()

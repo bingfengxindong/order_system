@@ -6,11 +6,13 @@ from .settings import STATICFILES_DIRS,MEDIA_ROOT
 import os
 import order
 import proofing_progress
+import production_schedule
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^order/', include(("order.urls","order"),namespace="order")),
     url(r'^pp/', include(("proofing_progress.urls","pp"),namespace="pp")),
+    url(r'^ps/', include(("production_schedule.urls","ps"),namespace="ps")),
     url(r"^static/(?P<path>.*)",serve,{"document_root": STATICFILES_DIRS[0]}, name="static"),
     url(r"^media/(?P<path>.*)",serve,{"document_root":MEDIA_ROOT},name="media"),
 ]

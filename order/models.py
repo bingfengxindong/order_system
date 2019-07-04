@@ -1,6 +1,7 @@
 from django.db import models
 from user.models import User
 from proofing_progress.models import *
+from production_schedule.models import ProductionSchedule
 
 # Create your models here.
 class Order(models.Model):
@@ -32,6 +33,7 @@ class Order(models.Model):
     o_proofingprogress = models.ManyToManyField(ProofingProgress, blank=True, verbose_name="打样")
     o_pp_all_end = models.BooleanField(default=False,verbose_name="打样是否完成/默认未完成")
     o_modifyopinion = models.OneToOneField(ModifyOpinion, blank=True, null=True, on_delete=models.CASCADE, verbose_name="打样修改意见")
+    o_productionschedule = models.OneToOneField(ProductionSchedule, blank=True, null=True, on_delete=models.CASCADE, verbose_name="大货表")
     create_date = models.DateTimeField(auto_now_add=True)
     create_end_date = models.DateTimeField(auto_now=True)
     isdelete = models.BooleanField(default=False)

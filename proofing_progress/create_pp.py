@@ -2,9 +2,6 @@ from proofing_progress.models import *
 import uuid
 
 class CreatePP:
-    def __init__(self,order):
-        self.order = order
-
     def add_pp(self):
         return ProofingProgress.objects.create(pp_id=uuid.uuid1())
 

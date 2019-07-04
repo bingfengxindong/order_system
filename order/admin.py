@@ -11,6 +11,7 @@ class OrderAdmin(admin.ModelAdmin):
         ("产品信息",{"fields":["o_captype","o_main_fabric","o_embroiderorprint","o_capeyebrow","o_versionnumber","o_afterdeduction",]}),
         ("大货信息",{"fields":["o_ps_price","o_dollar_exchange_rate","o_dollar_type","o_dollar_price","o_ps_amount","o_ps_dollar_total_price","o_delivery_date",]}),
         ("打样信息",{"fields":["o_proofingprogress","o_pp_all_end","o_modifyopinion",]}),
+        ("大货信息",{"fields":["o_productionschedule",]}),
     )
 admin.site.register(Order,OrderAdmin)
 
