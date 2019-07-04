@@ -128,7 +128,9 @@
                     <span class="input-group-addon">
                         <span>文件下载</span>
                     </span>
-                    <a href="/media/{{ order.o_file }}" class="form-control" download="{{ order.o_file | filename }}">{% if order.o_file %}{{ order.o_file | filename }}{% endif %}</a>
+                    <span class="form-control">
+                        <a href="/media/{{ order.o_file }}" download="{{ order.o_file | filename }}">{% if order.o_file %}{{ order.o_file | filename }}{% endif %}</a>
+                    </span>
                 </div>
                 <div class="one_space"></div>
             </div>
