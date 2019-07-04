@@ -1,0 +1,146 @@
+{% extends "base.html"%}
+{% block head %}
+    <link rel="stylesheet" href="/static/css/order.css" />
+{% endblock %}
+
+{% block header %}
+    <div class="header-in">
+        <b>{{ title }}</b>
+    </div>
+{% endblock %}
+
+{% block center %}
+    <div class="center-in">
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}" class="btn btn-default">订单编辑</a>
+            </div>
+        </div>
+        <div class="ten_space"></div>
+        <form action="" method="post" enctype="multipart/form-data">
+            <input type="text" name="pk" id="pk" value="{{ order.pk }}" hidden>
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>大货单价</span>
+                        </span>
+                        <input type="text" id="q_offer" name="q_offer"  class="form-control">
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>浮动率</span>
+                        </span>
+                        <input type="text" id="q_floating_rate" name="q_floating_rate"  class="form-control">
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>最终报价</span>
+                        </span>
+                        <input type="text" id="q_end_offer" name="q_end_offer"  class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="ten_space"></div>
+
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>面料报价</span>
+                        </span>
+                        <input type="text" id="q_fabric_quotation" name="q_fabric_quotation"  class="form-control">
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>辅料报价</span>
+                        </span>
+                        <input type="text" id="q_ingredients_quotation" name="q_ingredients_quotation"  class="form-control">
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>工缴报价</span>
+                        </span>
+                        <input type="text" id="q_labor_payment_quotation" name="q_labor_payment_quotation"  class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="ten_space"></div>
+
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>水洗报价</span>
+                        </span>
+                        <input type="text" id="q_water_washing_quotation" name="q_water_washing_quotation"  class="form-control">
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>绣花报价</span>
+                        </span>
+                        <input type="text" id="q_embroider_quotation" name="q_embroider_quotation"  class="form-control">
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>印花报价</span>
+                        </span>
+                        <input type="text" id="q_print_quotation" name="q_print_quotation"  class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="ten_space"></div>
+
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>包装物报价</span>
+                        </span>
+                        <input type="text" id="q_packaging_quotation" name="q_packaging_quotation"  class="form-control">
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>其他报价</span>
+                        </span>
+                        <input type="text" id="q_other_quotation" name="q_other_quotation"  class="form-control">
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span>预留利润</span>
+                        </span>
+                        <input type="text" id="q_reserved_profits" name="q_reserved_profits"  class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="ten_space"></div>
+
+            <div class="row">
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"></div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <input type="submit" class="btn btn-default" value="添加报价单">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="one_space"></div>
+{% endblock %}
+
+{% block js%}
+{% endblock %}
