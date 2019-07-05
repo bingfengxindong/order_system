@@ -493,26 +493,36 @@
                         <td>
                             {% if order.o_productionschedule.ps_number %}
                                 {{ order.o_productionschedule.ps_number }}
+                            {% else %}
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             {% endif %}
                         </td>
                         <td>
                             {% if order.o_productionschedule.ps_date %}
                                 {{ order.o_productionschedule.ps_date }}
+                            {% else %}
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             {% endif %}
                         </td>
                         <td>
                             {% if order.o_productionschedule.ps_workshop %}
                                 {{ order.o_productionschedule.ps_workshop.pw_workshop }}
+                            {% else %}
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             {% endif %}
                         </td>
                         <td>
                             {% if order.o_productionschedule.ps_confirm_date %}
                                 {{ order.o_productionschedule.ps_confirm_date }}
+                            {% else %}
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             {% endif %}
                         </td>
                         <td>
                             {% if order.o_productionschedule.ps_gathering_date %}
                                 {{ order.o_productionschedule.ps_gathering_date }}
+                            {% else %}
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             {% endif %}
                         </td>
                     </tr>
@@ -534,16 +544,22 @@
                         <td>
                             {% if order.o_quotation.q_offer %}
                                 {{ order.o_quotation.q_offer }}
+                            {% else %}
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             {% endif %}
                         </td>
                         <td>
                             {% if order.o_quotation.q_floating_rate %}
                                 {{ order.o_quotation.q_floating_rate }}
+                            {% else %}
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             {% endif %}
                         </td>
                         <td>
                             {% if order.o_quotation.q_end_offer %}
                                 {{ order.o_quotation.q_end_offer }}
+                            {% else %}
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             {% endif %}
                         </td>
                     </tr>
@@ -569,36 +585,50 @@
                         <td>
                             {% if order.o_accountingdocuments.ad_ps_dollar_total_price %}
                                 {{ order.o_accountingdocuments.ad_ps_dollar_total_price }}
+                            {% else %}
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             {% endif %}
                         </td>
                         <td>
                             {% if order.o_accountingdocuments.ad_actual_cost %}
                                 {{ order.o_accountingdocuments.ad_actual_cost }}
+                            {% else %}
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             {% endif %}
                         </td>
                         <td>
                             {% if order.o_accountingdocuments.ad_total_profit %}
                                 {{ order.o_accountingdocuments.ad_total_profit }}
+                            {% else %}
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             {% endif %}
                         </td>
                         <td>
                             {% if order.o_accountingdocuments.ad_total_amount_materials %}
                                 {{ order.o_accountingdocuments.ad_total_amount_materials }}
+                            {% else %}
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             {% endif %}
                         </td>
                         <td>
                             {% if order.o_accountingdocuments.ad_total_amount_labor_payment %}
                                 {{ order.o_accountingdocuments.ad_total_amount_labor_payment }}
+                            {% else %}
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             {% endif %}
                         </td>
                         <td>
                             {% if order.o_accountingdocuments.ad_total_amount_embroide_print %}
                                 {{ order.o_accountingdocuments.ad_total_amount_embroide_print }}
+                            {% else %}
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             {% endif %}
                         </td>
                         <td>
                             {% if order.o_accountingdocuments.ad_total_amount_packaging_shipping %}
                                 {{ order.o_accountingdocuments.ad_total_amount_packaging_shipping }}
+                            {% else %}
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             {% endif %}
                         </td>
                     </tr>
