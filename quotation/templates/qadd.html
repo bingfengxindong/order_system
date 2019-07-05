@@ -28,7 +28,7 @@
                         <span class="input-group-addon">
                             <span>{{ order.o_price_type }}</span>
                         </span>
-                        <input type="text" id="q_offer" name="q_offer"  class="form-control">
+                        <input type="text" id="q_offer" name="q_offer"  class="form-control" readonly>
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -47,7 +47,7 @@
                         <span class="input-group-addon">
                             <span>{{ order.o_price_type }}</span>
                         </span>
-                        <input type="text" id="q_end_offer" name="q_end_offer"  class="form-control">
+                        <input type="text" id="q_end_offer" name="q_end_offer"  class="form-control" readonly>
                     </div>
                 </div>
             </div>
@@ -173,4 +173,5 @@
 {% endblock %}
 
 {% block js%}
+    <script src="/static/js/q_price_calculation.js"></script>
 {% endblock %}

@@ -32,6 +32,10 @@ class CreateOrder:
            order.o_ps_dollar_total_price = kwargs["o_ps_dollar_total_price"]
         if kwargs["o_delivery_date"]:
            order.o_delivery_date = kwargs["o_delivery_date"]
+        if order.o_quotation.q_offer and kwargs["o_ps_amount"]:
+            accountingdocuments = order.o_accountingdocuments
+            accountingdocuments.ad_ps_dollar_total_price = "%.2f" % (float(order.o_quotation.q_offer) * float(kwargs["o_ps_amount"]))
+            accountingdocuments.save()
         order.save()
 
     def add_user(self,order,user_pk):

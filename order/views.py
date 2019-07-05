@@ -2,8 +2,12 @@ from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from order.models import *
 from user.models import *
+from proofing_progress.models import ProofingProgress,ModifyOpinion
+from production_schedule.models import ProductionSchedule
+from quotation.models import Quotation
+from accounting_documents.models import AccountingDocuments
 from order.create_order import CreateOrder
-# Create your views here.
+import uuid
 
 def order_add(request,order,createorder):
     o_date = request.POST.get("o_date")
@@ -91,6 +95,11 @@ class OrderAdd(View):
         o_customer_number = request.POST.get("o_customer_number")
         order = createorder.createorder(customer_pk = customer_pk,
                                         o_customer_number=o_customer_number,)
+        order.o_proofingprogress.add(ProofingProgress.objects.create(pp_id=uuid.uuid1()))
+        order.o_modifyopinion = ModifyOpinion.objects.create(mo_id=uuid.uuid1())
+        order.o_productionschedule = ProductionSchedule.objects.create(ps_id=uuid.uuid1())
+        order.o_quotation = Quotation.objects.create(q_id=uuid.uuid1())
+        order.o_accountingdocuments = AccountingDocuments.objects.create(ad_id=uuid.uuid1())
         order_add(request,order,createorder)
         return redirect("/order/orderlist")
 

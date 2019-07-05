@@ -430,7 +430,7 @@
                             <span class="input-group-addon">
                                 <span>客人反馈信息</span>
                             </span>
-                            <textarea id="mo_customer_info" name="mo_customer_info" class="form-control" style="height: 150px" disabled>{{ order.o_modifyopinion.mo_customer_info }}</textarea>
+                            <textarea id="mo_customer_info" name="mo_customer_info" class="form-control" style="height: 150px" disabled>{% if order.o_modifyopinion.mo_customer_info %}{{ order.o_modifyopinion.mo_customer_info }}{% endif %}</textarea>
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -438,7 +438,7 @@
                             <span class="input-group-addon">
                                 <span>工厂修改信息</span>
                             </span>
-                            <textarea id="mo_factory_info" name="mo_factory_info" class="form-control" style="height: 150px" disabled>{{ order.o_modifyopinion.mo_factory_info }}</textarea>
+                            <textarea id="mo_factory_info" name="mo_factory_info" class="form-control" style="height: 150px" disabled>{% if order.o_modifyopinion.mo_factory_info %}{{ order.o_modifyopinion.mo_factory_info }}{% endif %}</textarea>
                         </div>
                     </div>
                 </div>

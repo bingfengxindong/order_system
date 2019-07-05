@@ -293,14 +293,14 @@
                                 <span class="input-group-addon">
                                     <span>{{ order.o_price_type }}</span>
                                 </span>
-                                <input type="text" id="o_ps_price" name="o_ps_price" {% if order.o_ps_price %}placeholder="{{ order.o_ps_price }}"{% endif %} class="form-control">
+                                <input type="text" id="o_ps_price" name="o_ps_price" {% if order.o_ps_price %}placeholder="{{ order.o_ps_price }}"{% endif %} class="form-control" readonly>
                             </div>
                             <div class="ten_space"></div>
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <span>美元汇率</span>
                                 </span>
-                                <input type="text" id="o_dollar_exchange_rate" name="o_dollar_exchange_rate" {% if order.o_dollar_exchange_rate %}placeholder="{{ order.o_dollar_exchange_rate }}"{% endif %}" class="form-control">
+                                <input type="text" id="o_dollar_exchange_rate" name="o_dollar_exchange_rate" {% if order.o_dollar_exchange_rate %}value="{{ order.o_dollar_exchange_rate }}"{% endif %} class="form-control">
                             </div>
                             <div class="ten_space"></div>
                             <div class="input-group">
@@ -310,14 +310,14 @@
                                 <span class="input-group-addon">
                                     <span>{{ order.o_dollar_type }}</span>
                                 </span>
-                                <input type="text" id="o_dollar_price" name="o_dollar_price" {% if order.o_dollar_price %}placeholder="{{ order.o_dollar_price }}"{% endif %} class="form-control">
+                                <input type="text" id="o_dollar_price" name="o_dollar_price" {% if order.o_dollar_price %}value="{{ order.o_dollar_price }}"{% endif %} class="form-control" readonly>
                             </div>
                             <div class="ten_space"></div>
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <span>大货数量</span>
                                 </span>
-                                <input type="number" id="o_ps_amount" name="o_ps_amount" {% if order.o_ps_amount %}placeholder="{{ order.o_ps_amount }}"{% endif %} class="form-control">
+                                <input type="number" id="o_ps_amount" name="o_ps_amount" {% if order.o_ps_amount %}value="{{ order.o_ps_amount }}"{% endif %} class="form-control">
                             </div>
                             <div class="ten_space"></div>
                             <div class="input-group">
@@ -327,7 +327,7 @@
                                 <span class="input-group-addon">
                                     <span>{{ order.o_dollar_type }}</span>
                                 </span>
-                                <input type="text" id="o_ps_dollar_total_price" name="o_ps_dollar_total_price" {% if order.o_ps_dollar_total_price %}placeholder="{{ order.o_ps_dollar_total_price }}"{% endif %} class="form-control">
+                                <input type="text" id="o_ps_dollar_total_price" name="o_ps_dollar_total_price" {% if order.o_ps_dollar_total_price %}placeholder="{{ order.o_ps_dollar_total_price }}"{% endif %} class="form-control" readonly>
                             </div>
                             <div class="ten_space"></div>
                             <div class="input-group">
@@ -389,10 +389,12 @@
                     {% else %}
                         <a href="{% url 'q:qadd' %}?pk={{ order.pk }}" class="btn btn-default">报价单添加</a>
                     {% endif %}
-                    {% if order.o_accountingdocuments %}
-                        <a href="{% url 'ad:adedit' %}?pk={{ order.pk }}" class="btn btn-default">核算单修改</a>
-                    {% else %}
-                        <a href="{% url 'ad:adadd' %}?pk={{ order.pk }}" class="btn btn-default">核算单添加</a>
+                    {% if order.o_quotation.q_offer %}
+                        {% if order.o_accountingdocuments %}
+                            <a href="{% url 'ad:adedit' %}?pk={{ order.pk }}" class="btn btn-default">核算单修改</a>
+                        {% else %}
+                            <a href="{% url 'ad:adadd' %}?pk={{ order.pk }}" class="btn btn-default">核算单添加</a>
+                        {% endif %}
                     {% endif %}
                 </div>
             </div>
@@ -460,7 +462,7 @@
                             <span class="input-group-addon">
                                 <span>客人反馈信息</span>
                             </span>
-                            <textarea id="mo_customer_info" name="mo_customer_info" placeholder="{{ order.o_modifyopinion.mo_customer_info }}" class="form-control" style="height: 150px" disabled></textarea>
+                            <textarea id="mo_customer_info" name="mo_customer_info" {% if order.o_modifyopinion.mo_customer_info %}placeholder="{{ order.o_modifyopinion.mo_customer_info }}"{% endif %} class="form-control" style="height: 150px" disabled></textarea>
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -468,7 +470,7 @@
                             <span class="input-group-addon">
                                 <span>工厂修改信息</span>
                             </span>
-                            <textarea id="mo_factory_info" name="mo_factory_info" placeholder="{{ order.o_modifyopinion.mo_factory_info }}" class="form-control" style="height: 150px" disabled></textarea>
+                            <textarea id="mo_factory_info" name="mo_factory_info" {% if order.o_modifyopinion.mo_factory_info %}placeholder="{{ order.o_modifyopinion.mo_factory_info }}"{% endif %} class="form-control" style="height: 150px" disabled></textarea>
                         </div>
                     </div>
                 </div>

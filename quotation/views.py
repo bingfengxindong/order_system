@@ -3,11 +3,20 @@ from django.views.generic.base import View
 from order.models import Order
 from quotation.models import Quotation
 from quotation.create_q import CreateQ
+from accounting_documents.models import AccountingDocuments
+import uuid
 
-def add_quotation(request,create_q,quotation):
+def add_quotation(request,create_q,quotation,order):
     q_offer = request.POST.get("q_offer")
     if q_offer:
         create_q.add_q_offer(quotation, q_offer)
+        order.o_ps_price = q_offer
+        order.o_dollar_price = "%.2f"%(float(q_offer) / float(order.o_dollar_exchange_rate))
+        if order.o_ps_amount:
+            order.o_ps_dollar_total_price = "%.2f" % (float(q_offer) / float(order.o_dollar_exchange_rate) * float(order.o_ps_amount))
+            accountingdocuments = order.o_accountingdocuments
+            accountingdocuments.ad_ps_dollar_total_price = "%.2f"%(float(q_offer) * float(order.o_ps_amount))
+            accountingdocuments.save()
 
     q_floating_rate = request.POST.get("q_floating_rate")
     if q_floating_rate:
@@ -68,7 +77,7 @@ class QAdd(View):
         order = Order.objects.get(pk=pk)
         create_q = CreateQ()
         quotation = create_q.add_quotation()
-        add_quotation(request,create_q,quotation)
+        add_quotation(request,create_q,quotation,order)
         quotation.save()
         order.o_quotation = quotation
         order.save()
@@ -89,6 +98,7 @@ class QEdit(View):
         order = Order.objects.get(pk=pk)
         create_q = CreateQ()
         quotation = order.o_quotation
-        add_quotation(request,create_q,quotation)
+        add_quotation(request,create_q,quotation,order)
         quotation.save()
+        order.save()
         return redirect("/order/orderedit?pk={}".format(pk))

@@ -28,7 +28,7 @@
                         <span class="input-group-addon">
                             <span>{{ order.o_price_type }}</span>
                         </span>
-                        <input type="text" id="q_offer" name="q_offer" {% if order.o_quotation.q_offer %}placeholder="{{ order.o_quotation.q_offer }}"{% endif %} class="form-control">
+                        <input type="text" id="q_offer" name="q_offer" {% if order.o_quotation.q_offer %}value="{{ order.o_quotation.q_offer }}"{% endif %} class="form-control" readonly>
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -36,7 +36,7 @@
                         <span class="input-group-addon">
                             <span>浮动率</span>
                         </span>
-                        <input type="text" id="q_floating_rate" name="q_floating_rate" {% if order.o_quotation.q_floating_rate %}placeholder="{{ order.o_quotation.q_floating_rate }}"{% endif %}  class="form-control">
+                        <input type="text" id="q_floating_rate" name="q_floating_rate" {% if order.o_quotation.q_floating_rate %}value="{{ order.o_quotation.q_floating_rate }}"{% endif %}  class="form-control">
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -47,7 +47,7 @@
                         <span class="input-group-addon">
                             <span>{{ order.o_price_type }}</span>
                         </span>
-                        <input type="text" id="q_end_offer" name="q_end_offer" {% if order.o_quotation.q_end_offer %}placeholder="{{ order.o_quotation.q_end_offer }}"{% endif %}  class="form-control">
+                        <input type="text" id="q_end_offer" name="q_end_offer" {% if order.o_quotation.q_end_offer %}value="{{ order.o_quotation.q_end_offer }}"{% endif %}  class="form-control" readonly>
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                         <span class="input-group-addon">
                             <span>{{ order.o_price_type }}</span>
                         </span>
-                        <input type="text" id="q_fabric_quotation" name="q_fabric_quotation" {% if order.o_quotation.q_fabric_quotation %}placeholder="{{ order.o_quotation.q_fabric_quotation }}"{% endif %}  class="form-control">
+                        <input type="text" id="q_fabric_quotation" name="q_fabric_quotation" {% if order.o_quotation.q_fabric_quotation %}value="{{ order.o_quotation.q_fabric_quotation }}"{% endif %}  class="form-control">
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -73,7 +73,7 @@
                         <span class="input-group-addon">
                             <span>{{ order.o_price_type }}</span>
                         </span>
-                        <input type="text" id="q_ingredients_quotation" name="q_ingredients_quotation" {% if order.o_quotation.q_ingredients_quotation %}placeholder="{{ order.o_quotation.q_ingredients_quotation }}"{% endif %}  class="form-control">
+                        <input type="text" id="q_ingredients_quotation" name="q_ingredients_quotation" {% if order.o_quotation.q_ingredients_quotation %}value="{{ order.o_quotation.q_ingredients_quotation }}"{% endif %}  class="form-control">
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -84,7 +84,7 @@
                         <span class="input-group-addon">
                             <span>{{ order.o_price_type }}</span>
                         </span>
-                        <input type="text" id="q_labor_payment_quotation" name="q_labor_payment_quotation" {% if order.o_quotation.q_labor_payment_quotation %}placeholder="{{ order.o_quotation.q_labor_payment_quotation }}"{% endif %}  class="form-control">
+                        <input type="text" id="q_labor_payment_quotation" name="q_labor_payment_quotation" {% if order.o_quotation.q_labor_payment_quotation %}value="{{ order.o_quotation.q_labor_payment_quotation }}"{% endif %}  class="form-control">
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                         <span class="input-group-addon">
                             <span>{{ order.o_price_type }}</span>
                         </span>
-                        <input type="text" id="q_water_washing_quotation" name="q_water_washing_quotation" {% if order.o_quotation.q_water_washing_quotation %}placeholder="{{ order.o_quotation.q_water_washing_quotation }}"{% endif %}  class="form-control">
+                        <input type="text" id="q_water_washing_quotation" name="q_water_washing_quotation" {% if order.o_quotation.q_water_washing_quotation %}value="{{ order.o_quotation.q_water_washing_quotation }}"{% endif %}  class="form-control">
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -110,7 +110,7 @@
                         <span class="input-group-addon">
                             <span>{{ order.o_price_type }}</span>
                         </span>
-                        <input type="text" id="q_embroider_quotation" name="q_embroider_quotation" {% if order.o_quotation.q_embroider_quotation %}placeholder="{{ order.o_quotation.q_embroider_quotation }}"{% endif %}  class="form-control">
+                        <input type="text" id="q_embroider_quotation" name="q_embroider_quotation" {% if order.o_quotation.q_embroider_quotation %}value="{{ order.o_quotation.q_embroider_quotation }}"{% endif %}  class="form-control">
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -121,7 +121,7 @@
                         <span class="input-group-addon">
                             <span>{{ order.o_price_type }}</span>
                         </span>
-                        <input type="text" id="q_print_quotation" name="q_print_quotation" {% if order.o_quotation.q_print_quotation %}placeholder="{{ order.o_quotation.q_print_quotation }}"{% endif %}  class="form-control">
+                        <input type="text" id="q_print_quotation" name="q_print_quotation" {% if order.o_quotation.q_print_quotation %}value="{{ order.o_quotation.q_print_quotation }}"{% endif %}  class="form-control">
                     </div>
                 </div>
             </div>
@@ -136,7 +136,7 @@
                         <span class="input-group-addon">
                             <span>{{ order.o_price_type }}</span>
                         </span>
-                        <input type="text" id="q_packaging_quotation" name="q_packaging_quotation" {% if order.o_quotation.q_packaging_quotation %}placeholder="{{ order.o_quotation.q_packaging_quotation }}"{% endif %}  class="form-control">
+                        <input type="text" id="q_packaging_quotation" name="q_packaging_quotation" {% if order.o_quotation.q_packaging_quotation %}value="{{ order.o_quotation.q_packaging_quotation }}"{% endif %}  class="form-control">
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -147,7 +147,7 @@
                         <span class="input-group-addon">
                             <span>{{ order.o_price_type }}</span>
                         </span>
-                        <input type="text" id="q_other_quotation" name="q_other_quotation" {% if order.o_quotation.q_other_quotation %}placeholder="{{ order.o_quotation.q_other_quotation }}"{% endif %}  class="form-control">
+                        <input type="text" id="q_other_quotation" name="q_other_quotation" {% if order.o_quotation.q_other_quotation %}value="{{ order.o_quotation.q_other_quotation }}"{% endif %}  class="form-control">
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -155,7 +155,7 @@
                         <span class="input-group-addon">
                             <span>预留利润</span>
                         </span>
-                        <input type="text" id="q_reserved_profits" name="q_reserved_profits" {% if order.o_quotation.q_reserved_profits %}placeholder="{{ order.o_quotation.q_reserved_profits }}"{% endif %}  class="form-control">
+                        <input type="text" id="q_reserved_profits" name="q_reserved_profits" {% if order.o_quotation.q_reserved_profits %}value="{{ order.o_quotation.q_reserved_profits }}"{% endif %}  class="form-control">
                     </div>
                 </div>
             </div>
@@ -173,4 +173,5 @@
 {% endblock %}
 
 {% block js%}
+    <script src="/static/js/q_price_calculation.js"></script>
 {% endblock %}
