@@ -238,7 +238,7 @@
                                 <span class="input-group-addon">
                                     <span>裁剪开始时间</span>
                                 </span>
-                                <input type="text" id="ad_tailor_start_date" name="ad_tailor_start_date" {% if order.o_accountingdocuments.ad_tailor_start_date %}value="{{ order.o_accountingdocuments.ad_tailor_start_date }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off">
+                                <input type="text" id="ad_tailor_start_date" name="ad_tailor_start_date" {% if order.o_accountingdocuments.ad_tailor_start_date %}value="{{ order.o_accountingdocuments.ad_tailor_start_date|date:'Y-m-j H:i' }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -246,7 +246,7 @@
                                 <span class="input-group-addon">
                                     <span>裁剪结束时间</span>
                                 </span>
-                                <input type="text" id="ad_tailor_end_date" name="ad_tailor_end_date" {% if order.o_accountingdocuments.ad_tailor_end_date %}value="{{ order.o_accountingdocuments.ad_tailor_end_date }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off">
+                                <input type="text" id="ad_tailor_end_date" name="ad_tailor_end_date" {% if order.o_accountingdocuments.ad_tailor_end_date %}value="{{ order.o_accountingdocuments.ad_tailor_end_date|date:'Y-m-j H:i' }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -281,7 +281,7 @@
                                 <span class="input-group-addon">
                                     <span>车缝开始时间</span>
                                 </span>
-                                <input type="text" id="ad_sewing_start_date" name="ad_sewing_start_date" {% if order.o_accountingdocuments.ad_sewing_start_date %}value="{{ order.o_accountingdocuments.ad_sewing_start_date }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off">
+                                <input type="text" id="ad_sewing_start_date" name="ad_sewing_start_date" {% if order.o_accountingdocuments.ad_sewing_start_date %}value="{{ order.o_accountingdocuments.ad_sewing_start_date|date:'Y-m-j H:i' }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -289,7 +289,7 @@
                                 <span class="input-group-addon">
                                     <span>车缝结束时间</span>
                                 </span>
-                                <input type="text" id="ad_sewing_end_date" name="ad_sewing_end_date" {% if order.o_accountingdocuments.ad_sewing_end_date %}value="{{ order.o_accountingdocuments.ad_sewing_end_date }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off">
+                                <input type="text" id="ad_sewing_end_date" name="ad_sewing_end_date" {% if order.o_accountingdocuments.ad_sewing_end_date %}value="{{ order.o_accountingdocuments.ad_sewing_end_date|date:'Y-m-j H:i' }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -324,7 +324,7 @@
                                 <span class="input-group-addon">
                                     <span>整烫开始时间</span>
                                 </span>
-                                <input type="text" id="ad_iron_start_date" name="ad_iron_start_date" {% if order.o_accountingdocuments.ad_iron_start_date %}value="{{ order.o_accountingdocuments.ad_iron_start_date }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off">
+                                <input type="text" id="ad_iron_start_date" name="ad_iron_start_date" {% if order.o_accountingdocuments.ad_iron_start_date %}value="{{ order.o_accountingdocuments.ad_iron_start_date|date:'Y-m-j H:i' }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -332,7 +332,7 @@
                                 <span class="input-group-addon">
                                     <span>整烫结束时间</span>
                                 </span>
-                                <input type="text" id="ad_iron_end_date" name="ad_iron_end_date" {% if order.o_accountingdocuments.ad_iron_end_date %}value="{{ order.o_accountingdocuments.ad_iron_end_date }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off">
+                                <input type="text" id="ad_iron_end_date" name="ad_iron_end_date" {% if order.o_accountingdocuments.ad_iron_end_date %}value="{{ order.o_accountingdocuments.ad_iron_end_date|date:'Y-m-j H:i' }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">

@@ -4,6 +4,9 @@ from order.models import Order
 from accounting_documents.models import AccountingDocuments
 from accounting_documents.create_ad import CreateAD
 
+def date_edit(dt):
+    return dt.replace("年","-").replace("月","-").replace("日","")
+
 def add_quotation(request,create_ad,accountingdocuments):
     ad_ps_dollar_total_price = request.POST.get("ad_ps_dollar_total_price")
     if ad_ps_dollar_total_price:
@@ -55,11 +58,12 @@ def add_quotation(request,create_ad,accountingdocuments):
     if ad_total_amount_tailor:
         create_ad.add_ad_total_amount_tailor(accountingdocuments,ad_total_amount_tailor)
 
-    ad_tailor_start_date = request.POST.get("ad_tailor_start_date")
+    ad_tailor_start_date = date_edit(request.POST.get("ad_tailor_start_date"))
     if ad_tailor_start_date:
         create_ad.add_ad_tailor_start_date(accountingdocuments,ad_tailor_start_date)
 
-    ad_tailor_end_date = request.POST.get("ad_tailor_end_date")
+    ad_tailor_end_date = date_edit(request.POST.get("ad_tailor_end_date"))
+    print(ad_tailor_end_date)
     if ad_tailor_end_date:
         create_ad.add_ad_tailor_end_date(accountingdocuments,ad_tailor_end_date)
 
@@ -71,11 +75,11 @@ def add_quotation(request,create_ad,accountingdocuments):
     if ad_total_amount_sewing:
         create_ad.add_ad_total_amount_sewing(accountingdocuments,ad_total_amount_sewing)
 
-    ad_sewing_start_date = request.POST.get("ad_sewing_start_date")
+    ad_sewing_start_date = date_edit(request.POST.get("ad_sewing_start_date"))
     if ad_sewing_start_date:
         create_ad.add_ad_sewing_start_date(accountingdocuments,ad_sewing_start_date)
 
-    ad_sewing_end_date = request.POST.get("ad_sewing_end_date")
+    ad_sewing_end_date = date_edit(request.POST.get("ad_sewing_end_date"))
     if ad_sewing_end_date:
         create_ad.add_ad_sewing_end_date(accountingdocuments,ad_sewing_end_date)
 
@@ -87,11 +91,11 @@ def add_quotation(request,create_ad,accountingdocuments):
     if ad_total_amount_iron:
         create_ad.add_ad_total_amount_iron(accountingdocuments,ad_total_amount_iron)
 
-    ad_iron_start_date = request.POST.get("ad_iron_start_date")
+    ad_iron_start_date = date_edit(request.POST.get("ad_iron_start_date"))
     if ad_iron_start_date:
         create_ad.add_ad_iron_start_date(accountingdocuments,ad_iron_start_date)
 
-    ad_iron_end_date = request.POST.get("ad_iron_end_date")
+    ad_iron_end_date = date_edit(request.POST.get("ad_iron_end_date"))
     if ad_iron_end_date:
         create_ad.add_ad_iron_end_date(accountingdocuments,ad_iron_end_date)
 
