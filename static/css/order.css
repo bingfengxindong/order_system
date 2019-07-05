@@ -70,3 +70,11 @@
 textarea{
     resize: none;
 }
+
+/*完成未完成图标*/
+.o-ok{
+    color: green;;
+}
+.o-remove{
+    color: red;
+}

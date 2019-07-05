@@ -105,7 +105,7 @@ class OrderAdd(View):
 
 class OrderList(View):
     def get(self,request):
-        orders = Order.objects.all()
+        orders = Order.objects.all().order_by("-pk")
         orders_len = len(orders)
         context = {
             "title": "订单列表",

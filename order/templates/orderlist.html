@@ -4,19 +4,48 @@
     <link rel="stylesheet" href="/static/css/orderlist.css" />
 {% endblock %}
 
-{% block header %}
-    <div class="header-in">
-        <b>{{ title }}</b>
-    </div>
-{% endblock %}
-
 {% block center %}
     <div class="center-in">
-        <div class="row">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <a href="{% url 'order:orderadd' %}" class="btn btn-default">添加订单</a>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">{{ title }}</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                订单状态
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'order:orderpp' %}">打样中（打样未结束）</a></li>
+                                <li><a href="{% url 'order:orderps' %}">大货中（打样结束大货未结束）</a></li>
+                                <li><a href="{% url 'order:ordero' %}">未完成（大货结束订单未结束）</a></li>
+                                <li><a href="{% url 'order:orderend' %}">已完成（订单已结束）</a></li>
+                                <li><a href="{% url 'order:orderlist' %}">全部</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="{% url 'order:orderadd' %}">添加订单</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        </nav>
+{#        <div class="row">#}
+{#            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">#}
+{#                <a href="{% url 'order:orderadd' %}" class="btn btn-default">添加订单</a>#}
+{#            </div>#}
+{#        </div>#}
         <div class="ten_space"></div>
         <table class="table table-striped">
             {% if orders_len == 0 %}
@@ -28,6 +57,8 @@
                     <th>下单日期</th>
                     <th>业务员</th>
                     <th>打样</th>
+                    <th>大货</th>
+                    <th>订单</th>
                     <th>操作</th>
                 </tr>
                 {% for order in orders %}
@@ -38,9 +69,23 @@
                         <td>{{ order.o_user.u_name }}</td>
                         <td>
                             {% if order.o_pp_all_end %}
-                                已完成
+                                <span class="glyphicon glyphicon-ok-sign o-ok" aria-hidden="true"></span>
                             {% else %}
-                                未完成
+                                <span class="glyphicon glyphicon-remove-sign o-remove" aria-hidden="true"></span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if order.o_productionschedule.ps_end %}
+                                <span class="glyphicon glyphicon-ok-sign o-ok" aria-hidden="true"></span>
+                            {% else %}
+                                <span class="glyphicon glyphicon-remove-sign o-remove" aria-hidden="true"></span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if order.o_end %}
+                                <span class="glyphicon glyphicon-ok-sign o-ok" aria-hidden="true"></span>
+                            {% else %}
+                                <span class="glyphicon glyphicon-remove-sign o-remove" aria-hidden="true"></span>
                             {% endif %}
                         </td>
                         <td>

@@ -47,7 +47,7 @@ class Order(models.Model):
         return "{}".format(self.o_customer_number)
 
     class Meta:
-        ordering = ["pk"]
+        ordering = ["-pk"]
         verbose_name = "订单表"
         verbose_name_plural = "订单表"
 
