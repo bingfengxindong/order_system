@@ -6,23 +6,44 @@
     <link rel="stylesheet" href="/static/css/accounting_documents.css" />
 {% endblock %}
 
-{% block header %}
-    <div class="header-in">
-        <b>{{ title }}</b>
-    </div>
-{% endblock %}
-
 {% block center %}
     <div class="center-in">
-        <div class="row">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <a href="{% url 'order:orderlist' %}" class="btn btn-default">订单列表</a>
-                {% if order.o_end == False  %}
-                    <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}" class="btn btn-default">订单编辑</a>
-                {% endif %}
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">{{ title }}</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="{% url 'order:orderlist' %}">订单列表</a>
+                        </li>
+                        {% if order.o_end == False  %}
+                            <li>
+                                <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}">订单编辑</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="ten_space"></div>
+        </nav>
+{#        <div class="row">#}
+{#            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">#}
+{#                <a href="{% url 'order:orderlist' %}" class="btn btn-default">订单列表</a>#}
+{#                {% if order.o_end == False  %}#}
+{#                    <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}" class="btn btn-default">订单编辑</a>#}
+{#                {% endif %}#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="ten_space"></div>#}
         <div class="row">
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                 <div class="input-group">
