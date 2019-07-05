@@ -97,9 +97,11 @@ class OrderAdd(View):
 class OrderList(View):
     def get(self,request):
         orders = Order.objects.all()
+        orders_len = len(orders)
         context = {
             "title": "订单列表",
             "orders": orders,
+            "orders_len": orders_len,
         }
         return render(request=request,template_name="orderlist.html",context=context)
 
@@ -107,9 +109,11 @@ class OrderDetail(View):
     def get(self,request):
         pk = request.GET.get("pk")
         order = Order.objects.get(pk=pk)
+        proofingprogress_len = len(order.o_proofingprogress.all())
         context = {
             "title": "订单详情",
             "order": order,
+            "proofingprogress_len": proofingprogress_len,
         }
         return render(request=request,template_name="orderdetail.html",context=context)
 

@@ -2,6 +2,8 @@
 {% load extra_tags %}
 {% block head %}
     <link rel="stylesheet" href="/static/css/order.css" />
+    <link rel="stylesheet" href="/static/css/orderdetail.css" />
+    <link rel="stylesheet" href="/static/css/accounting_documents.css" />
 {% endblock %}
 
 {% block header %}
@@ -250,9 +252,954 @@
                 </div>
             </div>
         </div>
+        <ul class="nav nav-tabs nav-justified">
+            <li role="presentation" class="active" id="pp"><a>打样进度</a></li>
+            <li role="presentation" id="mo"><a>打样意见</a></li>
+            <li role="presentation" id="ps"><a>大货进度</a></li>
+            <li role="presentation" id="q"><a>报价单</a></li>
+            <li role="presentation" id="ad"><a>按单核算</a></li>
+        </ul>
+{#        打样进度#}
+        <div id="pp-v">
+            <div class="ten_space"></div>
+            {% if proofingprogress_len != 0 %}
+                <ul class="nav nav-pills" id="pp-ids">
+                    {% for proofingprogress in order.o_proofingprogress.all %}
+                        <li role="presentation" {% if forloop.counter == 1 %}class="active"{% endif %} id="pp-{{ forloop.counter }}"><a>第{{ forloop.counter }}次打样</a></li>
+                    {% endfor %}
+                </ul>
+                <div class="ten_space"></div>
+                {% for proofingprogress in order.o_proofingprogress.all %}
+                    <div id="pp-{{ forloop.counter }}1">
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>样品单号</span>
+                                    </span>
+                                    <input type="text" id="pp_number" name="pp_number" {% if proofingprogress.pp_number %}value="{{ proofingprogress.pp_number }}"{% endif %} class="form-control" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>ERP单号</span>
+                                    </span>
+                                    <input type="text" id="pp_erp_number" name="pp_erp_number" {% if proofingprogress.pp_erp_number %}value="{{ proofingprogress.pp_erp_number }}"{% endif %} class="form-control" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>接单时间</span>
+                                    </span>
+                                    <input type="text" id="pp_date" name="pp_date" {% if proofingprogress.pp_date %}value="{{ proofingprogress.pp_date }}"{% endif %} class="form-control form_datetime" autocomplete="off" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>交货日期</span>
+                                    </span>
+                                    <input type="text" id="pp_delivery_date" name="pp_delivery_date" {% if proofingprogress.pp_delivery_date %}value="{{ proofingprogress.pp_delivery_date }}"{% endif %} class="form-control form_datetime" autocomplete="off" disabled/>
+                                </div>
+                            </div>
+                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>主料到货</span>
+                                    </span>
+                                    <input type="text" id="pp_main_fabric_arrival" name="pp_main_fabric_arrival" {% if proofingprogress.pp_main_fabric_arrival %}value="{{ proofingprogress.pp_main_fabric_arrival }}"{% endif %} class="form-control form_datetime" autocomplete="off" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>辅料到货</span>
+                                    </span>
+                                    <input type="text" id="pp_ingredients_fabric_arrival" name="pp_ingredients_fabric_arrival" {% if proofingprogress.pp_ingredients_fabric_arrival %}value="{{ proofingprogress.pp_ingredients_fabric_arrival }}"{% endif %} class="form-control form_datetime" autocomplete="off" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>裁剪日期</span>
+                                    </span>
+                                    <input type="text" id="pp_tailor_date" name="pp_tailor_date" {% if proofingprogress.pp_tailor_date %}value="{{ proofingprogress.pp_tailor_date }}"{% endif %} class="form-control form_datetime" autocomplete="off" disabled/>
+                                </div>
+                            </div>
+                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>送绣花</span>
+                                    </span>
+                                    <input type="text" id="pp_send_embroide" name="pp_send_embroide" {% if proofingprogress.pp_send_embroide %}value="{{ proofingprogress.pp_send_embroide }}"{% endif %} class="form-control form_datetime" autocomplete="off" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>绣花回</span>
+                                    </span>
+                                    <input type="text" id="pp_receive_embroide" name="pp_receive_embroide" {% if proofingprogress.pp_receive_embroide %}value="{{ proofingprogress.pp_receive_embroide }}"{% endif %} class="form-control form_datetime" autocomplete="off" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>送印花</span>
+                                    </span>
+                                    <input type="text" id="pp_send_print" name="pp_send_print" {% if proofingprogress.pp_send_print %}value="{{ proofingprogress.pp_send_print }}"{% endif %} class="form-control form_datetime" autocomplete="off" disabled/>
+                                </div>
+                            </div>
+                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>印花回</span>
+                                    </span>
+                                    <input type="text" id="pp_receive_print" name="pp_receive_print" {% if proofingprogress.pp_receive_print %}value="{{ proofingprogress.pp_receive_print }}"{% endif %} class="form-control form_datetime" autocomplete="off" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>发样品</span>
+                                    </span>
+                                    <input type="text" id="pp_delivery_proofing" name="pp_delivery_proofing" {% if proofingprogress.pp_delivery_proofing %}value="{{ proofingprogress.pp_delivery_proofing }}"{% endif %} class="form-control form_datetime" autocomplete="off" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>操作工</span>
+                                    </span>
+                                    <input type="text" id="worker" name="worker" {% if proofingprogress.pp_worker.w_worker %}value="{{ proofingprogress.pp_worker.w_worker }}"{% endif %} class="form-control" autocomplete="off" disabled/>
+                                </div>
+                            </div>
+                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>完成日期</span>
+                                    </span>
+                                    <input type="text" id="pp_end_date" name="pp_end_date" {% if proofingprogress.pp_end_date %}value="{{ proofingprogress.pp_end_date }}"{% endif %} class="form-control form_datetime" autocomplete="off" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>快递时间</span>
+                                    </span>
+                                    <input type="text" id="pp_express_date" name="pp_express_date" {% if proofingprogress.pp_express_date %}value="{{ proofingprogress.pp_express_date }}"{% endif %} class="form-control form_datetime" autocomplete="off" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <b>未添加打样单！</b>
+            {% endif %}
+        </div>
+{#        打样意见#}
+        <div id="mo-v">
+            <div class="ten_space"></div>
+            {% if order.o_modifyopinion %}
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="input-group mo-textarea-h">
+                            <span class="input-group-addon">
+                                <span>客人反馈信息</span>
+                            </span>
+                            <textarea id="mo_customer_info" name="mo_customer_info" class="form-control" style="height: 150px" disabled>{{ order.o_modifyopinion.mo_customer_info }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="input-group mo-textarea-h">
+                            <span class="input-group-addon">
+                                <span>工厂修改信息</span>
+                            </span>
+                            <textarea id="mo_factory_info" name="mo_factory_info" class="form-control" style="height: 150px" disabled>{{ order.o_modifyopinion.mo_factory_info }}</textarea>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <b>未添加打样意见</b>
+            {% endif %}
+        </div>
+{#        大货进度#}
+        <div id="ps-v">
+            <div class="ten_space"></div>
+            {% if order.o_productionschedule %}
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>大货单号</span>
+                            </span>
+                            <input type="text" id="ps_number" name="ps_number" {% if order.o_productionschedule.ps_number %}value="{{ order.o_productionschedule.ps_number }}"{% endif %}  class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>大货交期</span>
+                            </span>
+                            <input type="text" id="ps_date" name="ps_date" {% if order.o_productionschedule.ps_date %}value="{{ order.o_productionschedule.ps_date }}"{% endif %} class="form-control form_datetime" autocomplete="off" disabled>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>生产车间</span>
+                            </span>
+                            <input type="text" id="workshop" name="workshop" {% if order.o_productionschedule.ps_workshop.pw_workshop %}value="{{ order.o_productionschedule.ps_workshop.pw_workshop }}"{% endif %} class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="ten_space"></div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="ten_space"></div>
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>大货确认时间</span>
+                                    </span>
+                                    <input type="text" id="ps_confirm_date" name="ps_confirm_date" {% if order.o_productionschedule.ps_confirm_date %}value="{{ order.o_productionschedule.ps_confirm_date }}"{% endif %} class="form-control form_datetime" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>面料到货</span>
+                                    </span>
+                                    <input type="text" id="ps_arrival_date" name="ps_arrival_date" {% if order.o_productionschedule.ps_arrival_date %}value="{{ order.o_productionschedule.ps_arrival_date }}"{% endif %} class="form-control form_datetime" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>裁剪时间</span>
+                                    </span>
+                                    <input type="text" id="ps_tailor_date" name="ps_tailor_date"{% if order.o_productionschedule.ps_tailor_date %}value="{{ order.o_productionschedule.ps_tailor_date }}"{% endif %}  class="form-control form_datetime" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>绣花时间</span>
+                                    </span>
+                                    <input type="text" id="ps_embroider_date" name="ps_embroider_date"{% if order.o_productionschedule.ps_embroider_date %}value="{{ order.o_productionschedule.ps_embroider_date }}"{% endif %}  class="form-control form_datetime" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>印花时间</span>
+                                    </span>
+                                    <input type="text" id="ps_print_date" name="ps_print_date"{% if order.o_productionschedule.ps_print_date %}value="{{ order.o_productionschedule.ps_print_date }}"{% endif %}  class="form-control form_datetime" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>水洗时间</span>
+                                    </span>
+                                    <input type="text" id="ps_water_washing_date" name="ps_water_washing_date"{% if order.o_productionschedule.ps_water_washing_date %}value="{{ order.o_productionschedule.ps_water_washing_date }}"{% endif %}  class="form-control form_datetime" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+
+                         <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>车缝时间</span>
+                                    </span>
+                                    <input type="text" id="ps_sewing_date" name="ps_sewing_date"{% if order.o_productionschedule.ps_sewing_date %}value="{{ order.o_productionschedule.ps_sewing_date }}"{% endif %}  class="form-control form_datetime" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>辅料到货</span>
+                                    </span>
+                                    <input type="text" id="ps_ingredients_fabric_arrival_date"{% if order.o_productionschedule.ps_ingredients_fabric_arrival_date %}value="{{ order.o_productionschedule.ps_ingredients_fabric_arrival_date }}"{% endif %}  name="ps_ingredients_fabric_arrival_date" class="form-control form_datetime" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>吊牌到货</span>
+                                    </span>
+                                    <input type="text" id="ps_tags_arrival_date" name="ps_tags_arrival_date"{% if order.o_productionschedule.ps_tags_arrival_date %}value="{{ order.o_productionschedule.ps_tags_arrival_date }}"{% endif %}  class="form-control form_datetime" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>整烫包装</span>
+                                    </span>
+                                    <input type="text" id="ps_iron_package_date" name="ps_iron_package_date"{% if order.o_productionschedule.ps_iron_package_date %}value="{{ order.o_productionschedule.ps_iron_package_date }}"{% endif %}  class="form-control form_datetime" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>外运时间</span>
+                                    </span>
+                                    <input type="text" id="ps_outward_transport_date" name="ps_outward_transport_date"{% if order.o_productionschedule.ps_outward_transport_date %}value="{{ order.o_productionschedule.ps_outward_transport_date }}"{% endif %}  class="form-control form_datetime" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+
+                         <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>收款时间</span>
+                                    </span>
+                                    <input type="text" id="ps_gathering_date" name="ps_gathering_date"{% if order.o_productionschedule.ps_gathering_date %}value="{{ order.o_productionschedule.ps_gathering_date }}"{% endif %}  class="form-control form_datetime" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>收款金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ps_gathering_price" name="ps_gathering_price"{% if order.o_productionschedule.ps_gathering_price %}value="{{ order.o_productionschedule.ps_gathering_price }}"{% endif %}  class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>合同金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ps_contract_balance" name="ps_contract_balance"{% if order.o_productionschedule.ps_contract_balance %}value="{{ order.o_productionschedule.ps_contract_balance }}"{% endif %}  class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+                    </div>
+                </div>
+            {% else %}
+                <b>未添加大货单</b>
+            {% endif %}
+        </div>
+{#        报价单#}
+        <div id="q-v">
+            <div class="ten_space"></div>
+            {% if order.o_quotation%}
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>大货单价</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="q_offer" name="q_offer" {% if order.o_quotation.q_offer %}value="{{ order.o_quotation.q_offer }}"{% endif %} class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>浮动率</span>
+                            </span>
+                            <input type="text" id="q_floating_rate" name="q_floating_rate" {% if order.o_quotation.q_floating_rate %}value="{{ order.o_quotation.q_floating_rate }}"{% endif %}  class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>最终报价</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="q_end_offer" name="q_end_offer" {% if order.o_quotation.q_end_offer %}value="{{ order.o_quotation.q_end_offer }}"{% endif %}  class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="ten_space"></div>
+
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>面料报价</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="q_fabric_quotation" name="q_fabric_quotation" {% if order.o_quotation.q_fabric_quotation %}value="{{ order.o_quotation.q_fabric_quotation }}"{% endif %}  class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>辅料报价</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="q_ingredients_quotation" name="q_ingredients_quotation" {% if order.o_quotation.q_ingredients_quotation %}value="{{ order.o_quotation.q_ingredients_quotation }}"{% endif %}  class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>工缴报价</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="q_labor_payment_quotation" name="q_labor_payment_quotation" {% if order.o_quotation.q_labor_payment_quotation %}value="{{ order.o_quotation.q_labor_payment_quotation }}"{% endif %}  class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="ten_space"></div>
+
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>水洗报价</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="q_water_washing_quotation" name="q_water_washing_quotation" {% if order.o_quotation.q_water_washing_quotation %}value="{{ order.o_quotation.q_water_washing_quotation }}"{% endif %}  class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>绣花报价</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="q_embroider_quotation" name="q_embroider_quotation" {% if order.o_quotation.q_embroider_quotation %}value="{{ order.o_quotation.q_embroider_quotation }}"{% endif %}  class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>印花报价</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="q_print_quotation" name="q_print_quotation" {% if order.o_quotation.q_print_quotation %}value="{{ order.o_quotation.q_print_quotation }}"{% endif %}  class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="ten_space"></div>
+
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>包装物报价</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="q_packaging_quotation" name="q_packaging_quotation" {% if order.o_quotation.q_packaging_quotation %}value="{{ order.o_quotation.q_packaging_quotation }}"{% endif %}  class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>其他报价</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="q_other_quotation" name="q_other_quotation" {% if order.o_quotation.q_other_quotation %}value="{{ order.o_quotation.q_other_quotation }}"{% endif %}  class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>预留利润</span>
+                            </span>
+                            <input type="text" id="q_reserved_profits" name="q_reserved_profits" {% if order.o_quotation.q_reserved_profits %}value="{{ order.o_quotation.q_reserved_profits }}"{% endif %}  class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <b>未添加报价单</b>
+            {% endif %}
+        </div>
+{#        按单核算#}
+        <div id="ad-v">
+            <div class="ten_space"></div>
+            {% if order.o_accountingdocuments %}
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>大货总金额</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="ad_ps_dollar_total_price" name="ad_ps_dollar_total_price" {% if order.o_accountingdocuments.ad_ps_dollar_total_price %}value="{{ order.o_accountingdocuments.ad_ps_dollar_total_price }}"{% endif %} class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>实际成本</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="ad_actual_cost" name="ad_actual_cost" {% if order.o_accountingdocuments.ad_actual_cost %}value="{{ order.o_accountingdocuments.ad_actual_cost }}"{% endif %} class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>利润总金额</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="ad_total_profit" name="ad_total_profit" {% if order.o_accountingdocuments.ad_total_profit %}value="{{ order.o_accountingdocuments.ad_total_profit }}"{% endif %} class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="ten_space"></div>
+
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>面辅料总金额</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="ad_total_amount_materials" name="ad_total_amount_materials" {% if order.o_accountingdocuments.ad_total_amount_materials %}value="{{ order.o_accountingdocuments.ad_total_amount_materials }}"{% endif %} class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>工缴金额</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="ad_total_amount_labor_payment" name="ad_total_amount_labor_payment" {% if order.o_accountingdocuments.ad_total_amount_labor_payment %}value="{{ order.o_accountingdocuments.ad_total_amount_labor_payment }}"{% endif %} class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>绣印花金额</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="ad_total_amount_embroide_print" name="ad_total_amount_embroide_print" {% if order.o_accountingdocuments.ad_total_amount_embroide_print %}value="{{ order.o_accountingdocuments.ad_total_amount_embroide_print }}"{% endif %} class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="ten_space"></div>
+
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span>包装船务金额</span>
+                            </span>
+                            <span class="input-group-addon">
+                                <span>{{ order.o_price_type }}</span>
+                            </span>
+                            <input type="text" id="ad_total_amount_packaging_shipping" name="ad_total_amount_packaging_shipping" {% if order.o_accountingdocuments.ad_total_amount_packaging_shipping %}value="{{ order.o_accountingdocuments.ad_total_amount_packaging_shipping }}"{% endif %} class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="ten_space"></div>
+                <div class="ten_space"></div>
+
+                <div class="panel panel-default o-ad">
+                    <div class="o-ad-title">
+                        <b>实际面辅料</b>
+                    </div>
+                    <div class="panel-body">
+                        <div class="ten_space"></div>
+                        <div class="ten_space"></div>
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>面料金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ad_total_amount_fabric" name="ad_total_amount_fabric" {% if order.o_accountingdocuments.ad_total_amount_fabric %}value="{{ order.o_accountingdocuments.ad_total_amount_fabric }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>面料快递金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ad_total_amount_fabric_express" name="ad_total_amount_fabric_express" {% if order.o_accountingdocuments.ad_total_amount_fabric_express %}value="{{ order.o_accountingdocuments.ad_total_amount_fabric_express }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>粘合金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ad_total_amount_bonding" name="ad_total_amount_bonding" {% if order.o_accountingdocuments.ad_total_amount_bonding %}value="{{ order.o_accountingdocuments.ad_total_amount_bonding }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>辅料金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ad_total_amount_ingredients" name="ad_total_amount_ingredients" {% if order.o_accountingdocuments.ad_total_amount_ingredients %}value="{{ order.o_accountingdocuments.ad_total_amount_ingredients }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>辅料快递金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ad_total_amount_ingredients_express" name="ad_total_amount_ingredients_express" {% if order.o_accountingdocuments.ad_total_amount_ingredients_express %}value="{{ order.o_accountingdocuments.ad_total_amount_ingredients_express }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>其他金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ad_total_amount_other" name="ad_total_amount_other" {% if order.o_accountingdocuments.ad_total_amount_other %}value="{{ order.o_accountingdocuments.ad_total_amount_other }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ten_space"></div>
+
+                <div class="panel panel-default o-ad">
+                    <div class="o-ad-title">
+                        <b>实际工缴</b>
+                    </div>
+                    <div class="panel-body">
+                        <div class="ten_space"></div>
+                        <div class="ten_space"></div>
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>裁剪总金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ad_total_amount_tailor" name="ad_total_amount_tailor" {% if order.o_accountingdocuments.ad_total_amount_tailor %}value="{{ order.o_accountingdocuments.ad_total_amount_tailor }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>裁剪开始时间</span>
+                                    </span>
+                                    <input type="text" id="ad_tailor_start_date" name="ad_tailor_start_date" {% if order.o_accountingdocuments.ad_tailor_start_date %}value="{{ order.o_accountingdocuments.ad_tailor_start_date }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>裁剪结束时间</span>
+                                    </span>
+                                    <input type="text" id="ad_tailor_end_date" name="ad_tailor_end_date" {% if order.o_accountingdocuments.ad_tailor_end_date %}value="{{ order.o_accountingdocuments.ad_tailor_end_date }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>裁剪人数</span>
+                                    </span>
+                                    <input type="number" id="ad_tailor_number_people" name="ad_tailor_number_people" {% if order.o_accountingdocuments.ad_tailor_number_people %}value="{{ order.o_accountingdocuments.ad_tailor_number_people }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>车缝总金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ad_total_amount_sewing" name="ad_total_amount_sewing" {% if order.o_accountingdocuments.ad_total_amount_sewing %}value="{{ order.o_accountingdocuments.ad_total_amount_sewing }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>车缝开始时间</span>
+                                    </span>
+                                    <input type="text" id="ad_sewing_start_date" name="ad_sewing_start_date" {% if order.o_accountingdocuments.ad_sewing_start_date %}value="{{ order.o_accountingdocuments.ad_sewing_start_date }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>车缝结束时间</span>
+                                    </span>
+                                    <input type="text" id="ad_sewing_end_date" name="ad_sewing_end_date" {% if order.o_accountingdocuments.ad_sewing_end_date %}value="{{ order.o_accountingdocuments.ad_sewing_end_date }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>车缝人数</span>
+                                    </span>
+                                    <input type="number" id="ad_sewing_number_people" name="ad_sewing_number_people" {% if order.o_accountingdocuments.ad_sewing_number_people %}value="{{ order.o_accountingdocuments.ad_sewing_number_people }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>整烫总金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ad_total_amount_iron" name="ad_total_amount_iron" {% if order.o_accountingdocuments.ad_total_amount_iron %}value="{{ order.o_accountingdocuments.ad_total_amount_iron }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>整烫开始时间</span>
+                                    </span>
+                                    <input type="text" id="ad_iron_start_date" name="ad_iron_start_date" {% if order.o_accountingdocuments.ad_iron_start_date %}value="{{ order.o_accountingdocuments.ad_iron_start_date }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>整烫结束时间</span>
+                                    </span>
+                                    <input type="text" id="ad_iron_end_date" name="ad_iron_end_date" {% if order.o_accountingdocuments.ad_iron_end_date %}value="{{ order.o_accountingdocuments.ad_iron_end_date }}"{% endif %} class="form-control form_datetime_hi" autocomplete="off" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>整烫人数</span>
+                                    </span>
+                                    <input type="number" id="ad_iron_number_people" name="ad_iron_number_people" {% if order.o_accountingdocuments.ad_iron_number_people %}value="{{ order.o_accountingdocuments.ad_iron_number_people }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ten_space"></div>
+
+                <div class="panel panel-default o-ad">
+                    <div class="o-ad-title">
+                        <b>实际绣印花金额</b>
+                    </div>
+                    <div class="panel-body">
+                        <div class="ten_space"></div>
+                        <div class="ten_space"></div>
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>水洗金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ad_total_amount_water_washing" name="ad_total_amount_water_washing" {% if order.o_accountingdocuments.ad_total_amount_water_washing %}value="{{ order.o_accountingdocuments.ad_total_amount_water_washing }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>绣花金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ad_total_amount_embroide" name="ad_total_amount_embroide" {% if order.o_accountingdocuments.ad_total_amount_embroide %}value="{{ order.o_accountingdocuments.ad_total_amount_embroide }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>印花金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ad_total_amount_print" name="ad_total_amount_print" {% if order.o_accountingdocuments.ad_total_amount_print %}value="{{ order.o_accountingdocuments.ad_total_amount_print }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ten_space"></div>
+
+                <div class="panel panel-default o-ad">
+                    <div class="o-ad-title">
+                        <b>实际包装/船务金额</b>
+                    </div>
+                    <div class="panel-body">
+                        <div class="ten_space"></div>
+                        <div class="ten_space"></div>
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>纸板金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ad_total_amount_paperboard" name="ad_total_amount_paperboard" {% if order.o_accountingdocuments.ad_total_amount_paperboard %}value="{{ order.o_accountingdocuments.ad_total_amount_paperboard }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>物流金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ad_total_amount_physical_distribution" name="ad_total_amount_physical_distribution" {% if order.o_accountingdocuments.ad_total_amount_physical_distribution %}value="{{ order.o_accountingdocuments.ad_total_amount_physical_distribution }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>进仓金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ad_total_amount_warehouse_entry" name="ad_total_amount_warehouse_entry" {% if order.o_accountingdocuments.ad_total_amount_warehouse_entry %}value="{{ order.o_accountingdocuments.ad_total_amount_warehouse_entry }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ten_space"></div>
+
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span>报关金额</span>
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <span>{{ order.o_price_type }}</span>
+                                    </span>
+                                    <input type="text" id="ad_total_amount_customs_declaration" name="ad_total_amount_customs_declaration" {% if order.o_accountingdocuments.ad_total_amount_customs_declaration %}value="{{ order.o_accountingdocuments.ad_total_amount_customs_declaration }}"{% endif %} class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <b>未添加核算单</b>
+            {% endif %}
+        </div>
     </div>
     <div class="one_space"></div>
 {% endblock %}
 
 {% block js%}
+    <script src="/static/js/orderdetail.js"></script>
 {% endblock %}

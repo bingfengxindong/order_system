@@ -19,36 +19,40 @@
         </div>
         <div class="ten_space"></div>
         <table class="table table-striped">
-            <tr>
-                <th>客户款号</th>
-                <th>客户名</th>
-                <th>下单日期</th>
-                <th>业务员</th>
-                <th>打样</th>
-                <th>操作</th>
-            </tr>
-            {% for order in orders %}
+            {% if orders_len == 0 %}
+                <th colspan="6">无任何订单，请<a href="{% url 'order:orderadd' %}">添加</a>！</th>
+            {% else %}
                 <tr>
-                    <td>{{ order.o_customer_number }}</td>
-                    <td>{{ order.o_customer.c_name }}</td>
-                    <td>{{ order.o_date }}</td>
-                    <td>{{ order.o_user.u_name }}</td>
-                    <td>
-                        {% if order.o_pp_all_end %}
-                            已完成
-                        {% else %}
-                            未完成
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a href="{% url 'order:orderdetail' %}?pk={{ order.pk }}">详情</a>
-                        {% if order.o_end == False %}
-                            /
-                            <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}">编辑</a>
-                        {% endif %}
-                    </td>
+                    <th>客户款号</th>
+                    <th>客户名</th>
+                    <th>下单日期</th>
+                    <th>业务员</th>
+                    <th>打样</th>
+                    <th>操作</th>
                 </tr>
-            {% endfor %}
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.o_customer_number }}</td>
+                        <td>{{ order.o_customer.c_name }}</td>
+                        <td>{{ order.o_date }}</td>
+                        <td>{{ order.o_user.u_name }}</td>
+                        <td>
+                            {% if order.o_pp_all_end %}
+                                已完成
+                            {% else %}
+                                未完成
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'order:orderdetail' %}?pk={{ order.pk }}">详情</a>
+                            {% if order.o_end == False %}
+                                /
+                                <a href="{% url 'order:orderedit' %}?pk={{ order.pk }}">编辑</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
         </table>
         <div class="one_space"></div>
     </div>
