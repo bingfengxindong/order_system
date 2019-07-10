@@ -1,3 +1,6 @@
 .table tr th,.table tr td{
     text-align: center;
 }
+.table tr td img{
+    height: 45px;
+}

@@ -45,6 +45,47 @@
 {#        </div>#}
 {#        <div class="ten_space"></div>#}
         <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="progress">
+                    {% if order.o_end == False %}
+                        {% if order.o_pp_all_end == False %}
+                            <div class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 20%">
+                                打样中
+                            </div>
+                        {% else %}
+                            <div class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 20%">
+                                打样中
+                            </div>
+                            <div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: 20%">
+                                打样已完成
+                            </div>
+                            {% if order.o_productionschedule.ps_end == False %}
+                                <div class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 20%">
+                                    大货中
+                                </div>
+                            {% else %}
+                                <div class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 20%">
+                                    大货中
+                                </div>
+                                <div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: 20%">
+                                    大货已完成
+                                </div>
+                                {% if order.o_end == False %}
+                                    <div class="progress-bar progress-bar-info progress-bar-striped active" style="width: 20%">
+                                        核算中
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        <div class="progress-bar progress-bar-success progress-bar-striped active" style="width: 100%">
+                            订单已完成
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                 <div class="input-group">
                     <span class="input-group-addon">

@@ -144,20 +144,6 @@
                             {% endfor %}
                         </span>
                     </div>
-{#                    <div class="row">#}
-{#                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">#}
-{#                            <span class="input-group-addon" id="color-title">#}
-{#                                <span>颜色</span>#}
-{#                            </span>#}
-{#                        </div>#}
-{#                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" id="color-content">#}
-{#                            {% for capcolor in capcolors %}#}
-{#                                <label class="checkbox-inline">#}
-{#                                    <input type="checkbox" name="capcolor" value="{{ capcolor.pk }}"> {{ capcolor.cc_color }}#}
-{#                                </label>#}
-{#                            {% endfor %}#}
-{#                        </div>#}
-{#                    </div>#}
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     <div class="input-group">
@@ -245,7 +231,7 @@
                                     {% if order.o_embroiderorprint %}
                                         <option selected disabled>{{ order.o_embroiderorprint.eop_type }}</option>
                                     {% else %}
-                                        <option selected disabled>请选择帽型</option>
+                                        <option selected disabled>请选择绣印花</option>
                                     {% endif %}
                                     {% for embroiderorprint in embroiderorprints %}
                                         <option value="{{ embroiderorprint.pk }}">{{ embroiderorprint.eop_type }}</option>
@@ -261,7 +247,7 @@
                                     {% if order.o_capeyebrow %}
                                         <option selected disabled>{{ order.o_capeyebrow.ce_type }}</option>
                                     {% else %}
-                                        <option selected disabled>请选择帽型</option>
+                                        <option selected disabled>请选择帽眉</option>
                                     {% endif %}
                                     {% for capeyebrow in capeyebrows %}
                                         <option value="{{ capeyebrow.pk }}">{{ capeyebrow.ce_type }}</option>
@@ -277,7 +263,7 @@
                                     {% if order.o_versionnumber %}
                                         <option selected disabled>{{ order.o_versionnumber.vn_version }}</option>
                                     {% else %}
-                                        <option selected disabled>请选择帽型</option>
+                                        <option selected disabled>请选择版号</option>
                                     {% endif %}
                                     {% for versionnumber in versionnumbers %}
                                         <option value="{{ versionnumber.pk }}">{{ versionnumber.vn_version }}</option>
@@ -293,7 +279,7 @@
                                     {% if order.o_afterdeduction %}
                                         <option selected disabled>{{ order.o_afterdeduction.ad_type }}</option>
                                     {% else %}
-                                        <option selected disabled>请选择帽型</option>
+                                        <option selected disabled>请选择后扣</option>
                                     {% endif %}
                                     {% for afterdeduction in afterdeductions %}
                                         <option value="{{ afterdeduction.pk }}">{{ afterdeduction.ad_type }}</option>

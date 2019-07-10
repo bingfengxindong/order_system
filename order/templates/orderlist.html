@@ -52,6 +52,7 @@
                 <th colspan="6">无任何订单，请<a href="{% url 'order:orderadd' %}">添加</a>！</th>
             {% else %}
                 <tr>
+                    <th>图片</th>
                     <th>客户款号</th>
                     <th>客户名</th>
                     <th>下单日期</th>
@@ -63,6 +64,9 @@
                 </tr>
                 {% for order in orders %}
                     <tr>
+                        <td>
+                            <img src="/media/{{ order.o_image }}" class="img-rounded">
+                        </td>
                         <td>{{ order.o_customer_number }}</td>
                         <td>{{ order.o_customer.c_name }}</td>
                         <td>{{ order.o_date }}</td>
