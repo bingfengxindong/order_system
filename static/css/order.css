@@ -33,18 +33,18 @@
     width: 282px;
     height: 162px;
     text-align: center;
-    line-height: 160px;
     border: 1px solid #cccccc;
 }
 #order-image img{
-    height: 158px;
+    width: 280px;
+    height: 160px;
 }
 
 /*订单信息（产品信息、大货信息）*/
 .o-info{
     position: relative;
 }
-.o-info-title-img,.o-info-title{
+.o-info-title-img,.o-info-title,.o-info-title-color{
     width: 100px;
     height: 35px;
     text-align: center;
@@ -57,6 +57,12 @@
     line-height: 33px;
     border: 1px solid #cccccc;
     background: white;
+}
+.o-info-title-color{
+    line-height: 33px;
+    border: 1px solid #cccccc;
+    background: white;
+    left: 278px;
 }
 .o-info-title{
     background: rgb(255,255,128);

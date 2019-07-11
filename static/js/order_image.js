@@ -3,19 +3,24 @@ function order_image() {
     var files;
     image.click();
     image.on("change",function () {
-        files = this.files[0];
-        var url = getObjectURL(files);
-        if(url){
-            $("#order-image").html(
-                `
-                    <img src="`+ url +`">
-                `
-            );
-            $("#image-button").html(
-                `
-                    <a class="btn btn-default" onclick="cancel_image()">取消</a>
-                `
-            )
+        file = this.files[0];
+        var img_type = file.type;
+        if(img_type == "image/jpeg" || img_type == "image/jpg" || img_type == "image/png") {
+            var url = getObjectURL(file);
+            if (url) {
+                $("#order-image").html(
+                    `
+                        <img src="` + url + `">
+                    `
+                );
+                $("#image-button").html(
+                    `
+                        <a class="btn btn-default" onclick="cancel_image()">取消</a>
+                    `
+                )
+            }
+        }else{
+            alert("仅支持png和jpg格式的图片！");
         }
     })
 }

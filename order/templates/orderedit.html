@@ -99,7 +99,7 @@
                         <span class="input-group-addon">
                             <span>客人款号</span>
                         </span>
-                        <input type="text" id="o_customer_number" name="o_customer_number" {% if order.o_customer_number %}placeholder="{{ order.o_customer_number }}"{% endif %} class="form-control">
+                        <input type="text" id="o_customer_number" name="o_customer_number" {% if order.o_customer_number %}placeholder="{{ order.o_customer_number }}" title="{{ order.o_customer_number }}"{% endif %} class="form-control">
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -129,22 +129,39 @@
                 </div>
             </div>
             <div class="ten_space"></div>
+            <div class="ten_space"></div>
+            <div class="ten_space"></div>
 
             <div class="row">
-                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span>颜色</span>
-                        </span>
-                        <span class="form-control">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 o-info">
+                    <div class="o-info-title-color">
+                        <b>颜色</b>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="ten_space"></div>
                             {% for capcolor in capcolors %}
                                 <label class="checkbox-inline">
                                     <input type="checkbox" name="capcolor" value="{{ capcolor.pk }}" {% if capcolor in order.o_capcolor.all %}checked{% endif %}> {{ capcolor.cc_color }}
                                 </label>
                             {% endfor %}
-                        </span>
+                        </div>
                     </div>
                 </div>
+{#                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">#}
+{#                    <div class="input-group">#}
+{#                        <span class="input-group-addon">#}
+{#                            <span>颜色</span>#}
+{#                        </span>#}
+{#                        <span class="form-control">#}
+{#                            {% for capcolor in capcolors %}#}
+{#                                <label class="checkbox-inline">#}
+{#                                    <input type="checkbox" name="capcolor" value="{{ capcolor.pk }}" {% if capcolor in order.o_capcolor.all %}checked{% endif %}> {{ capcolor.cc_color }}#}
+{#                                </label>#}
+{#                            {% endfor %}#}
+{#                        </span>#}
+{#                    </div>#}
+{#                </div>#}
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     <div class="input-group">
                         <span class="input-group-addon">
@@ -154,8 +171,6 @@
                     </div>
                 </div>
             </div>
-            <div class="ten_space"></div>
-            <div class="ten_space"></div>
             <div class="ten_space"></div>
 
             <div class="row">
@@ -190,7 +205,9 @@
                         <input type="file" id="o_file" name="o_file" class="hide">
                         <input type="text" id="upload-file" class="form-control" {% if order.o_file %}placeholder="{{ order.o_file | filename }}"{% endif %} disabled>
                     </div>
-                    <div class="ten_space"></div>
+                    <div class="ten_space" id="image-format">
+{#                        <b>图片的宽高比最好为7:4,或者上传280*160的图片</b>#}
+                    </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 o-info">
                     <div class="o-info-title">

@@ -4,3 +4,6 @@
 .table tr td img{
     height: 45px;
 }
+#image-format{
+    color: red;
+}
