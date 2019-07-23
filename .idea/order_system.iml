@@ -27,6 +27,7 @@
         <option value="$MODULE_DIR$/production_schedule/templates" />
         <option value="$MODULE_DIR$/quotation/templates" />
         <option value="$MODULE_DIR$/accounting_documents/templates" />
+        <option value="$MODULE_DIR$/order_system/templates" />
       </list>
     </option>
   </component>

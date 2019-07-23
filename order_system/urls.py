@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.conf.urls import url,include
 from django.views.static import serve
 from .settings import STATICFILES_DIRS,MEDIA_ROOT
+from order_system import view
 
 import os
 import order
@@ -9,6 +10,7 @@ import proofing_progress
 import production_schedule
 import quotation
 import accounting_documents
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -20,3 +22,7 @@ urlpatterns = [
     url(r"^static/(?P<path>.*)",serve,{"document_root": STATICFILES_DIRS[0]}, name="static"),
     url(r"^media/(?P<path>.*)",serve,{"document_root":MEDIA_ROOT},name="media"),
 ]
+
+handler403 = view.page_permission_denied
+handler404 = view.page_not_found
+handler500 = view.page_inter_error
