@@ -1,8 +1,10 @@
 from django.shortcuts import render,redirect
 from django.views.generic.base import View
 from order.models import Order
+from user.models import *
 from production_schedule.models import *
 from production_schedule.create_ps import CreatePS
+from user.views import login_verify
 
 def add_productionschedule(request,create_ps,productionschedule):
     ps_number = request.POST.get("ps_number")
@@ -74,14 +76,17 @@ def add_productionschedule(request,create_ps,productionschedule):
         create_ps.add_ps_contract_balance(productionschedule, ps_contract_balance)
 
 class PSAdd(View):
+    @login_verify
     def get(self,request):
         pk = request.GET.get("pk")
         order = Order.objects.get(pk=pk)
         productionworkshops = ProductionWorkshop.objects.all()
+        user = User.objects.get(pk=request.session["user"])
         context = {
             "title": "大货添加",
             "order": order,
             "productionworkshops": productionworkshops,
+            "user": user,
         }
         return render(request=request, template_name="psadd.html", context=context)
 
@@ -97,14 +102,17 @@ class PSAdd(View):
         return redirect("/order/orderedit?pk={}".format(pk))
 
 class PSEdit(View):
+    @login_verify
     def get(self,request):
         pk = request.GET.get("pk")
         order = Order.objects.get(pk=pk)
         productionworkshops = ProductionWorkshop.objects.all()
+        user = User.objects.get(pk=request.session["user"])
         context = {
             "title": "大货修改",
             "order": order,
             "productionworkshops": productionworkshops,
+            "user": user,
         }
         return render(request=request, template_name="psedit.html", context=context)
 

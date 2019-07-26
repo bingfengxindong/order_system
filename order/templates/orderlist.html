@@ -37,16 +37,19 @@
                         <li>
                             <a href="{% url 'order:orderadd' %}">添加订单</a>
                         </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                {{ user.u_name }}
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'user:logout' %}">注销</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
-{#        <div class="row">#}
-{#            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">#}
-{#                <a href="{% url 'order:orderadd' %}" class="btn btn-default">添加订单</a>#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="ten_space"></div>#}
         <table class="table table-striped">
             {% if orders_len == 0 %}
                 <th colspan="6">无任何订单，请<a href="{% url 'order:orderadd' %}">添加</a>！</th>

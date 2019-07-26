@@ -1,8 +1,10 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.views.generic.base import View
 from order.models import *
+from user.models import *
 from .create_pp import *
 from .create_mo import *
+from user.views import login_verify
 
 def add_proofingprogress(request,create_pp,proofingprogress):
     pp_number = request.POST.get("pp_number")
@@ -66,14 +68,17 @@ def add_proofingprogress(request,create_pp,proofingprogress):
         create_pp.add_pp_express_date(proofingprogress, pp_express_date)
 
 class PPAdd(View):
+    @login_verify
     def get(self,request):
         pk = request.GET.get("pk")
         order = Order.objects.get(pk=pk)
         workers = Worker.objects.all()
+        user = User.objects.get(pk=request.session["user"])
         context = {
             "title":"打样添加",
             "order":order,
             "workers":workers,
+            "user":user,
         }
         return render(request=request,template_name="ppadd.html",context=context)
 
@@ -96,17 +101,20 @@ class EndPP(View):
         return redirect("/order/orderedit?pk={}".format(proofingprogress.order_set.all()[0].pk))
 
 class PPEdit(View):
+    @login_verify
     def get(self,request):
         pk = request.GET.get("pk")
         pp_pk = request.GET.get("pp_pk")
         order = Order.objects.get(pk=pk)
         proofingprogress = ProofingProgress.objects.get(pk=pp_pk)
         workers = Worker.objects.all()
+        user = User.objects.get(pk=request.session["user"])
         context = {
             "title": "打样修改",
             "order": order,
             "proofingprogress": proofingprogress,
             "workers": workers,
+            "user": user,
         }
         return render(request=request, template_name="ppedit.html", context=context)
 
@@ -138,12 +146,15 @@ def add_modifyopinion(request,create_mo,modifyopinion):
         create_mo.add_mo_factory_info(modifyopinion, mo_factory_info)
 
 class MOAdd(View):
+    @login_verify
     def get(self,request):
         pk = request.GET.get("pk")
         order = Order.objects.get(pk=pk)
+        user = User.objects.get(pk=request.session["user"])
         context = {
             "title": "打样意见添加",
             "order": order,
+            "user": user,
         }
         return render(request=request, template_name="moadd.html", context=context)
 
@@ -159,15 +170,18 @@ class MOAdd(View):
         return redirect("/order/orderedit?pk={}".format(pk))
 
 class MOEdit(View):
+    @login_verify
     def get(self,request):
         pk = request.GET.get("pk")
         mo_pk = request.GET.get("mo_pk")
         order = Order.objects.get(pk=pk)
         modifyopinion = ModifyOpinion.objects.get(pk=mo_pk)
+        user = User.objects.get(pk=request.session["user"])
         context = {
             "title": "打样意见修改",
             "order": order,
             "modifyopinion": modifyopinion,
+            "user": user,
         }
         return render(request=request, template_name="moedit.html", context=context)
 

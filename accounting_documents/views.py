@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from order.models import Order
+from user.models import *
 from accounting_documents.models import AccountingDocuments
 from accounting_documents.create_ad import CreateAD
+from user.views import login_verify
 
 def date_edit(dt):
     return dt.replace("年","-").replace("月","-").replace("日","")
@@ -142,12 +144,15 @@ def add_quotation(request,create_ad,accountingdocuments):
         create_ad.add_ad_total_amount_customs_declaration(accountingdocuments,ad_total_amount_customs_declaration)
 
 class ADAdd(View):
+    @login_verify
     def get(self,request):
         pk =  request.GET.get("pk")
         order = Order.objects.get(pk=pk)
+        user = User.objects.get(pk=request.session["user"])
         context = {
             "title": "核算单添加",
             "order": order,
+            "user": user,
         }
         return render(request=request,template_name="adadd.html",context=context)
 
@@ -163,12 +168,15 @@ class ADAdd(View):
         return redirect("/order/orderedit?pk={}".format(pk))
 
 class ADEdit(View):
+    @login_verify
     def get(self,request):
         pk = request.GET.get("pk")
         order = Order.objects.get(pk=pk)
+        user = User.objects.get(pk=request.session["user"])
         context = {
             "title": "核算单修改",
             "order": order,
+            "user": user,
         }
         return render(request=request,template_name="adedit.html",context=context)
 

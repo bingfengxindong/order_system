@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from order.models import Order
 from quotation.models import Quotation
+from user.models import *
 from quotation.create_q import CreateQ
 from accounting_documents.models import AccountingDocuments
+from user.views import login_verify
 import uuid
 
 def add_quotation(request,create_q,quotation,order):
@@ -64,12 +66,15 @@ def add_quotation(request,create_q,quotation,order):
         create_q.add_q_reserved_profits(quotation, q_reserved_profits)
 
 class QAdd(View):
+    @login_verify
     def get(self,request):
         pk =  request.GET.get("pk")
         order = Order.objects.get(pk=pk)
+        user = User.objects.get(pk=request.session["user"])
         context = {
             "title": "报价单添加",
             "order": order,
+            "user": user,
         }
         return render(request=request,template_name="qadd.html",context=context)
 
@@ -85,12 +90,15 @@ class QAdd(View):
         return redirect("/order/orderedit?pk={}".format(pk))
 
 class QEdit(View):
+    @login_verify
     def get(self,request):
         pk = request.GET.get("pk")
         order = Order.objects.get(pk=pk)
+        user = User.objects.get(pk=request.session["user"])
         context = {
             "title": "报价单修改",
             "order": order,
+            "user": user,
         }
         return render(request=request,template_name="qedit.html",context=context)
 

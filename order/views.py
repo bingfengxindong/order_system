@@ -7,6 +7,7 @@ from production_schedule.models import ProductionSchedule
 from quotation.models import Quotation
 from accounting_documents.models import AccountingDocuments
 from order.create_order import CreateOrder
+from user.views import login_verify
 import uuid
 
 def order_add(request,order,createorder):
@@ -67,6 +68,7 @@ def order_add(request,order,createorder):
     order.save()
 
 class OrderAdd(View):
+    @login_verify
     def get(self,request):
         customers = Customer.objects.all()
         users = User.objects.all()
@@ -76,6 +78,7 @@ class OrderAdd(View):
         capeyebrows = CapEyebrow.objects.all()
         versionnumbers = VersionNumber.objects.all()
         afterdeductions = AfterDeduction.objects.all()
+        user = User.objects.get(pk=request.session["user"])
         context = {
             "title":"订单添加",
             "customers":customers,
@@ -86,6 +89,7 @@ class OrderAdd(View):
             "capeyebrows":capeyebrows,
             "versionnumbers":versionnumbers,
             "afterdeductions":afterdeductions,
+            "user":user,
         }
         return render(request=request,template_name="orderadd.html",context=context)
 
@@ -104,29 +108,36 @@ class OrderAdd(View):
         return redirect("/order/orderlist")
 
 class OrderList(View):
+    @login_verify
     def get(self,request):
         orders = Order.objects.all().order_by("-pk")
         orders_len = len(orders)
+        user = User.objects.get(pk=request.session["user"])
         context = {
             "title": "订单列表",
             "orders": orders,
             "orders_len": orders_len,
+            "user": user,
         }
         return render(request=request,template_name="orderlist.html",context=context)
 
 class OrderDetail(View):
+    @login_verify
     def get(self,request):
         pk = request.GET.get("pk")
         order = Order.objects.get(pk=pk)
         proofingprogress_len = len(order.o_proofingprogress.all())
+        user = User.objects.get(pk=request.session["user"])
         context = {
             "title": "订单详情",
             "order": order,
             "proofingprogress_len": proofingprogress_len,
+            "user": user,
         }
         return render(request=request,template_name="orderdetail.html",context=context)
 
 class OrderEdit(View):
+    @login_verify
     def get(self,request):
         pk = request.GET.get("pk")
         order = Order.objects.get(pk=pk)
@@ -140,6 +151,7 @@ class OrderEdit(View):
         afterdeductions = AfterDeduction.objects.all()
         proofingprogresses_len = len(order.o_proofingprogress.all())
         proofingprogress = order.o_proofingprogress.all().order_by("-pk")[0] if proofingprogresses_len > 0 else None
+        user = User.objects.get(pk=request.session["user"])
         context = {
             "title": "订单修改",
             "order": order,
@@ -153,6 +165,7 @@ class OrderEdit(View):
             "afterdeductions": afterdeductions,
             "proofingprogresses_len": proofingprogresses_len,
             "proofingprogress": proofingprogress,
+            "user": user,
         }
         return render(request=request,template_name="orderedit.html",context=context)
 
@@ -173,6 +186,7 @@ class OrderEdit(View):
         return redirect("/order/orderdetail?pk={}".format(pk))
 
 class EndOrder(View):
+    @login_verify
     def get(self,request):
         pk = request.GET.get("pk")
         order = Order.objects.get(pk=pk)
