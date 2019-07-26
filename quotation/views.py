@@ -10,13 +10,6 @@ def add_quotation(request,create_q,quotation,order):
     q_offer = request.POST.get("q_offer")
     if q_offer:
         create_q.add_q_offer(quotation, q_offer)
-        order.o_ps_price = q_offer
-        order.o_dollar_price = "%.2f"%(float(q_offer) / float(order.o_dollar_exchange_rate))
-        if order.o_ps_amount:
-            order.o_ps_dollar_total_price = "%.2f" % (float(q_offer) / float(order.o_dollar_exchange_rate) * float(order.o_ps_amount))
-            accountingdocuments = order.o_accountingdocuments
-            accountingdocuments.ad_ps_dollar_total_price = "%.2f"%(float(q_offer) * float(order.o_ps_amount))
-            accountingdocuments.save()
 
     q_floating_rate = request.POST.get("q_floating_rate")
     if q_floating_rate:
@@ -25,6 +18,14 @@ def add_quotation(request,create_q,quotation,order):
     q_end_offer = request.POST.get("q_end_offer")
     if q_end_offer:
         create_q.add_q_end_offer(quotation, q_end_offer)
+        order.o_ps_price = q_end_offer
+        order.o_dollar_price = "%.2f" % (float(q_end_offer) / float(order.o_dollar_exchange_rate))
+        if order.o_ps_amount:
+            order.o_ps_dollar_total_price = "%.2f" % (
+                        float(q_end_offer) / float(order.o_dollar_exchange_rate) * float(order.o_ps_amount))
+            accountingdocuments = order.o_accountingdocuments
+            accountingdocuments.ad_ps_dollar_total_price = "%.2f" % (float(q_end_offer) * float(order.o_ps_amount))
+            accountingdocuments.save()
 
     q_fabric_quotation = request.POST.get("q_fabric_quotation")
     if q_fabric_quotation:

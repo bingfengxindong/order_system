@@ -4,7 +4,7 @@ class Quotation(models.Model):
     q_id = models.UUIDField(verbose_name="编号")
     q_offer = models.CharField(max_length=200,blank=True,null=True,verbose_name="大货单价")
     q_floating_rate = models.CharField(max_length=200,blank=True,null=True,verbose_name="浮动率")
-    q_end_offer = models.CharField(max_length=200,blank=True,null=True,verbose_name="最终报价")
+    q_end_offer = models.CharField(max_length=200,blank=True,null=True,verbose_name="对外单价")
     q_fabric_quotation = models.CharField(max_length=200,blank=True,null=True,verbose_name="面料报价")
     q_ingredients_quotation = models.CharField(max_length=200,blank=True,null=True,verbose_name="辅料报价")
     q_labor_payment_quotation = models.CharField(max_length=200,blank=True,null=True,verbose_name="工缴报价")

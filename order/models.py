@@ -16,7 +16,7 @@ class Order(models.Model):
     o_image = models.ImageField(blank=True,null=True,upload_to="image/%Y/%m/%d/",verbose_name="图片")
     o_file = models.FileField(blank=True,null=True,upload_to="file/%Y/%m/%d/",verbose_name="文件")
     o_main_fabric = models.CharField(max_length=200,blank=True,null=True,verbose_name="主面料")
-    o_ps_price = models.CharField(max_length=200,blank=True,null=True,verbose_name="大货单价")
+    o_ps_price = models.CharField(max_length=200,blank=True,null=True,verbose_name="对外单价")
     o_dollar_exchange_rate = models.CharField(max_length=200,blank=True,null=True,default="6.9",verbose_name="美元汇率")
     o_dollar_price = models.CharField(max_length=200,blank=True,null=True,verbose_name="美元单价")
     o_ps_amount = models.CharField(max_length=200,blank=True,null=True,verbose_name="大货数量")
